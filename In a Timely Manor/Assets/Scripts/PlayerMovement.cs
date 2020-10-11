@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     bool inPast = false;
 
+    [SerializeField]
+    float travel = 150.0f;
+
     // Update is called once per frame
     void Update()
     {
-
         // Time travel.
         if (Input.GetButtonDown("TimeShift"))
             TimeTravel();
@@ -25,18 +27,12 @@ public class PlayerMovement : MonoBehaviour
 
     void TimeTravel() {
 
-        float travel = 0;
-
         // Go from past to present.
-        if (!inPast) {
-            travel = 15;
+        if (!inPast)
             inPast = true;
-        }
-        else {
-            travel = -15;
+        else
             inPast = false;
-        }
-
-        this.transform.position += new Vector3(0, 0, travel); // Unity doesn't allow you to only modify the z value...
+        
+        this.transform.position += new Vector3(0, (inPast ? travel : -travel), 0); // Unity doesn't allow you to only modify the z value...
     }
 }
