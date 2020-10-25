@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,8 +9,7 @@ public class PlayerController : MonoBehaviour
     bool inPast = false;
 
     [SerializeField]
-    float travel = 150.0f;
-
+    float travel = 150.0f; // Distance of 2nd timeline in y
 
     // Update is called once per frame
     void Update()
@@ -21,13 +18,18 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("TimeShift"))
             TimeShift();
 
+        MovePlayer();
+    }
+
+    void MovePlayer() {
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         this.transform.Translate(direction.normalized * speed * Time.deltaTime);
     }
 
+    // Go from past to present and vice-versa
     void TimeShift() {
 
-        // Go from past to present.
+        // Boolean switch
         if (!inPast)
             inPast = true;
         else
