@@ -2,6 +2,8 @@
 
 public class PlayerController : MonoBehaviour
 {
+    public static bool canMove = true;
+
     [SerializeField]
     float speed = 5.0f;
 
@@ -22,8 +24,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void MovePlayer() {
-        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        this.transform.Translate(direction.normalized * speed * Time.deltaTime);
+        if (canMove)
+        {
+            Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            this.transform.Translate(direction.normalized * speed * Time.deltaTime);
+        }
     }
 
     // Go from past to present and vice-versa

@@ -16,7 +16,7 @@ public class Collectible : MonoBehaviour
             // Add the item to inventory.
             if (Input.GetButton("Interact")) {
                 AddItem(this.gameObject);
-
+                MessageController.ShowMessage("Picked up sapling.");
                 
 
             }
