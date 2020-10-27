@@ -8,10 +8,9 @@ public class MessageController : MonoBehaviour
     public GameObject messageBox;
     public GameObject messageText;
     public GameObject closeMessageText;
-    public AudioClip typewriter1;
     public new AudioSource audio;
 
-    private float typeDelay = 0.06f;
+    private float typeDelay = 0.04f;
     private bool textIsTyping = false;
     private bool textFinishedTyping = false;
     private static bool showMessage;
@@ -22,6 +21,7 @@ public class MessageController : MonoBehaviour
     void Start()
     {
         messageBox.SetActive(false);
+        closeMessageText.SetActive(false);
         audio.GetComponent<AudioSource>();
     }
 
@@ -54,14 +54,23 @@ public class MessageController : MonoBehaviour
     {
         textIsTyping = true;
         textFinishedTyping = false;
-        for(int i = 0; i < textToShow.Length + 1; i++)
+        for(int i = 0; i < textToShow.Length; i++)
         {
-            audio.PlayOneShot(typewriter1);
-            currentText = textToShow.Substring(0, i);
+            // only play typewriter sound for every other character
+            if(i % 2 == 0)
+                audio.Play();
+            currentText = textToShow.Substring(0, i + 1);
             messageText.GetComponent<Text>().text = currentText;
+
+            // add short pause after periods, except the last period
+            if (i-1 >= 0 && textToShow[i - 1].Equals('.'))
+            {
+                yield return new WaitForSeconds(0.5f);
+            }
             yield return new WaitForSeconds(typeDelay);
         }
         textFinishedTyping = true;
+        closeMessageText.SetActive(true);
     }
 
     private void CloseMessage()
@@ -70,6 +79,7 @@ public class MessageController : MonoBehaviour
         PlayerController.canMove = true;
         showMessage = false;
         textIsTyping = false;
+        closeMessageText.SetActive(false);
     }
 
 }
