@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +11,11 @@ public class MessageController : MonoBehaviour
     public new AudioSource audio;
 
     private float typeDelay = 0.04f;
-    private bool textIsTyping = false;
-    private bool textFinishedTyping = false;
-    private static bool showMessage;
+    private static bool textIsTyping = false;
+    private static bool textFinishedTyping = false;
+    private static int showMessage;
     private static string textToShow = "";
+    private static string[] textArray;
     private string currentText = "";
 
     // Start is called before the first frame update
@@ -23,12 +24,13 @@ public class MessageController : MonoBehaviour
         messageBox.SetActive(false);
         closeMessageText.SetActive(false);
         audio.GetComponent<AudioSource>();
+        showMessage = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (showMessage)
+        if (showMessage > 0)
         {
             PlayerController.canMove = false;
             messageBox.SetActive(true);
@@ -37,17 +39,39 @@ public class MessageController : MonoBehaviour
                 StartCoroutine(ShowText());
             }
 
-            if (textFinishedTyping && Input.GetButtonDown("Interact"))
+            if (textFinishedTyping && Input.GetButtonDown("Interact") && showMessage == 1)
             {
                 CloseMessage();
+
+            } else if (textFinishedTyping && Input.GetButtonDown("Interact"))
+            {
+                GoToNextPage();
+
             }
         }
     }
 
+    public static void GoToNextPage()
+    {
+        showMessage -= 1;
+        textIsTyping = false;
+        textFinishedTyping = false;
+        textToShow = textArray[textArray.Length - showMessage];
+    }
+
+    public static void ShowMessage(string[] text)
+    {
+        showMessage = text.Length;
+        textArray = text;
+        textToShow = textArray[0];
+
+    }
+
     public static void ShowMessage(string text)
     {
-        showMessage = true;
+        showMessage = 1;
         textToShow = text;
+
     }
 
     private IEnumerator ShowText()
@@ -77,7 +101,7 @@ public class MessageController : MonoBehaviour
     {
         messageBox.SetActive(false);
         PlayerController.canMove = true;
-        showMessage = false;
+        showMessage -= 1;
         textIsTyping = false;
         closeMessageText.SetActive(false);
     }
