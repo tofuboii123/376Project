@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static bool canMove = true;
+
     [SerializeField]
     float speed = 5.0f;
 
@@ -11,8 +11,11 @@ public class PlayerController : MonoBehaviour
     bool inPast = false;
 
     [SerializeField]
-    float travel = 150.0f;
+    float travel = 150.0f; // Distance of 2nd timeline in y
 
+    private Vector2 movement;
+
+    public Animator animator;
 
     // Update is called once per frame
     void Update()
@@ -21,13 +24,32 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("TimeShift"))
             TimeShift();
 
-        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        this.transform.Translate(direction.normalized * speed * Time.deltaTime);
+        MovePlayer();
     }
 
+    void MovePlayer() {
+        if (canMove)
+        {
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+
+            if (movement != Vector2.zero) {
+                animator.SetFloat("Horizontal", movement.x);
+                animator.SetFloat("Vertical", movement.y);
+            }
+
+            animator.SetFloat("Speed", movement.sqrMagnitude);
+
+            this.transform.Translate(movement.normalized * speed * Time.deltaTime);
+        } else {
+            animator.SetFloat("Speed", 0);
+        }
+    }
+
+    // Go from past to present and vice-versa
     void TimeShift() {
 
-        // Go from past to present.
+        // Boolean switch
         if (!inPast)
             inPast = true;
         else
