@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("Speed", movement.sqrMagnitude);
 
             this.transform.Translate(movement.normalized * speed * Time.deltaTime);
+        } else {
+            animator.SetFloat("Speed", 0);
         }
     }
 
