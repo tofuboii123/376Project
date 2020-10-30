@@ -35,7 +35,7 @@ public class PuzzleGoal : MonoBehaviour
                         if (img.sprite.name == s)
                             img.sprite = emptySlot;
                     }
-
+                    MessageController.ShowMessage("You planted the sapling.");
                     print("You did it!");
                     return true;
                 }
