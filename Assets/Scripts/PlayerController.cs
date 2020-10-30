@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +18,23 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
 
     public Animator animator;
+
+    public PostProcessVolume volume;
+    private Bloom bloom;
+    private LensDistortion lensDistortion;
+    private Grain grain;
+    private DepthOfField depthOfField;
+    private ColorGrading colorGrading;
+    private ChromaticAberration chromaticAberration;
+
+    void Start() {
+        volume.profile.TryGetSettings(out bloom);
+        volume.profile.TryGetSettings(out lensDistortion);
+        volume.profile.TryGetSettings(out grain);
+        volume.profile.TryGetSettings(out depthOfField);
+        volume.profile.TryGetSettings(out colorGrading);
+        volume.profile.TryGetSettings(out chromaticAberration);
+    }
 
     // Update is called once per frame
     void Update()
@@ -48,14 +67,44 @@ public class PlayerController : MonoBehaviour
 
     // Go from past to present and vice-versa
     void TimeShift() {
-
         // Boolean switch
-        if (!inPast)
-            inPast = true;
-        else
-            inPast = false;
-        
-        this.transform.position += new Vector3(0, (inPast ? travel : -travel), 0); // Unity doesn't allow you to only modify the z value...
+        inPast = !inPast;
+
+        StartCoroutine(StartTimeShift());
     }
 
+    IEnumerator StartTimeShift() {
+        for (int i = 0; i < 100; i++) {
+            bloom.intensity.value = i / 3;
+            lensDistortion.intensity.value = i / 5;
+            depthOfField.focalLength.value = i;
+            chromaticAberration.intensity.value = i / 100;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        this.transform.position += new Vector3(0, (inPast ? travel : -travel), 0); // Unity doesn't allow you to only modify the z value...
+        grain.intensity.value = (inPast ? 1 : 0);
+
+        if (inPast) {
+            colorGrading.active = true;
+            colorGrading.mixerBlueOutGreenIn.value = 50;
+            colorGrading.mixerBlueOutBlueIn.value = 50;
+            colorGrading.mixerBlueOutRedIn.value = 50;
+        } else {
+            colorGrading.active = false;
+            colorGrading.mixerBlueOutGreenIn.value = 0;
+            colorGrading.mixerBlueOutBlueIn.value = 0;
+            colorGrading.mixerBlueOutRedIn.value = 0;
+        }
+
+        for (int i = 100; i >= 0; i--) {
+            bloom.intensity.value = i / 3;
+            lensDistortion.intensity.value = i / 5;
+            depthOfField.focalLength.value = i;
+            chromaticAberration.intensity.value = i / 100;
+
+            yield return new WaitForSeconds(0.005f);
+        }
+    }
 }
