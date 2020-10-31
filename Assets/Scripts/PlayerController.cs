@@ -74,9 +74,11 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator StartTimeShift() {
+        canMove = false;
+
         for (int i = 0; i < 100; i++) {
             bloom.intensity.value = i / 3;
-            lensDistortion.intensity.value = i / 5;
+            lensDistortion.intensity.value = i / 4;
             depthOfField.focalLength.value = i;
             chromaticAberration.intensity.value = i / 100;
 
@@ -100,11 +102,13 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 100; i >= 0; i--) {
             bloom.intensity.value = i / 3;
-            lensDistortion.intensity.value = i / 5;
+            lensDistortion.intensity.value = i / 4;
             depthOfField.focalLength.value = i;
             chromaticAberration.intensity.value = i / 100;
 
             yield return new WaitForSeconds(0.005f);
         }
+
+        canMove = true;
     }
 }
