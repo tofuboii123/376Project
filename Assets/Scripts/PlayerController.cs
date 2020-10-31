@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool canMove = true;
+    // Getter and setter
+    public static bool CanMove { get; set; }
 
     [SerializeField]
     float speed = 5.0f;
@@ -14,6 +16,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     float travel = 150.0f; // Distance of 2nd timeline in y
+
+    [SerializeField]
+    Text timeIndicator;
 
     private Vector2 movement;
 
@@ -34,20 +39,24 @@ public class PlayerController : MonoBehaviour
         volume.profile.TryGetSettings(out depthOfField);
         volume.profile.TryGetSettings(out colorGrading);
         volume.profile.TryGetSettings(out chromaticAberration);
+        CanMove = true;
+        timeIndicator.text = "Present";
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Time travel.
-        if (Input.GetButtonDown("TimeShift"))
-            TimeShift();
+        if(CanMove) {
+            // Time travel.
+            if (Input.GetButtonDown("TimeShift"))
+                TimeShift();
 
-        MovePlayer();
+            MovePlayer();
+        }
     }
 
     void MovePlayer() {
-        if (canMove)
+        if (CanMove)
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
@@ -69,12 +78,17 @@ public class PlayerController : MonoBehaviour
     void TimeShift() {
         // Boolean switch
         inPast = !inPast;
+        
+        // HUD element
+        // TODO change for cool animation
+        timeIndicator.text = inPast ?  "Past" : "Present";
 
         StartCoroutine(StartTimeShift());
     }
 
+
+    // Time shift animation
     IEnumerator StartTimeShift() {
-        canMove = false;
 
         for (int i = 0; i < 100; i++) {
             bloom.intensity.value = i / 3;
@@ -109,6 +123,6 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
-        canMove = true;
+        CanMove = true;
     }
 }
