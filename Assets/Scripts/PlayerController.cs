@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
             isSafeSpot = false;
             while (isSafeSpot == false)
             {
-                telePosition = this.transform.position + new Vector3(Random.Range(-3-numOfTries/10, 3+numOfTries/10), (inPast ? travel : -travel) + Random.Range(-3 - numOfTries / 10, 3+ -numOfTries / 10), 0);
+                telePosition = this.transform.position + new Vector3(Random.Range(-3-(numOfTries/10), 3+(numOfTries/10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3+ (numOfTries / 10)), 0);
 
                 hit = Physics2D.Raycast(telePosition, Vector2.up);
 
