@@ -114,7 +114,10 @@ public class PlayerController : MonoBehaviour
                 {
                     isSafeSpot = true;
                 }
-                numOfTries += 1;
+                if (numOfTries <= 20)
+                {
+                    numOfTries += 1;
+                }
 
             }
             numOfTries = 0;
