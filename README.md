@@ -1,4 +1,4 @@
-# In-a-Timely-Manor
+# In A Timely Manor
 COMP 376 Team Project
  
  
