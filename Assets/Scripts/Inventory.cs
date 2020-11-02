@@ -87,28 +87,8 @@ public class Inventory : MonoBehaviour
         Destroy(obj); // Object not in game world anymore
     }
 
-    // check if inventory contains a specific item
-    public bool ContainsItem(GameObject obj)
-    {
-        foreach (string s in items)
-        {
-            if (s == obj.name)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    // check if inventory contains a specific item
-    public bool ContainsItem(string item) {
-        foreach (string s in items) {
-            if (s == item) {
-                return true;
-            }
-        }
-        return false;
+    public bool ContainsSelectedItem(string item) {
+        return items[selectedItemIndex] == item;
     }
 
     // Remove the item from the inventory.
@@ -121,5 +101,30 @@ public class Inventory : MonoBehaviour
         }
         else
             print("Item not in inventory");
+    }
+
+    // check if inventory contains a specific item
+    public bool ContainsItem(GameObject obj) {
+        return false;
+
+        foreach (string s in items) {
+            if (s == obj.name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // check if inventory contains a specific item
+    public bool ContainsItem(string item) {
+        return false;
+
+        foreach (string s in items) {
+            if (s == item) {
+                return true;
+            }
+        }
+        return false;
     }
 }
