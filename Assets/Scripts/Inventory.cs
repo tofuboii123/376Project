@@ -14,7 +14,6 @@ public class Inventory : MonoBehaviour
     Sprite empty;
     [SerializeField]
     Sprite selected;
-    private int lastEmptyIndex = 0; // Keep track of last empty slot
     public static int selectedItemIndex = 0;
     
     public bool IsFull { get; set; }
@@ -37,6 +36,12 @@ public class Inventory : MonoBehaviour
             slotsBackground[0].sprite = selected;
         }
 
+        items = new List<string>();
+        for (int i = 0; i < slotsBackground.Count; i++) {
+            items.Add(null);
+        }
+
+        Debug.Log(items.Count);
         IsFull = false;
     }
 
@@ -71,18 +76,18 @@ public class Inventory : MonoBehaviour
     // add an item to the inventory
     public void AddItem(GameObject obj)
     {
-        // TODO Maybe we wont need this
-        if (lastEmptyIndex >= slots.Count) {
+        int idx = items.IndexOf(null);
+        if (idx < 0) {
             IsFull = true;
-            
             return;
         }
 
-        items.Add(obj.name); // Add item name to inventory
+        items[idx] = obj.name;
+
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
-        slots[lastEmptyIndex].sprite = sprite;
-        slots[lastEmptyIndex].enabled = true;
-        lastEmptyIndex++;
+        slots[idx].sprite = sprite;
+
+        slots[idx].enabled = true;
 
         Destroy(obj); // Object not in game world anymore
     }
@@ -94,19 +99,15 @@ public class Inventory : MonoBehaviour
     // Remove the item from the inventory.
     public void DiscardItem(string item) {
         int indexOfItem = items.IndexOf(item);
-        if (indexOfItem > 0) {
+        if (indexOfItem >= 0) {
             slots[indexOfItem].enabled = false;
             slots[indexOfItem].sprite = null;
-            items.Remove(item);
+            items[indexOfItem] = null;
         }
-        else
-            print("Item not in inventory");
     }
 
     // check if inventory contains a specific item
     public bool ContainsItem(GameObject obj) {
-        return false;
-
         foreach (string s in items) {
             if (s == obj.name) {
                 return true;
@@ -118,8 +119,6 @@ public class Inventory : MonoBehaviour
 
     // check if inventory contains a specific item
     public bool ContainsItem(string item) {
-        return false;
-
         foreach (string s in items) {
             if (s == item) {
                 return true;
