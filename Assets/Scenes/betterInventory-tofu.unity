@@ -622,7 +622,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104418, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_Name
-      value: Slot2
+      value: SlotBackground2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
@@ -1346,7 +1346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104418, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_Name
-      value: Slot3
+      value: SlotBackground3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
@@ -1980,7 +1980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104418, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_Name
-      value: Slot5
+      value: SlotBackground5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
@@ -2374,7 +2374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104418, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_Name
-      value: Slot4
+      value: SlotBackground4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
@@ -2738,6 +2738,10 @@ PrefabInstance:
       propertyPath: invent
       value: 
       objectReference: {fileID: 386476066}
+    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: selected
+      value: 
+      objectReference: {fileID: 21300000, guid: cc46ba83bf4426544a19895f48ae4a5a, type: 3}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.25
@@ -2803,10 +2807,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386476067}
     m_Modifications:
-    - target: {fileID: 6930445141949141933, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
-      propertyPath: m_Name
-      value: SlotImage1
-      objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104417, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2893,7 +2893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104418, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_Name
-      value: Slot1
+      value: SlotBackground1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
