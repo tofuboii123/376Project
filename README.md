@@ -1,7 +1,9 @@
 # In-a-Timely-Manor
- COMP 376 Team Project
+COMP 376 Team Project
  
  
 # Resources used
- https://fonts2u.com/pixel-nes.font
- https://freesound.org/people/Horn/sounds/9744/
+* https://fonts2u.com/pixel-nes.font
+* https://freesound.org/people/Horn/sounds/9744/
+* https://assetstore.unity.com/packages/2d/textures-materials/handpainted-simplypack-122893
+* https://assetstore.unity.com/packages/2d/textures-materials/nature/2d-pixel-trees-63479
