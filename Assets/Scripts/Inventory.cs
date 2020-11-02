@@ -41,7 +41,6 @@ public class Inventory : MonoBehaviour
             items.Add(null);
         }
 
-        Debug.Log(items.Count);
         IsFull = false;
     }
 
