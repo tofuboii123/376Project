@@ -52,26 +52,23 @@ public class PlayerController : MonoBehaviour
                 TimeShift();
 
             MovePlayer();
+        } else {
+            animator.SetFloat("Speed", 0);
         }
     }
 
     void MovePlayer() {
-        if (CanMove)
-        {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-            if (movement != Vector2.zero) {
-                animator.SetFloat("Horizontal", movement.x);
-                animator.SetFloat("Vertical", movement.y);
-            }
-
-            animator.SetFloat("Speed", movement.sqrMagnitude);
-
-            this.transform.Translate(movement.normalized * speed * Time.deltaTime);
-        } else {
-            animator.SetFloat("Speed", 0);
+        if (movement != Vector2.zero) {
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
         }
+
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        this.transform.Translate(movement.normalized * speed * Time.deltaTime);
     }
 
     // Go from past to present and vice-versa
@@ -89,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     // Time shift animation
     IEnumerator StartTimeShift() {
+        CanMove = false;
 
         for (int i = 0; i < 100; i++) {
             bloom.intensity.value = i / 3;

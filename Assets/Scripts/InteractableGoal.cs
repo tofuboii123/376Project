@@ -8,7 +8,8 @@ public class InteractableGoal : Interactable
     string keyItemName;
 
     public override void OnInteraction() {
-        if (inventory.ContainsItem(keyItemName)) {
+        //if (inventory.ContainsItem(keyItemName)) {
+        if (inventory.items[Inventory.selectedItemIndex] == keyItemName) {
             inventory.DiscardItem(keyItemName);
             MessageController.ShowMessage("Used " + keyItemName + ".");
         }

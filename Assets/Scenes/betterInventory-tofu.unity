@@ -532,6 +532,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386476067}
     m_Modifications:
+    - target: {fileID: 6930445141949141933, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
+      propertyPath: m_Name
+      value: SlotImage2
+      objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104417, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -789,7 +793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &687972922
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1137,7 +1141,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1252,6 +1256,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386476067}
     m_Modifications:
+    - target: {fileID: 6930445141949141933, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
+      propertyPath: m_Name
+      value: SlotImage3
+      objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104417, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1882,6 +1890,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386476067}
     m_Modifications:
+    - target: {fileID: 6930445141949141933, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
+      propertyPath: m_Name
+      value: SlotImage5
+      objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104417, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2272,6 +2284,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386476067}
     m_Modifications:
+    - target: {fileID: 6930445141949141933, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
+      propertyPath: m_Name
+      value: SlotImage4
+      objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104417, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2787,6 +2803,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 386476067}
     m_Modifications:
+    - target: {fileID: 6930445141949141933, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
+      propertyPath: m_Name
+      value: SlotImage1
+      objectReference: {fileID: 0}
     - target: {fileID: 8010866005400104417, guid: 1ed3a0fd1a8bef24985ce33cf04e029b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
