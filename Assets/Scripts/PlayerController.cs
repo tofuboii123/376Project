@@ -1,24 +1,32 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool canMove = true;
+    // Getter and setter
+    public static bool CanMove { get; set; }
 
     [SerializeField]
     float speed = 5.0f;
 
     [SerializeField]
     bool inPast = false;
-
+    private bool isSafeSpot;
+    private int numOfTries;
+    Vector2 telePosition;
     [SerializeField]
     float travel = 150.0f; // Distance of 2nd timeline in y
+
+    [SerializeField]
+    Text timeIndicator;
 
     private Vector2 movement;
 
     public Animator animator;
 
+    private Rigidbody rb;
     public PostProcessVolume volume;
     private Bloom bloom;
     private LensDistortion lensDistortion;
@@ -27,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
+
     void Start() {
         volume.profile.TryGetSettings(out bloom);
         volume.profile.TryGetSettings(out lensDistortion);
@@ -34,47 +43,59 @@ public class PlayerController : MonoBehaviour
         volume.profile.TryGetSettings(out depthOfField);
         volume.profile.TryGetSettings(out colorGrading);
         volume.profile.TryGetSettings(out chromaticAberration);
+
+        isSafeSpot = true;
+        numOfTries = 0;
+
+
+        CanMove = true;
+        timeIndicator.text = "Present";
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Time travel.
-        if (Input.GetButtonDown("TimeShift"))
-            TimeShift();
+        if(CanMove) {
+            // Time travel.
+            if (Input.GetButtonDown("TimeShift"))
+                TimeShift();
 
-        MovePlayer();
-    }
-
-    void MovePlayer() {
-        if (canMove)
-        {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-
-            if (movement != Vector2.zero) {
-                animator.SetFloat("Horizontal", movement.x);
-                animator.SetFloat("Vertical", movement.y);
-            }
-
-            animator.SetFloat("Speed", movement.sqrMagnitude);
-
-            this.transform.Translate(movement.normalized * speed * Time.deltaTime);
+            MovePlayer();
         } else {
             animator.SetFloat("Speed", 0);
         }
+    }
+
+    void MovePlayer() {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        if (movement != Vector2.zero) {
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+        }
+
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        this.transform.Translate(movement.normalized * speed * Time.deltaTime);
     }
 
     // Go from past to present and vice-versa
     void TimeShift() {
         // Boolean switch
         inPast = !inPast;
+        
+        // HUD element
+        // TODO change for cool animation
+        timeIndicator.text = inPast ?  "Past" : "Present";
 
         StartCoroutine(StartTimeShift());
     }
 
+
+    // Time shift animation
     IEnumerator StartTimeShift() {
-        canMove = false;
+        CanMove = false;
 
         for (int i = 0; i < 100; i++) {
             bloom.intensity.value = i / 3;
@@ -85,7 +106,37 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
-        this.transform.position += new Vector3(0, (inPast ? travel : -travel), 0); // Unity doesn't allow you to only modify the z value...
+
+        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
+        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
+        {
+
+            isSafeSpot = false;
+            while (isSafeSpot == false)
+            {
+                telePosition = this.transform.position + new Vector3(Random.Range(-3-(numOfTries/10), 3+(numOfTries/10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3+ (numOfTries / 10)), 0);
+
+                hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+                if (hit.collider == null || !hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
+                {
+                    isSafeSpot = true;
+                }
+                if (numOfTries <= 20)
+                {
+                    numOfTries += 1;
+                }
+
+            }
+            numOfTries = 0;
+        }
+    
+
+        
+        this.transform.position = telePosition;
+        
         grain.intensity.value = (inPast ? 1 : 0);
 
         if (inPast) {
@@ -109,6 +160,8 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
-        canMove = true;
+        CanMove = true;
     }
+
+
 }

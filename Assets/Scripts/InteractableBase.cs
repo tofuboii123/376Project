@@ -17,7 +17,7 @@ public abstract class Interactable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Input.GetButton("Interact"))
+            if (Input.GetButtonDown("Interact"))
             {
                 OnInteraction();
             }

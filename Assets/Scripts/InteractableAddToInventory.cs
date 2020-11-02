@@ -6,11 +6,12 @@ public class InteractableAddToInventory : Interactable
 {
     public override void OnInteraction()
     {
-        if (!inventory.ContainsItem(gameObject))
-        {
-            inventory.AddItem(gameObject);
-            // TODO replace print with MessageController.ShowMessage()
-            print("Added " + gameObject.name);
+        if (inventory.IsFull) {
+            MessageController.ShowMessage("Inventory Full.");
+            return;
         }
+
+        inventory.AddItem(gameObject);
+        MessageController.ShowMessage("Picked up a " + gameObject.name + ".");
     }
 }
