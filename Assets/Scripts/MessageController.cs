@@ -32,7 +32,7 @@ public class MessageController : MonoBehaviour
     {
         if (showMessage > 0)
         {
-            PlayerController.canMove = false;
+            PlayerController.CanMove = false;
             messageBox.SetActive(true);
             if (!textIsTyping)
             {
@@ -100,7 +100,7 @@ public class MessageController : MonoBehaviour
     private void CloseMessage()
     {
         messageBox.SetActive(false);
-        PlayerController.canMove = true;
+        PlayerController.CanMove = true;
         showMessage -= 1;
         textIsTyping = false;
         closeMessageText.SetActive(false);

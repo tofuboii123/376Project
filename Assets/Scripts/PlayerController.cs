@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public static bool canMove = true;
+    // Getter and setter
+    public static bool CanMove { get; set; }
 
     [SerializeField]
     float speed = 5.0f;
@@ -16,6 +18,9 @@ public class PlayerController : MonoBehaviour
     Vector2 telePosition;
     [SerializeField]
     float travel = 150.0f; // Distance of 2nd timeline in y
+
+    [SerializeField]
+    Text timeIndicator;
 
     private Vector2 movement;
 
@@ -43,49 +48,54 @@ public class PlayerController : MonoBehaviour
         numOfTries = 0;
 
 
+        CanMove = true;
+        timeIndicator.text = "Present";
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Time travel.
-        if (Input.GetButtonDown("TimeShift"))
-            TimeShift();
+        if(CanMove) {
+            // Time travel.
+            if (Input.GetButtonDown("TimeShift"))
+                TimeShift();
 
-        MovePlayer();
-    }
-
-    void MovePlayer() {
-        if (canMove)
-        {
-            movement.x = Input.GetAxisRaw("Horizontal");
-            movement.y = Input.GetAxisRaw("Vertical");
-
-            if (movement != Vector2.zero) {
-                animator.SetFloat("Horizontal", movement.x);
-                animator.SetFloat("Vertical", movement.y);
-            }
-
-            animator.SetFloat("Speed", movement.sqrMagnitude);
-
-            this.transform.Translate(movement.normalized * speed * Time.deltaTime);
+            MovePlayer();
         } else {
             animator.SetFloat("Speed", 0);
         }
+    }
+
+    void MovePlayer() {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        if (movement != Vector2.zero) {
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+        }
+
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        this.transform.Translate(movement.normalized * speed * Time.deltaTime);
     }
 
     // Go from past to present and vice-versa
     void TimeShift() {
         // Boolean switch
         inPast = !inPast;
+        
+        // HUD element
+        // TODO change for cool animation
+        timeIndicator.text = inPast ?  "Past" : "Present";
 
         StartCoroutine(StartTimeShift());
     }
 
-    IEnumerator StartTimeShift() {
 
-        
-        canMove = false;
+    // Time shift animation
+    IEnumerator StartTimeShift() {
+        CanMove = false;
 
         for (int i = 0; i < 100; i++) {
             bloom.intensity.value = i / 3;
@@ -150,8 +160,7 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
-      
-        canMove = true;
+        CanMove = true;
     }
 
 
