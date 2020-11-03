@@ -138,6 +138,7 @@ public class Inventory : MonoBehaviour
             itemsQuantity[indexOfItem]--;
             if (itemsQuantity[indexOfItem] <= 0) {
                 itemsQuantity[indexOfItem] = 0; // Probably not needed...
+                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem]; // Probably not needed...
                 slotQuantities[indexOfItem].enabled = false;
 
                 slotImages[indexOfItem].enabled = false;
@@ -148,27 +149,5 @@ public class Inventory : MonoBehaviour
                 slotQuantities[indexOfItem].enabled = true;
             }
         }
-    }
-
-    // check if inventory contains a specific item
-    public bool ContainsItem(GameObject obj) {
-        foreach (string s in items) {
-            if (s == obj.name) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    // check if inventory contains a specific item
-    public bool ContainsItem(string item) {
-        foreach (string s in items) {
-            if (s == item) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

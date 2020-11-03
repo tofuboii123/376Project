@@ -12,7 +12,7 @@ public class InteractableGoal : Interactable
             inventory.DiscardItem(keyItemName);
             MessageController.ShowMessage("Used " + keyItemName + ".");
         } else {
-            MessageController.ShowMessage("That doesn't work...");
+            MessageController.ShowMessage("That doesn't work.");
         }
     }
 }

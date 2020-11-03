@@ -165,8 +165,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  slotsBackground: []
-  slots: []
+  itemsQuantity: 
+  slotsBackgroundList: []
+  slotImages: []
+  slotQuantities: []
   invent: {fileID: 0}
   empty: {fileID: 21300000, guid: 5193d0a1bbfce3448b19f416baac6c47, type: 3}
   selected: {fileID: 21300000, guid: cc46ba83bf4426544a19895f48ae4a5a, type: 3}
