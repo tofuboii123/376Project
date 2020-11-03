@@ -75,6 +75,7 @@ public class Inventory : MonoBehaviour
     // add an item to the inventory
     public void AddItem(GameObject obj)
     {
+        print("Adding item");
         int idx = items.IndexOf(null);
         if (idx < 0) {
             IsFull = true;

@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     // Getter and setter
     public static bool CanMove { get; set; }
+    bool canPickUp = false;
 
     [SerializeField]
     float speed = 5.0f;
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
+    InteractableAddToInventory pickup;
+
 
     void Start() {
         volume.profile.TryGetSettings(out bloom);
@@ -46,7 +49,6 @@ public class PlayerController : MonoBehaviour
 
         isSafeSpot = true;
         numOfTries = 0;
-
 
         CanMove = true;
         timeIndicator.text = "Present";
@@ -63,6 +65,14 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         } else {
             animator.SetFloat("Speed", 0);
+        }
+
+    }
+
+    private void OnTriggerStay2D(Collider2D collision) {
+        if(collision.tag == "Collectible") {
+            pickup = collision.GetComponentInParent<InteractableAddToInventory>();
+            canPickUp = true;
         }
     }
 

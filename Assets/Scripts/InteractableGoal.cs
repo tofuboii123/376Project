@@ -7,6 +7,8 @@ public class InteractableGoal : Interactable
     [SerializeField]
     string keyItemName;
 
+    bool canPlant = false;
+
     public override void OnInteraction() {
         if (inventory.ContainsSelectedItem(keyItemName)) {
             inventory.DiscardItem(keyItemName);
