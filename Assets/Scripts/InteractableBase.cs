@@ -5,24 +5,42 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     protected Inventory inventory;
-    protected bool canInteract = false;
-
     public abstract void OnInteraction();
 
+    private bool canInteract = false;
 
     private void Start()
     {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
+    private void Update()
+    {
+
+        if (Input.GetButtonDown("Interact") && canInteract)
+        {
+            OnInteraction();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerItemCollider"))
+        {
             canInteract = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerItemCollider"))
+        {
+            canInteract = false;
         }
     }
 }
 
 public class InteractableBase : MonoBehaviour
 {
-    
+
 }
