@@ -97,11 +97,12 @@ public class Inventory : MonoBehaviour
         // Check if we already have the item
         idx = items.IndexOf(obj.name);
         if (idx >= 0) {
+            // We already have the item in our inventory
+            // Just add one to the quantity, not add a whole new item
             itemsQuantity[idx]++;
             slotQuantities[idx].text = "x" + itemsQuantity[idx];
-            Destroy(obj); // Object not in game world anymore
 
-            Debug.Log("Adding to existing item! Now has x" + itemsQuantity[idx] + " of " + obj.name);
+            Destroy(obj); // Object not in game world anymore
             return;
         }
 
@@ -112,17 +113,18 @@ public class Inventory : MonoBehaviour
             return;
         }
 
+        // It's a new item! Add it to the first open slot
         items[idx] = obj.name;
 
+        // Update image in inventory slot
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
         slotImages[idx].sprite = sprite;
         slotImages[idx].enabled = true;
 
+        // Update item quantity
         itemsQuantity[idx]++;
         slotQuantities[idx].text = "x" + itemsQuantity[idx];
         slotQuantities[idx].enabled = true;
-
-        Debug.Log("Adding new item! Now has x" + itemsQuantity[idx] + " of " + obj.name);
 
         Destroy(obj); // Object not in game world anymore
     }
