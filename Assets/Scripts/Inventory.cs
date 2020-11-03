@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     public List<string> items;
+    public List<int> itemsQuantity;
 
     public List<Image> slotsBackgroundList;
     public List<Image> slotImages;
+    public List<TextMeshProUGUI> slotQuantities;
 
     [SerializeField]
     GameObject invent = null;
@@ -25,14 +28,23 @@ public class Inventory : MonoBehaviour
     private void Start() {
         slotsBackgroundList = new List<Image>();
         slotImages = new List<Image>();
+        slotQuantities = new List<TextMeshProUGUI>();
 
-        Image[] s = invent.GetComponentsInChildren<Image>();
-        foreach (Image i in s) {
-            if (i.name.StartsWith("SlotImage")) {
-                slotImages.Add(i);
-                i.enabled = false;
-            } else if (i.name.StartsWith("SlotBackground")) {
-                slotsBackgroundList.Add(i);
+        Image[] images = invent.GetComponentsInChildren<Image>();
+        foreach (Image image in images) {
+            if (image.name.StartsWith("SlotImage")) {
+                slotImages.Add(image);
+                image.enabled = false;
+            } else if (image.name.StartsWith("SlotBackground")) {
+                slotsBackgroundList.Add(image);
+
+                TextMeshProUGUI[] texts = image.GetComponentsInChildren<TextMeshProUGUI>();
+                foreach (TextMeshProUGUI text in texts) {
+                    if (text.name.StartsWith("SlotQuantity")) {
+                        slotQuantities.Add(text);
+                        text.enabled = false;
+                    }
+                }
             }
         }
 
@@ -43,6 +55,7 @@ public class Inventory : MonoBehaviour
         items = new List<string>();
         for (int i = 0; i < slotsBackgroundList.Count; i++) {
             items.Add(null);
+            itemsQuantity.Add(0);
         }
 
         IsFull = false;
@@ -79,7 +92,21 @@ public class Inventory : MonoBehaviour
     // add an item to the inventory
     public void AddItem(GameObject obj)
     {
-        int idx = items.IndexOf(null);
+        int idx;
+
+        // Check if we already have the item
+        idx = items.IndexOf(obj.name);
+        if (idx >= 0) {
+            itemsQuantity[idx]++;
+            slotQuantities[idx].text = "x" + itemsQuantity[idx];
+            Destroy(obj); // Object not in game world anymore
+
+            Debug.Log("Adding to existing item! Now has x" + itemsQuantity[idx] + " of " + obj.name);
+            return;
+        }
+
+        // New item adding to inventory...check to see if we have space
+        idx = items.IndexOf(null);
         if (idx < 0) {
             IsFull = true;
             return;
@@ -89,8 +116,13 @@ public class Inventory : MonoBehaviour
 
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
         slotImages[idx].sprite = sprite;
-
         slotImages[idx].enabled = true;
+
+        itemsQuantity[idx]++;
+        slotQuantities[idx].text = "x" + itemsQuantity[idx];
+        slotQuantities[idx].enabled = true;
+
+        Debug.Log("Adding new item! Now has x" + itemsQuantity[idx] + " of " + obj.name);
 
         Destroy(obj); // Object not in game world anymore
     }
@@ -103,9 +135,18 @@ public class Inventory : MonoBehaviour
     public void DiscardItem(string item) {
         int indexOfItem = items.IndexOf(item);
         if (indexOfItem >= 0) {
-            slotImages[indexOfItem].enabled = false;
-            slotImages[indexOfItem].sprite = null;
-            items[indexOfItem] = null;
+            itemsQuantity[indexOfItem]--;
+            if (itemsQuantity[indexOfItem] <= 0) {
+                itemsQuantity[indexOfItem] = 0; // Probably not needed...
+                slotQuantities[indexOfItem].enabled = false;
+
+                slotImages[indexOfItem].enabled = false;
+                slotImages[indexOfItem].sprite = null;
+                items[indexOfItem] = null;
+            } else {
+                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                slotQuantities[indexOfItem].enabled = true;
+            }
         }
     }
 
