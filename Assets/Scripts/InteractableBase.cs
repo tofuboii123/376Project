@@ -16,7 +16,6 @@ public abstract class Interactable : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetButtonDown("Interact") && canInteract)
         {
             OnInteraction();

@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
 {
     // Getter and setter
     public static bool CanMove { get; set; }
-    bool canPickUp = false;
 
     [SerializeField]
     float speed = 5.0f;
@@ -35,9 +34,6 @@ public class PlayerController : MonoBehaviour
     private DepthOfField depthOfField;
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
-
-    InteractableAddToInventory pickup;
-
 
     void Start() {
         volume.profile.TryGetSettings(out bloom);
@@ -69,12 +65,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision) {
-        if(collision.tag == "Collectible") {
-            pickup = collision.GetComponentInParent<InteractableAddToInventory>();
-            canPickUp = true;
-        }
-    }
 
     void MovePlayer() {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -102,6 +92,32 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StartTimeShift());
     }
 
+    Vector3 checkTeleportPosition() {
+        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
+        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z))) {
+
+            isSafeSpot = false;
+            while (isSafeSpot == false) {
+                telePosition = this.transform.position + new Vector3(Random.Range(-3 - (numOfTries / 10), 3 + (numOfTries / 10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3 + (numOfTries / 10)), 0);
+
+                hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+                if (hit.collider == null || !hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z))) {
+                    isSafeSpot = true;
+                }
+                if (numOfTries <= 20) {
+                    numOfTries += 1;
+                }
+
+            }
+            numOfTries = 0;
+        }
+
+        return telePosition;
+    }
+
 
     // Time shift animation
     IEnumerator StartTimeShift() {
@@ -116,37 +132,9 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
+        //this.transform.position = checkTeleportPosition();
+        this.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
 
-        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
-        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
-        {
-
-            isSafeSpot = false;
-            while (isSafeSpot == false)
-            {
-                telePosition = this.transform.position + new Vector3(Random.Range(-3-(numOfTries/10), 3+(numOfTries/10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3+ (numOfTries / 10)), 0);
-
-                hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-                if (hit.collider == null || !hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
-                {
-                    isSafeSpot = true;
-                }
-                if (numOfTries <= 20)
-                {
-                    numOfTries += 1;
-                }
-
-            }
-            numOfTries = 0;
-        }
-    
-
-        
-        this.transform.position = telePosition;
-        
         grain.intensity.value = (inPast ? 1 : 0);
 
         if (inPast) {
