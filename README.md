@@ -7,4 +7,3 @@ COMP 376 Team Project
 * https://freesound.org/people/Horn/sounds/9744/
 * https://assetstore.unity.com/packages/2d/textures-materials/handpainted-simplypack-122893
 * https://assetstore.unity.com/packages/2d/textures-materials/nature/2d-pixel-trees-63479
-* https://unitycodemonkey.com/video.php?v=pbTysQw-WNs
