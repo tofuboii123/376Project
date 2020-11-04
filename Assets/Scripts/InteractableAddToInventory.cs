@@ -8,10 +8,9 @@ public class InteractableAddToInventory : Interactable
     {
         if (inventory.IsFull) {
             MessageController.ShowMessage("Inventory Full.");
-            return;
+        } else {
+            inventory.AddItem(gameObject);
+            MessageController.ShowMessage("Picked up a " + gameObject.name + ".");
         }
-
-        inventory.AddItem(gameObject);
-        MessageController.ShowMessage("Picked up a " + gameObject.name + ".");
     }
 }

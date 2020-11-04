@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
-
     void Start() {
         volume.profile.TryGetSettings(out bloom);
         volume.profile.TryGetSettings(out lensDistortion);
@@ -46,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
         isSafeSpot = true;
         numOfTries = 0;
-
 
         CanMove = true;
         timeIndicator.text = "Present";
@@ -64,7 +62,9 @@ public class PlayerController : MonoBehaviour
         } else {
             animator.SetFloat("Speed", 0);
         }
+
     }
+
 
     void MovePlayer() {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -84,12 +84,39 @@ public class PlayerController : MonoBehaviour
     void TimeShift() {
         // Boolean switch
         inPast = !inPast;
-        
+
         // HUD element
         // TODO change for cool animation
+        Clock.TimeTravel();
         timeIndicator.text = inPast ?  "Past" : "Present";
 
         StartCoroutine(StartTimeShift());
+    }
+
+    Vector3 checkTeleportPosition() {
+        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
+        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z))) {
+
+            isSafeSpot = false;
+            while (isSafeSpot == false) {
+                telePosition = this.transform.position + new Vector3(Random.Range(-3 - (numOfTries / 10), 3 + (numOfTries / 10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3 + (numOfTries / 10)), 0);
+
+                hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+                if (hit.collider == null || !hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z))) {
+                    isSafeSpot = true;
+                }
+                if (numOfTries <= 20) {
+                    numOfTries += 1;
+                }
+
+            }
+            numOfTries = 0;
+        }
+
+        return telePosition;
     }
 
 
@@ -106,37 +133,9 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.005f);
         }
 
+        //this.transform.position = checkTeleportPosition();
+        this.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
 
-        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
-        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
-        {
-
-            isSafeSpot = false;
-            while (isSafeSpot == false)
-            {
-                telePosition = this.transform.position + new Vector3(Random.Range(-3-(numOfTries/10), 3+(numOfTries/10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3+ (numOfTries / 10)), 0);
-
-                hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-                if (hit.collider == null || !hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
-                {
-                    isSafeSpot = true;
-                }
-                if (numOfTries <= 20)
-                {
-                    numOfTries += 1;
-                }
-
-            }
-            numOfTries = 0;
-        }
-    
-
-        
-        this.transform.position = telePosition;
-        
         grain.intensity.value = (inPast ? 1 : 0);
 
         if (inPast) {
@@ -152,10 +151,10 @@ public class PlayerController : MonoBehaviour
         }
 
         for (int i = 100; i >= 0; i--) {
-            bloom.intensity.value = i / 3;
-            lensDistortion.intensity.value = i / 4;
-            depthOfField.focalLength.value = i;
-            chromaticAberration.intensity.value = i / 100;
+            bloom.intensity.value = i / 4;
+            lensDistortion.intensity.value = i / 5;
+            depthOfField.focalLength.value = i / 1.5f;
+            chromaticAberration.intensity.value = i / 200;
 
             yield return new WaitForSeconds(0.005f);
         }
