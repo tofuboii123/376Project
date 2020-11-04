@@ -84,9 +84,10 @@ public class PlayerController : MonoBehaviour
     void TimeShift() {
         // Boolean switch
         inPast = !inPast;
-        
+
         // HUD element
         // TODO change for cool animation
+        Clock.TimeTravel();
         timeIndicator.text = inPast ?  "Past" : "Present";
 
         StartCoroutine(StartTimeShift());
