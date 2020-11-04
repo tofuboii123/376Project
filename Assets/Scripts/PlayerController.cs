@@ -151,10 +151,10 @@ public class PlayerController : MonoBehaviour
         }
 
         for (int i = 100; i >= 0; i--) {
-            bloom.intensity.value = i / 3;
-            lensDistortion.intensity.value = i / 4;
-            depthOfField.focalLength.value = i;
-            chromaticAberration.intensity.value = i / 100;
+            bloom.intensity.value = i / 4;
+            lensDistortion.intensity.value = i / 5;
+            depthOfField.focalLength.value = i / 1.5f;
+            chromaticAberration.intensity.value = i / 200;
 
             yield return new WaitForSeconds(0.005f);
         }

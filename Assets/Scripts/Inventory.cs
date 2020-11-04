@@ -1,93 +1,130 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     public List<string> items;
-    public List<Image> slotsBackground;
-    public List<Image> slots;
+    public List<int> itemsQuantity;
+
+    public List<Image> slotsBackgroundList;
+    public List<Image> slotImages;
+    public List<TextMeshProUGUI> slotQuantities;
+
     [SerializeField]
     GameObject invent = null;
+
     [SerializeField]
     Sprite empty;
     [SerializeField]
     Sprite selected;
+
     public static int selectedItemIndex = 0;
     
     public bool IsFull { get; set; }
 
     private void Start() {
-        slotsBackground = new List<Image>();
-        slots = new List<Image>();
+        slotsBackgroundList = new List<Image>();
+        slotImages = new List<Image>();
+        slotQuantities = new List<TextMeshProUGUI>();
 
-        Image[] s = invent.GetComponentsInChildren<Image>();
-        foreach (Image i in s) {
-            if (i.name.StartsWith("SlotImage")) {
-                slots.Add(i);
-                i.enabled = false;
-            } else if (i.name.StartsWith("SlotBackground")) {
-                slotsBackground.Add(i);
+        Image[] images = invent.GetComponentsInChildren<Image>();
+        foreach (Image image in images) {
+            if (image.name.StartsWith("SlotImage")) {
+                slotImages.Add(image);
+                image.enabled = false;
+            } else if (image.name.StartsWith("SlotBackground")) {
+                slotsBackgroundList.Add(image);
+
+                TextMeshProUGUI[] texts = image.GetComponentsInChildren<TextMeshProUGUI>();
+                foreach (TextMeshProUGUI text in texts) {
+                    if (text.name.StartsWith("SlotQuantity")) {
+                        slotQuantities.Add(text);
+                        text.enabled = false;
+                    }
+                }
             }
         }
 
-        if (slotsBackground[0] != null) {
-            slotsBackground[0].sprite = selected;
+        if (slotsBackgroundList[0] != null) {
+            slotsBackgroundList[0].sprite = selected;
         }
 
         items = new List<string>();
-        for (int i = 0; i < slotsBackground.Count; i++) {
+        for (int i = 0; i < slotsBackgroundList.Count; i++) {
             items.Add(null);
+            itemsQuantity.Add(0);
         }
 
         IsFull = false;
     }
 
     void Update() {
-        SelectItem();
+        CheckInventoryMovement();
     }
 
-    private void SelectItem() {
+    private void CheckInventoryMovement() {
         if (Input.GetButtonDown("ChoseItemLeft")) {
-            slotsBackground[selectedItemIndex].sprite = empty;
+            slotsBackgroundList[selectedItemIndex].sprite = empty;
 
             selectedItemIndex--;
             if (selectedItemIndex < 0) {
-                selectedItemIndex = slotsBackground.Count - 1;
+                selectedItemIndex = slotsBackgroundList.Count - 1;
             }
 
-            slotsBackground[selectedItemIndex].sprite = selected;
+            slotsBackgroundList[selectedItemIndex].sprite = selected;
         }
 
         if (Input.GetButtonDown("ChoseItemRight")) {
-            slotsBackground[selectedItemIndex].sprite = empty;
+            slotsBackgroundList[selectedItemIndex].sprite = empty;
 
             selectedItemIndex++;
-            if (selectedItemIndex > slotsBackground.Count - 1) {
+            if (selectedItemIndex > slotsBackgroundList.Count - 1) {
                 selectedItemIndex = 0;
             }
 
-            slotsBackground[selectedItemIndex].sprite = selected;
+            slotsBackgroundList[selectedItemIndex].sprite = selected;
         }
     }
 
     // add an item to the inventory
     public void AddItem(GameObject obj)
     {
-        print("Adding item");
-        int idx = items.IndexOf(null);
+        int idx;
+
+        // Check if we already have the item
+        idx = items.IndexOf(obj.name);
+        if (idx >= 0) {
+            // We already have the item in our inventory
+            // Just add one to the quantity, not add a whole new item
+            itemsQuantity[idx]++;
+            slotQuantities[idx].text = "x" + itemsQuantity[idx];
+
+            Destroy(obj); // Object not in game world anymore
+            return;
+        }
+
+        // New item adding to inventory...check to see if we have space
+        idx = items.IndexOf(null);
         if (idx < 0) {
             IsFull = true;
             return;
         }
 
+        // It's a new item! Add it to the first open slot
         items[idx] = obj.name;
 
+        // Update image in inventory slot
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
-        slots[idx].sprite = sprite;
+        slotImages[idx].sprite = sprite;
+        slotImages[idx].enabled = true;
 
-        slots[idx].enabled = true;
+        // Update item quantity
+        itemsQuantity[idx]++;
+        slotQuantities[idx].text = "x" + itemsQuantity[idx];
+        slotQuantities[idx].enabled = true;
 
         Destroy(obj); // Object not in game world anymore
     }
@@ -100,30 +137,19 @@ public class Inventory : MonoBehaviour
     public void DiscardItem(string item) {
         int indexOfItem = items.IndexOf(item);
         if (indexOfItem >= 0) {
-            slots[indexOfItem].enabled = false;
-            slots[indexOfItem].sprite = null;
-            items[indexOfItem] = null;
-        }
-    }
+            itemsQuantity[indexOfItem]--;
+            if (itemsQuantity[indexOfItem] <= 0) {
+                itemsQuantity[indexOfItem] = 0; // Probably not needed...
+                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem]; // Probably not needed...
+                slotQuantities[indexOfItem].enabled = false;
 
-    // check if inventory contains a specific item
-    public bool ContainsItem(GameObject obj) {
-        foreach (string s in items) {
-            if (s == obj.name) {
-                return true;
+                slotImages[indexOfItem].enabled = false;
+                slotImages[indexOfItem].sprite = null;
+                items[indexOfItem] = null;
+            } else {
+                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                slotQuantities[indexOfItem].enabled = true;
             }
         }
-
-        return false;
-    }
-
-    // check if inventory contains a specific item
-    public bool ContainsItem(string item) {
-        foreach (string s in items) {
-            if (s == item) {
-                return true;
-            }
-        }
-        return false;
     }
 }
