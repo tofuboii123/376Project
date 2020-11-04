@@ -11,7 +11,11 @@ public class InteractableDirt : Interactable
 
     private void Start() {
         tree.SetActive(false);
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>(); // Need this for some reason?
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        inventory = player.GetComponent<Inventory>(); // Need this for some reason?
+        interactTextObject = player.GetComponent<PlayerController>().interactTextObject; // Need this for some reason?
     }
 
     public override void OnInteraction() {
@@ -21,7 +25,7 @@ public class InteractableDirt : Interactable
             MessageController.ShowMessage("You put the plant into the ground and discard the pot.");
             GrowTree();
         } else {
-            MessageController.ShowMessage("That doesn't work...");
+            MessageController.ShowMessage("That doesn't work.");
         }
     }
 

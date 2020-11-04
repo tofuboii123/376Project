@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
     protected Inventory inventory;
+    protected TextMeshProUGUI interactTextObject;
+    public string interactTextString;
     public abstract void OnInteraction();
 
     protected bool canInteract = false;
 
     private void Start()
     {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        inventory = player.GetComponent<Inventory>();
+        interactTextObject = player.GetComponent<PlayerController>().interactTextObject;
+
+        interactTextObject.text = "";
+        interactTextObject.enabled = false;
     }
 
     private void Update()
@@ -26,6 +35,9 @@ public abstract class Interactable : MonoBehaviour
     {
         if (other.CompareTag("PlayerItemCollider"))
         {
+            interactTextObject.text = "X - " + interactTextString;
+            interactTextObject.enabled = true;
+
             canInteract = true;
         }
     }
@@ -34,6 +46,9 @@ public abstract class Interactable : MonoBehaviour
     {
         if (other.CompareTag("PlayerItemCollider"))
         {
+            interactTextObject.text = "";
+            interactTextObject.enabled = false;
+
             canInteract = false;
         }
     }

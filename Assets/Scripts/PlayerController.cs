@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     Text timeIndicator;
+
+    public TextMeshProUGUI interactTextObject;
 
     private Vector2 movement;
 
