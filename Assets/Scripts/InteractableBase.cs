@@ -7,7 +7,7 @@ public abstract class Interactable : MonoBehaviour
     protected Inventory inventory;
     public abstract void OnInteraction();
 
-    private bool canInteract = false;
+    protected bool canInteract = false;
 
     private void Start()
     {
