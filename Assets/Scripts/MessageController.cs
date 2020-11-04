@@ -11,6 +11,7 @@ public class MessageController : MonoBehaviour
     public new AudioSource audio;
 
     private float typeDelay = 0.04f;
+    private static bool messageBoxActive = false;
     private static bool textIsTyping = false;
     private static bool textFinishedTyping = false;
     private static int showMessage;
@@ -34,6 +35,7 @@ public class MessageController : MonoBehaviour
         {
             PlayerController.CanMove = false;
             messageBox.SetActive(true);
+            messageBoxActive = true;
             if (!textIsTyping)
             {
                 StartCoroutine(ShowText());
@@ -61,17 +63,22 @@ public class MessageController : MonoBehaviour
 
     public static void ShowMessage(string[] text)
     {
-        showMessage = text.Length;
-        textArray = text;
-        textToShow = textArray[0];
+        if (!messageBoxActive)
+        {
+            showMessage = text.Length;
+            textArray = text;
+            textToShow = textArray[0];
 
+        }
     }
 
     public static void ShowMessage(string text)
     {
-        showMessage = 1;
-        textToShow = text;
-
+        if (!messageBoxActive)
+        {
+            showMessage = 1;
+            textToShow = text;
+        }
     }
 
     private IEnumerator ShowText()
@@ -104,6 +111,7 @@ public class MessageController : MonoBehaviour
         showMessage -= 1;
         textIsTyping = false;
         closeMessageText.SetActive(false);
+        messageBoxActive = false;
     }
 
 }
