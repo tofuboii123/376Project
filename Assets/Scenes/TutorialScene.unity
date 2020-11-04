@@ -23503,6 +23503,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 711493704}
     m_Modifications:
+    - target: {fileID: 1500942784475757597, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6488956300714774440, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
       propertyPath: m_Name
       value: Inventory
@@ -25262,7 +25266,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 803887508}
-  - {fileID: 1815474028}
+  - {fileID: 1510260353}
   - {fileID: 1829100929}
   m_Father: {fileID: 859943961}
   m_RootOrder: 0
@@ -25474,7 +25478,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -45093,11 +45097,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &943790140 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6488956300714774440, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
-  m_PrefabInstance: {fileID: 330472686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1090411041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47391,6 +47390,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1510260352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1500942784475757596, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+  m_PrefabInstance: {fileID: 330472686}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1510260353 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1500942784475757597, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+  m_PrefabInstance: {fileID: 330472686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1518774410
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47409,7 +47418,15 @@ PrefabInstance:
     - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: invent
       value: 
-      objectReference: {fileID: 943790140}
+      objectReference: {fileID: 1510260352}
+    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: selected
+      value: 
+      objectReference: {fileID: 21300000, guid: c44e7d9e3eed6d646ba1d360e78ebb07, type: 3}
+    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: empty
+      value: 
+      objectReference: {fileID: 21300000, guid: 219c18dd6c1b5274eb6a2346a6e8ba21, type: 3}
     - target: {fileID: 4684393574480199430, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -48901,11 +48918,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!224 &1815474028 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6488956300714774441, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
-  m_PrefabInstance: {fileID: 330472686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1829100928
 PrefabInstance:
   m_ObjectHideFlags: 0
