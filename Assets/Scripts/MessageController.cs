@@ -14,7 +14,7 @@ public class MessageController : MonoBehaviour
     private static bool messageBoxActive = false;
     private static bool textIsTyping = false;
     private static bool textFinishedTyping = false;
-    private static int showMessage;
+    public static int showMessage;
     private static string textToShow = "";
     private static string[] textArray;
     private string currentText = "";
