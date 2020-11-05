@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     Text timeIndicator;
+
+    public TextMeshProUGUI interactTextObject;
 
     private Vector2 movement;
 
@@ -57,12 +60,18 @@ public class PlayerController : MonoBehaviour
             // Time travel.
             if (Input.GetButtonDown("TimeShift"))
                 TimeShift();
-
-            MovePlayer();
         } else {
             animator.SetFloat("Speed", 0);
         }
 
+    }
+
+    void FixedUpdate()
+    {
+        if (CanMove)
+        {
+            MovePlayer();
+        }
     }
 
 

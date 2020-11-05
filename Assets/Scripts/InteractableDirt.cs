@@ -8,21 +8,28 @@ public class InteractableDirt : Interactable
     string keyItemName = "Plant";
     [SerializeField]
     GameObject tree;
-    [SerializeField]
-    GameObject parent;
+
+    private void Start() {
+        tree.SetActive(false);
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        inventory = player.GetComponent<Inventory>(); // Need this for some reason?
+        interactTextObject = player.GetComponent<PlayerController>().interactTextObject; // Need this for some reason?
+    }
 
     public override void OnInteraction() {
+
         if (inventory.ContainsSelectedItem(keyItemName)) {
             inventory.DiscardItem(keyItemName);
             MessageController.ShowMessage("You put the plant into the ground and discard the pot.");
             GrowTree();
         } else {
-            MessageController.ShowMessage("That doesn't work...");
+            MessageController.ShowMessage("That doesn't work.");
         }
     }
 
     private void GrowTree() {
-        Instantiate(tree);
-        tree.transform.parent = parent.transform;
+        tree.SetActive(true);
     }
 }
