@@ -14,7 +14,7 @@ public class InteractableAddToInventory : Interactable
             "I'll take this " + objectName + " just in case.",
             "A " + objectName + ". I could use this.",
             "I might need this " + objectName + " later.",
-            "Something tells me this " + objectName + "could help.",
+            "Something tells me this " + objectName + " could help.",
             "I guess I can take this " + objectName + ".",
             "A " + objectName + " could come in handy."
         };
