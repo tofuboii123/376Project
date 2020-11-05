@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: -1914510759
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2748518832358382007, guid: 0a3292ee6fa7274468a90a37974c6b13, type: 3}
+  m_Sprite: {fileID: 7152930139536384079, guid: a6b0fd291579a6b4da42530e9a4baebd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.1, y: 0.3}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -104,6 +104,7 @@ MonoBehaviour:
   inPast: 0
   travel: 150
   timeIndicator: {fileID: 0}
+  interactTextObject: {fileID: 0}
   animator: {fileID: 4684393574480199429}
   volume: {fileID: 0}
 --- !u!61 &4684393574480199430
@@ -123,8 +124,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.75, y: 1.75}
-    newSize: {x: 0.1, y: 0.3}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -166,11 +167,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  slotsBackground: []
-  slots: []
+  itemsQuantity: 
+  slotsBackgroundList: []
+  slotImages: []
+  slotQuantities: []
   invent: {fileID: 0}
-  empty: {fileID: 21300000, guid: 5193d0a1bbfce3448b19f416baac6c47, type: 3}
-  selected: {fileID: 21300000, guid: cc46ba83bf4426544a19895f48ae4a5a, type: 3}
+  empty: {fileID: 21300000, guid: 219c18dd6c1b5274eb6a2346a6e8ba21, type: 3}
+  selected: {fileID: 21300000, guid: c44e7d9e3eed6d646ba1d360e78ebb07, type: 3}
 --- !u!95 &4684393574480199429
 Animator:
   serializedVersion: 3
@@ -235,7 +238,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.008029699, y: -0.0026766062}
+  m_Offset: {x: 0.008029699, y: -0.20129454}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -246,7 +249,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.2194781, y: 1.7762039}
+  m_Size: {x: 1.2194781, y: 2.1734397}
   m_EdgeRadius: 0
 --- !u!50 &265150726140466044
 Rigidbody2D:
@@ -267,5 +270,5 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0

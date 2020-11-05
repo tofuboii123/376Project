@@ -25308,6 +25308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a063dd1bac4e69b4fba8faa141637e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactTextString: Open Door
 --- !u!1 &711493703
 GameObject:
   m_ObjectHideFlags: 0
@@ -25338,6 +25339,7 @@ RectTransform:
   - {fileID: 803887508}
   - {fileID: 1510260353}
   - {fileID: 1829100929}
+  - {fileID: 1429312451}
   m_Father: {fileID: 859943961}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45279,6 +45281,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4399262772029954081, guid: c8f1e55d9d59d8f4989af047a255f12a, type: 3}
+      propertyPath: interactTextString
+      value: Pick up
+      objectReference: {fileID: 0}
     - target: {fileID: 4399262772029954087, guid: c8f1e55d9d59d8f4989af047a255f12a, type: 3}
       propertyPath: m_Name
       value: Plant
@@ -47455,6 +47461,119 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
   m_PrefabInstance: {fileID: 1518774410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1429312450
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 711493704}
+    m_Modifications:
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -244.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 74.635
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 488.77094
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50.000153
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 161667263590745505, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+      propertyPath: m_Name
+      value: X - Interact
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+--- !u!224 &1429312451 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 161667263590745504, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+  m_PrefabInstance: {fileID: 1429312450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1429312452 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 161667263590745507, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+  m_PrefabInstance: {fileID: 1429312450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1443741070
 GameObject:
   m_ObjectHideFlags: 0
@@ -47564,11 +47683,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.76
+      value: -10.5
       objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -47614,6 +47733,10 @@ PrefabInstance:
       propertyPath: volume
       value: 
       objectReference: {fileID: 519420033}
+    - target: {fileID: 4684393574480199449, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: interactTextObject
+      value: 
+      objectReference: {fileID: 1429312452}
     - target: {fileID: 4684393574480199450, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_Name
       value: Player
@@ -47725,6 +47848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770d7f812919aae45acd5553c820a610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactTextString: Climb Tree
 --- !u!1 &1756823245
 GameObject:
   m_ObjectHideFlags: 0
@@ -49281,6 +49405,10 @@ PrefabInstance:
       propertyPath: parent
       value: 
       objectReference: {fileID: 217945134}
+    - target: {fileID: 8000668673295127802, guid: f7df4358f070f6742aee6a45bccdbe7b, type: 3}
+      propertyPath: interactTextString
+      value: Plant Sapling
+      objectReference: {fileID: 0}
     - target: {fileID: 8000668673295127803, guid: f7df4358f070f6742aee6a45bccdbe7b, type: 3}
       propertyPath: m_SortingLayerID
       value: 908013415
@@ -49387,6 +49515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a063dd1bac4e69b4fba8faa141637e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactTextString: Open  Door
 --- !u!61 &1948091898
 BoxCollider2D:
   m_ObjectHideFlags: 0
