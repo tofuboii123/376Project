@@ -47663,30 +47663,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 265150726140466044, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 265150726140466044, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: invent
       value: 
       objectReference: {fileID: 1510260352}
-    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
-      propertyPath: selected
-      value: 
-      objectReference: {fileID: 21300000, guid: c44e7d9e3eed6d646ba1d360e78ebb07, type: 3}
-    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
-      propertyPath: empty
-      value: 
-      objectReference: {fileID: 21300000, guid: 219c18dd6c1b5274eb6a2346a6e8ba21, type: 3}
-    - target: {fileID: 4684393574480199430, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -47736,13 +47716,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 803887509}
     - target: {fileID: 4684393574480199449, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
-      propertyPath: volume
-      value: 
-      objectReference: {fileID: 519420033}
-    - target: {fileID: 4684393574480199449, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: interactTextObject
       value: 
       objectReference: {fileID: 1429312452}
+    - target: {fileID: 4684393574480199449, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 519420033}
     - target: {fileID: 4684393574480199450, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_Name
       value: Player
