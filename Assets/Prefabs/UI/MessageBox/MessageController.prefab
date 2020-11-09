@@ -47,3 +47,10 @@ MonoBehaviour:
   messageText: {fileID: 0}
   closeMessageText: {fileID: 0}
   audio: {fileID: 0}
+  faceSprites:
+  - {fileID: 6003631481857296823, guid: 126702a2bb53e1a4e88b2eb00a62788c, type: 3}
+  - {fileID: -8633511564045269336, guid: 126702a2bb53e1a4e88b2eb00a62788c, type: 3}
+  - {fileID: 6726140177965431813, guid: 126702a2bb53e1a4e88b2eb00a62788c, type: 3}
+  - {fileID: 6146166326494630913, guid: 126702a2bb53e1a4e88b2eb00a62788c, type: 3}
+  - {fileID: 21300000, guid: 16c471d3c4fa4e645858bf28e8fdd837, type: 3}
+  face: {fileID: 0}
