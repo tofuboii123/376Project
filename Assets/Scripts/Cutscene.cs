@@ -24,7 +24,11 @@ public class Cutscene : MonoBehaviour
     {
 
         yield return new WaitForSeconds(2);
-        MessageController.ShowMessage(new string[] { "???:\nI feel so cold..Where...Where am I?..\nI don't remember anything...", "???\nNo..I remember something..I remember home.\n1666 Avenue Ravensheart..Hamilton. \nBut is that my home? Only one way to figure out." });
+        MessageController.ShowMessage(new string[] {
+            "???:\n1666 Avenue Ravensheart, Hamilton...",
+            "???:\nIs that really where you'll be?" }, new int[] {
+                Face.None, Face.None
+            });
         while (MessageController.showMessage > 0)
         {
             yield return null;
@@ -33,7 +37,7 @@ public class Cutscene : MonoBehaviour
 
         yield return new WaitForSeconds(4);
 
-        MessageController.ShowMessage(new string[] { "???:\nTaxi!" });
+        MessageController.ShowMessage(new string[] { "???:\nTaxi!" }, new int[] { Face.Thinking });
         while (MessageController.showMessage > 0)
         {
             yield return null;
@@ -49,7 +53,22 @@ public class Cutscene : MonoBehaviour
         car.GetComponent<Animator>().speed = 0;
         yield return new WaitForSeconds(0.3f);
 
-        MessageController.ShowMessage(new string[] { "Driver:\nWhere are you going?", "???:\nHello sir..I am going to 1666 Avenue Ravensheart. Um, in Hamilton.", "Driver:\nThat's a one hour drive from here. It'll be 100 bucks.", "???:\nOh right, let me search my pockets...\nHuh, a pocket watch? it looks awfully familiar..\nand I have a hundrend dollar bill, that's lucky. Let's go." });
+        MessageController.ShowMessage(new string[] {
+            "Driver:\nWhere ya going?",
+            "???:\n1666 Avenue Ravensheart. Um, in Hamilton.",
+            "Driver:\nYou sure? That's a pretty long way from here. It'll cost ya.",
+            "???:\nThat's not a problem. I can pay.",
+            "Driver:\nIf you say so.\nSay, that's a pretty nice pocket watch you got there.",
+            "Driver:\nSeems like it'd fit right in a museum.\nNot many young'uns walking around with them.",
+            "???:\nYeah...\nI guess not." }, new int[] {
+            Face.None,
+            Face.Thinking,
+            Face.None,
+            Face.Happy,
+            Face.None,
+            Face.None,
+            Face.Disappointed
+            });
         while (MessageController.showMessage > 0)
         {
             yield return null;
