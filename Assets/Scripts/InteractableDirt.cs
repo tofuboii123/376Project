@@ -22,7 +22,7 @@ public class InteractableDirt : Interactable
 
         if (inventory.ContainsSelectedItem(keyItemName)) {
             inventory.DiscardItem(keyItemName);
-            MessageController.ShowMessage("You put the plant into the ground and discard the pot.");
+            MessageController.ShowMessage("I'll put the plant in the ground.");
             GrowTree();
         } else {
             MessageController.ShowMessage("That doesn't work.");

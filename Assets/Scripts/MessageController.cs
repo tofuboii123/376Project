@@ -3,20 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class Face
+{
+    public const int Thinking = 0;
+    public const int Surprised = 1;
+    public const int Disappointed = 2;
+    public const int Happy = 3;
+    public const int None = 4;
+}
+
 public class MessageController : MonoBehaviour
 {
     public GameObject messageBox;
     public GameObject messageText;
     public GameObject closeMessageText;
     public new AudioSource audio;
-
-    private float typeDelay = 0.04f;
+    public Sprite[] faceSprites = new Sprite[5];
+    public Image face;
+    
+    private float typeDelay = 0.025f;
+    private static int faceIndex = 0;
     private static bool messageBoxActive = false;
     private static bool textIsTyping = false;
     private static bool textFinishedTyping = false;
     public static int showMessage;
     private static string textToShow = "";
     private static string[] textArray;
+    private static int[] faceIndexArray;
     private string currentText = "";
 
     // Start is called before the first frame update
@@ -25,6 +38,7 @@ public class MessageController : MonoBehaviour
         messageBox.SetActive(false);
         closeMessageText.SetActive(false);
         audio.GetComponent<AudioSource>();
+        face.GetComponent<SpriteRenderer>();
         showMessage = 0;
     }
 
@@ -36,6 +50,15 @@ public class MessageController : MonoBehaviour
             PlayerController.CanMove = false;
             messageBox.SetActive(true);
             messageBoxActive = true;
+            if(faceIndex == Face.None)
+            {
+                face.enabled = false;
+            }
+            else
+            {
+                face.enabled = true;
+            }
+            face.sprite = faceSprites[faceIndex];
             if (!textIsTyping)
             {
                 StartCoroutine(ShowText());
@@ -47,8 +70,8 @@ public class MessageController : MonoBehaviour
 
             } else if (textFinishedTyping && Input.GetButtonDown("Interact"))
             {
+                closeMessageText.SetActive(false);
                 GoToNextPage();
-
             }
         }
     }
@@ -59,25 +82,36 @@ public class MessageController : MonoBehaviour
         textIsTyping = false;
         textFinishedTyping = false;
         textToShow = textArray[textArray.Length - showMessage];
+        if(faceIndexArray != null && faceIndexArray.Length > 0)
+            faceIndex = faceIndexArray[faceIndexArray.Length - showMessage];
     }
 
-    public static void ShowMessage(string[] text)
+    public static void ShowMessage(string[] text, int[] faces = null)
     {
         if (!messageBoxActive)
         {
             showMessage = text.Length;
             textArray = text;
             textToShow = textArray[0];
-
+            if (faces == null || faces.Length == 0)
+            {
+                faceIndex = 0;
+            }
+            else
+            {
+                faceIndexArray = faces;
+                faceIndex = faceIndexArray[0];
+            }
         }
     }
 
-    public static void ShowMessage(string text)
+    public static void ShowMessage(string text, int face = Face.Thinking)
     {
         if (!messageBoxActive)
         {
             showMessage = 1;
             textToShow = text;
+            faceIndex = face;
         }
     }
 
@@ -88,7 +122,7 @@ public class MessageController : MonoBehaviour
         for(int i = 0; i < textToShow.Length; i++)
         {
             // only play typewriter sound for every other character
-            if(i % 2 == 0)
+            if(i % 3 == 0)
                 audio.Play();
             currentText = textToShow.Substring(0, i + 1);
             messageText.GetComponent<Text>().text = currentText;
