@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         Clock.TimeTravel();
         timeIndicator.text = inPast ?  "Past" : "Present";
 
-        StartCoroutine(StartTimeShift());
+        StartCoroutine(StartPostProcessingEffect());
     }
 
     Vector3 checkTeleportPosition() {
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
 
     // Time shift animation
-    IEnumerator StartTimeShift() {
+    IEnumerator StartPostProcessingEffect() {
         CanMove = false;
         float timer;
 
