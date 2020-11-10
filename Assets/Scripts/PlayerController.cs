@@ -132,14 +132,20 @@ public class PlayerController : MonoBehaviour
     // Time shift animation
     IEnumerator StartTimeShift() {
         CanMove = false;
+        float timer;
 
-        for (int i = 0; i < 100; i++) {
-            bloom.intensity.value = i / 4;
-            lensDistortion.intensity.value = i / 5;
-            depthOfField.focalLength.value = i / 1.5f;
-            chromaticAberration.intensity.value = i / 200;
+        timer = 0.0f;
+        while (timer < 0.5f) {
+            timer += Time.deltaTime;
 
-            yield return new WaitForSeconds(0.005f);
+            bloom.intensity.value = Mathf.Lerp(0.0f, 25.0f, timer / 0.5f);
+            lensDistortion.intensity.value = Mathf.Lerp(0.0f, 20.0f, timer / 0.5f);
+            depthOfField.focalLength.value = Mathf.Lerp(0.0f, 67.0f, timer / 0.5f);
+            if (inPast) {
+                chromaticAberration.intensity.value = Mathf.Lerp(0.0f, 0.5f, timer / 0.5f);
+            }
+
+            yield return null;
         }
 
         //this.transform.position = checkTeleportPosition();
@@ -159,13 +165,18 @@ public class PlayerController : MonoBehaviour
             colorGrading.mixerBlueOutRedIn.value = 0;
         }
 
-        for (int i = 100; i >= 0; i--) {
-            bloom.intensity.value = i / 4;
-            lensDistortion.intensity.value = i / 5;
-            depthOfField.focalLength.value = i / 1.5f;
-            chromaticAberration.intensity.value = i / 200;
+        timer = 0.0f;
+        while (timer < 0.5f) {
+            timer += Time.deltaTime;
 
-            yield return new WaitForSeconds(0.005f);
+            bloom.intensity.value = Mathf.Lerp(25.0f, 0.0f, timer / 0.5f);
+            lensDistortion.intensity.value = Mathf.Lerp(20.0f, 0.0f, timer / 0.5f);
+            depthOfField.focalLength.value = Mathf.Lerp(67.0f, 0.0f, timer / 0.5f);
+            if (!inPast) {
+                chromaticAberration.intensity.value = Mathf.Lerp(0.5f, 0.0f, timer / 0.5f);
+            }
+
+            yield return null;
         }
 
         CanMove = true;
