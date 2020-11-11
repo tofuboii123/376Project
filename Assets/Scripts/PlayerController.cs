@@ -126,13 +126,9 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
-        float x = MrInvisible.transform.position.x;
-        float y = MrInvisible.transform.position.y;
-
-        MrInvisible.transform.position = new Vector2(-10, -20);
 
         //this.transform.position = checkTeleportPosition();
-        this.transform.position = new Vector2(x, y);
+        this.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
 
         grain.intensity.value = (inPast ? 1 : 0);
 
