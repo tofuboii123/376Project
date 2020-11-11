@@ -31,6 +31,7 @@ public class MessageController : MonoBehaviour
     private static string[] textArray;
     private static int[] faceIndexArray;
     private string currentText = "";
+    private static bool skipText = false;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,9 @@ public class MessageController : MonoBehaviour
             {
                 closeMessageText.SetActive(false);
                 GoToNextPage();
+            } else if (Input.GetButtonDown("Interact") && currentText.Length > 1)
+            {
+                skipText = true;
             }
         }
     }
@@ -81,6 +85,7 @@ public class MessageController : MonoBehaviour
         showMessage -= 1;
         textIsTyping = false;
         textFinishedTyping = false;
+        skipText = false;
         textToShow = textArray[textArray.Length - showMessage];
         if(faceIndexArray != null && faceIndexArray.Length > 0)
             faceIndex = faceIndexArray[faceIndexArray.Length - showMessage];
@@ -121,6 +126,13 @@ public class MessageController : MonoBehaviour
         textFinishedTyping = false;
         for(int i = 0; i < textToShow.Length; i++)
         {
+            // skip text typing
+            if (skipText)
+            {
+                messageText.GetComponent<Text>().text = textToShow;
+                break;
+            }
+
             // only play typewriter sound for every other character
             if(i % 3 == 0)
                 audio.Play();
@@ -146,6 +158,7 @@ public class MessageController : MonoBehaviour
         textIsTyping = false;
         closeMessageText.SetActive(false);
         messageBoxActive = false;
+        skipText = false;
     }
 
 }

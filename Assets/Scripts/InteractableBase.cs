@@ -12,6 +12,8 @@ public abstract class Interactable : MonoBehaviour
 
     protected bool canInteract = false;
 
+    private bool messageShowing = false;
+
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -25,7 +27,17 @@ public abstract class Interactable : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Interact") && canInteract)
+        if(MessageController.showMessage == 0 && messageShowing)
+        {
+            messageShowing = false;
+            return;
+        }
+        else if(MessageController.showMessage > 0)
+        {
+            messageShowing = true;
+        }
+
+        if (Input.GetButtonDown("Interact") && canInteract && !messageShowing)
         {
             OnInteraction();
         }
