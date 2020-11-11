@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
 
         CanMove = true;
         timeIndicator.text = "Present";
-
     }
 
     // Update is called once per frame
@@ -69,7 +68,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat("Speed", 0);
         }
-
     }
 
     void FixedUpdate()
@@ -79,7 +77,6 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
     }
-
 
     void MovePlayer()
     {
@@ -108,28 +105,26 @@ public class PlayerController : MonoBehaviour
         Clock.TimeTravel();
         timeIndicator.text = inPast ? "Past" : "Present";
 
-        StartCoroutine(StartTimeShift());
+        StartCoroutine(StartPostProcessingEffect());
     }
 
-
-
     // Time shift animation
-    IEnumerator StartTimeShift()
-    {
-
-
+    IEnumerator StartPostProcessingEffect() {
         CanMove = false;
-        MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
+        float timer;
 
+        timer = 0.0f;
+        while (timer < 0.5f) {
+            timer += Time.deltaTime;
 
-        for (int i = 0; i < 100; i++)
-        {
-            bloom.intensity.value = i / 4;
-            lensDistortion.intensity.value = i / 5;
-            depthOfField.focalLength.value = i / 1.5f;
-            chromaticAberration.intensity.value = i / 200;
+            bloom.intensity.value = Mathf.Lerp(0.0f, 25.0f, timer / 0.5f);
+            lensDistortion.intensity.value = Mathf.Lerp(0.0f, 20.0f, timer / 0.5f);
+            depthOfField.focalLength.value = Mathf.Lerp(0.0f, 67.0f, timer / 0.5f);
+            if (inPast) {
+                chromaticAberration.intensity.value = Mathf.Lerp(0.0f, 0.5f, timer / 0.5f);
+            }
 
-            yield return new WaitForSeconds(0.005f);
+            yield return null;
         }
         float x = MrInvisible.transform.position.x;
         float y = MrInvisible.transform.position.y;
@@ -156,25 +151,22 @@ public class PlayerController : MonoBehaviour
             colorGrading.mixerBlueOutRedIn.value = 0;
         }
 
-        for (int i = 100; i >= 0; i--)
-        {
-            bloom.intensity.value = i / 4;
-            lensDistortion.intensity.value = i / 5;
-            depthOfField.focalLength.value = i / 1.5f;
-            chromaticAberration.intensity.value = i / 200;
+        timer = 0.0f;
+        while (timer < 0.5f) {
+            timer += Time.deltaTime;
 
-            yield return new WaitForSeconds(0.005f);
+            bloom.intensity.value = Mathf.Lerp(25.0f, 0.0f, timer / 0.5f);
+            lensDistortion.intensity.value = Mathf.Lerp(20.0f, 0.0f, timer / 0.5f);
+            depthOfField.focalLength.value = Mathf.Lerp(67.0f, 0.0f, timer / 0.5f);
+            if (!inPast) {
+                chromaticAberration.intensity.value = Mathf.Lerp(0.5f, 0.0f, timer / 0.5f);
+            }
+
+            yield return null;
         }
 
         CanMove = true;
     }
-
-
-
-
-
-
-
 
     //just a major WIP, please ignore
     Vector3 checkTeleportPosition()
@@ -184,54 +176,43 @@ public class PlayerController : MonoBehaviour
 
         if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
         {
-
             isSafeSpot = false;
             /*
- RaycastHit2D hit = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
+            RaycastHit2D hit = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
 
+            if  (hit.collider != null && hit.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+            {
+                Debug.Log("up");
+                //up
+                MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y + (hit.collider.bounds.size.y/2));
+                RaycastHit2D hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
 
+                //If up is occupied
+                if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+                {
+                    Debug.Log("down");
 
- if  (hit.collider != null && hit.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
- {
-     Debug.Log("up");
-     //up
-     MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y + (hit.collider.bounds.size.y/2));
-     RaycastHit2D hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
+                    //down
+                    MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y - (hit.collider.bounds.size.y / 2) );
+                    hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.down);
 
-     //If up is occupied
-     if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-     {
+                    //if down is occupied
+                    if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+                    {
+                        Debug.Log("left");
 
-         Debug.Log("down");
+                        //left
+                        MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x - (hit.collider.bounds.size.x / 2) - (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
+                        hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
+                        if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit2.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+                        {
+                            Debug.Log("right");
 
-         //down
-         MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y - (hit.collider.bounds.size.y / 2) );
-         hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.down);
-
-         //if down is occupied
-         if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-         {
-
-
-             Debug.Log("left");
-
-             //left
-             MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x - (hit.collider.bounds.size.x / 2) - (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
-             hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
-             if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit2.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-             {
-
-                 Debug.Log("right");
-
-
-                 MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x + (hit.collider.bounds.size.x / 2) + (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
-
-
-             }
-         }
-     }
-
- }*/
+                            MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x + (hit.collider.bounds.size.x / 2) + (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
+                        }
+                    }
+                }
+            }*/
         }
 
         return telePosition;

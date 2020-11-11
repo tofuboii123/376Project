@@ -6,36 +6,35 @@ public class Clock : MonoBehaviour
 {
     private Transform arm;
 
-    private static int direction = -1;
-    private static float position;
-    private static float rotations;
-    private static float increments;
+    private static Clock instance;
+
+    private static int direction;
 
     void Awake()
     {
         arm = transform.Find("Arm");
-    }
-
-    void Update()
-    {
-        if (position <= rotations) {
-            arm.rotation = Quaternion.Euler(0, 0, direction * position);
-
-            position = Mathf.Round(position + increments);
-
-            if (position > 720) {
-                position = 720;
-            }
-            
-            increments *= 1.0025f;
-        }
+        instance = this; // For starting coroutines from a static method
+        direction = -1;
     }
 
     public static void TimeTravel()
     {
-        position = 0;
         direction *= -1;
-        rotations = 720;
-        increments = 1;
+
+        instance.StartCoroutine(instance.StartClockHandRotation());
+    }
+
+    IEnumerator StartClockHandRotation() {
+        float startRotation = arm.eulerAngles.z;
+        float endRotation = (direction == 1 ? startRotation + 720.0f : startRotation - 720.0f);
+
+        float t = 0.0f;
+
+        while (t < 1.0f) {
+            t += Time.deltaTime;
+            float zRotation = Mathf.Lerp(startRotation, endRotation, Mathf.Sin(((t / 1.0f) * 0.5f) * Mathf.PI)) % 360.0f;
+            arm.eulerAngles = new Vector3(arm.eulerAngles.x, arm.eulerAngles.y, zRotation);
+            yield return null;
+        }
     }
 }
