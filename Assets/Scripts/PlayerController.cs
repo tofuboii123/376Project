@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     // Getter and setter
     public static bool CanMove { get; set; }
-
+    public GameObject MrInvisible;
     [SerializeField]
     float speed = 5.0f;
 
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     bool inPast = false;
     private bool isSafeSpot;
     private int numOfTries;
+
     Vector2 telePosition;
     [SerializeField]
     float travel = 150.0f; // Distance of 2nd timeline in y
@@ -38,7 +39,8 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
-    void Start() {
+    void Start()
+    {
         volume.profile.TryGetSettings(out bloom);
         volume.profile.TryGetSettings(out lensDistortion);
         volume.profile.TryGetSettings(out grain);
@@ -56,14 +58,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(CanMove) {
+        if (CanMove)
+        {
             // Time travel.
             if (Input.GetButtonDown("TimeShift"))
                 TimeShift();
-        } else {
+        }
+        else
+        {
             animator.SetFloat("Speed", 0);
         }
-
     }
 
     void FixedUpdate()
@@ -74,12 +78,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    void MovePlayer() {
+    void MovePlayer()
+    {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        if (movement != Vector2.zero) {
+        if (movement != Vector2.zero)
+        {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
         }
@@ -90,56 +95,36 @@ public class PlayerController : MonoBehaviour
     }
 
     // Go from past to present and vice-versa
-    void TimeShift() {
+    void TimeShift()
+    {
         // Boolean switch
         inPast = !inPast;
 
         // HUD element
         // TODO change for cool animation
         Clock.TimeTravel();
-        timeIndicator.text = inPast ?  "Past" : "Present";
+        timeIndicator.text = inPast ? "Past" : "Present";
 
-        StartCoroutine(StartTimeShift());
+        StartCoroutine(StartPostProcessingEffect());
     }
-
-    Vector3 checkTeleportPosition() {
-        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
-        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z))) {
-
-            isSafeSpot = false;
-            while (isSafeSpot == false) {
-                telePosition = this.transform.position + new Vector3(Random.Range(-3 - (numOfTries / 10), 3 + (numOfTries / 10)), (inPast ? travel : -travel) + Random.Range(-3 - (numOfTries / 10), 3 + (numOfTries / 10)), 0);
-
-                hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-                if (hit.collider == null || !hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z))) {
-                    isSafeSpot = true;
-                }
-                if (numOfTries <= 20) {
-                    numOfTries += 1;
-                }
-
-            }
-            numOfTries = 0;
-        }
-
-        return telePosition;
-    }
-
 
     // Time shift animation
-    IEnumerator StartTimeShift() {
+    IEnumerator StartPostProcessingEffect() {
         CanMove = false;
+        float timer;
 
-        for (int i = 0; i < 100; i++) {
-            bloom.intensity.value = i / 4;
-            lensDistortion.intensity.value = i / 5;
-            depthOfField.focalLength.value = i / 1.5f;
-            chromaticAberration.intensity.value = i / 200;
+        timer = 0.0f;
+        while (timer < 0.5f) {
+            timer += Time.deltaTime;
 
-            yield return new WaitForSeconds(0.005f);
+            bloom.intensity.value = Mathf.Lerp(0.0f, 25.0f, timer / 0.5f);
+            lensDistortion.intensity.value = Mathf.Lerp(0.0f, 20.0f, timer / 0.5f);
+            depthOfField.focalLength.value = Mathf.Lerp(0.0f, 67.0f, timer / 0.5f);
+            if (inPast) {
+                chromaticAberration.intensity.value = Mathf.Lerp(0.0f, 0.5f, timer / 0.5f);
+            }
+
+            yield return null;
         }
 
         //this.transform.position = checkTeleportPosition();
@@ -147,29 +132,86 @@ public class PlayerController : MonoBehaviour
 
         grain.intensity.value = (inPast ? 1 : 0);
 
-        if (inPast) {
+        if (inPast)
+        {
             colorGrading.active = true;
             colorGrading.mixerBlueOutGreenIn.value = 50;
             colorGrading.mixerBlueOutBlueIn.value = 50;
             colorGrading.mixerBlueOutRedIn.value = 50;
-        } else {
+        }
+        else
+        {
             colorGrading.active = false;
             colorGrading.mixerBlueOutGreenIn.value = 0;
             colorGrading.mixerBlueOutBlueIn.value = 0;
             colorGrading.mixerBlueOutRedIn.value = 0;
         }
 
-        for (int i = 100; i >= 0; i--) {
-            bloom.intensity.value = i / 4;
-            lensDistortion.intensity.value = i / 5;
-            depthOfField.focalLength.value = i / 1.5f;
-            chromaticAberration.intensity.value = i / 200;
+        timer = 0.0f;
+        while (timer < 0.5f) {
+            timer += Time.deltaTime;
 
-            yield return new WaitForSeconds(0.005f);
+            bloom.intensity.value = Mathf.Lerp(25.0f, 0.0f, timer / 0.5f);
+            lensDistortion.intensity.value = Mathf.Lerp(20.0f, 0.0f, timer / 0.5f);
+            depthOfField.focalLength.value = Mathf.Lerp(67.0f, 0.0f, timer / 0.5f);
+            if (!inPast) {
+                chromaticAberration.intensity.value = Mathf.Lerp(0.5f, 0.0f, timer / 0.5f);
+            }
+
+            yield return null;
         }
 
         CanMove = true;
     }
 
+    //just a major WIP, please ignore
+    Vector3 checkTeleportPosition()
+    {
+        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
+        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
+
+        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
+        {
+            isSafeSpot = false;
+            /*
+            RaycastHit2D hit = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
+
+            if  (hit.collider != null && hit.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+            {
+                Debug.Log("up");
+                //up
+                MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y + (hit.collider.bounds.size.y/2));
+                RaycastHit2D hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
+
+                //If up is occupied
+                if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+                {
+                    Debug.Log("down");
+
+                    //down
+                    MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y - (hit.collider.bounds.size.y / 2) );
+                    hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.down);
+
+                    //if down is occupied
+                    if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+                    {
+                        Debug.Log("left");
+
+                        //left
+                        MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x - (hit.collider.bounds.size.x / 2) - (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
+                        hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
+                        if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit2.transform.position.z)) && (hit.collider.gameObject.layer != 10))
+                        {
+                            Debug.Log("right");
+
+                            MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x + (hit.collider.bounds.size.x / 2) + (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
+                        }
+                    }
+                }
+            }*/
+        }
+
+        return telePosition;
+    }
 
 }
