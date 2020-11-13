@@ -7,6 +7,7 @@ public abstract class Interactable : MonoBehaviour
 {
     protected Inventory inventory;
     protected TextMeshProUGUI interactTextObject;
+    public int itemID = 0;
     public string interactTextString;
     public abstract void OnInteraction();
 
