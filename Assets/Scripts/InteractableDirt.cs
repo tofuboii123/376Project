@@ -20,8 +20,8 @@ public class InteractableDirt : Interactable
 
     public override void OnInteraction() {
 
-        if (inventory.ContainsSelectedItem(keyItemName)) {
-            inventory.DiscardItem(keyItemName);
+        if (inventory.ContainsSelectedItem(itemID)) {
+            inventory.DiscardItem(itemID);
             MessageController.ShowMessage("I'll put the plant in the ground.");
             GrowTree();
         } else {

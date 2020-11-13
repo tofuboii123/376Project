@@ -7,6 +7,7 @@ public abstract class Interactable : MonoBehaviour
 {
     protected Inventory inventory;
     protected TextMeshProUGUI interactTextObject;
+
     public int itemID = 0;
     public string interactTextString;
     public abstract void OnInteraction();
@@ -14,6 +15,9 @@ public abstract class Interactable : MonoBehaviour
     protected bool canInteract = false;
 
     private bool messageShowing = false;
+
+    public string combineName = null;       // The name of the item it can be combined with
+    public GameObject combinedObject;       // The result of the combination
 
     private void Start()
     {
