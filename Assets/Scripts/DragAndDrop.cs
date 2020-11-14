@@ -37,14 +37,17 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         List<RaycastResult> test = GetEventSystemRaycastResults();
 
         foreach (RaycastResult item in test) {
-            Transform child = item.gameObject.transform.GetChild(0);
-            print(child.gameObject.name);
 
-            // Check if items can be combined
-            validDrag = IsValidDrag(child);
+            if(item.gameObject.transform.childCount > 0) {
+                Transform child = item.gameObject.transform.GetChild(0);
+                print(child.gameObject.name);
 
-            // Get the other item's ID
-            otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
+                // Check if items can be combined
+                validDrag = IsValidDrag(child);
+
+                // Get the other item's ID
+                otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
+            }
         }
 
         // If the combination is valid, combine the items!
@@ -59,6 +62,10 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     bool IsValidDrag(Transform child) {
         try {
             Image img = child.GetComponent<Image>();
+
+            if (img == null || img.sprite == null)
+                return false;
+
             return (img.sprite.name == combineName);
         }
         catch (UnassignedReferenceException) {

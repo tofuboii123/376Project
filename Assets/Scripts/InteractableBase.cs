@@ -16,9 +16,6 @@ public abstract class Interactable : MonoBehaviour
 
     private bool messageShowing = false;
 
-    public string combineName = null;       // The name of the item it can be combined with
-    public GameObject combinedObject;       // The result of the combination
-
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");

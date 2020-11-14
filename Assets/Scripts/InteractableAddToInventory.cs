@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InteractableAddToInventory : Interactable
 {
+
+    public string combineName = null;       // The name of the item it can be combined with
+    public GameObject combinedObject;       // The result of the combination
+
     public override void OnInteraction()
     {
         string objectName = gameObject.name;
