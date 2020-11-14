@@ -58,14 +58,20 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CanMove)
-        {
+        if (CanMove) {
             // Time travel.
             if (Input.GetButtonDown("TimeShift"))
                 TimeShift();
-        }
-        else
-        {
+
+            // Full screen inventory
+            if (Input.GetButtonDown("FullScreenInventory")) {
+                if (FullScreenInventory.inMenu) {
+                    FullScreenInventory.exitFullScreenInventory();
+                } else {
+                    FullScreenInventory.startFullScreenInventory();
+                }
+            }
+        } else {
             animator.SetFloat("Speed", 0);
         }
     }
