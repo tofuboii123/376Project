@@ -23503,6 +23503,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 711493704}
     m_Modifications:
+    - target: {fileID: 174917771480647115, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+      propertyPath: m_Name
+      value: SlotImage5
+      objectReference: {fileID: 0}
     - target: {fileID: 1500942784475757597, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -23523,6 +23527,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
+    - target: {fileID: 5521113567253934285, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+      propertyPath: m_Name
+      value: SlotImage2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824151688372150463, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+      propertyPath: m_Name
+      value: SlotImage4
+      objectReference: {fileID: 0}
     - target: {fileID: 5982076406402015559, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
       propertyPath: player
       value: 
@@ -23619,6 +23631,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
+    - target: {fileID: 7431221018814484018, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
+      propertyPath: m_Name
+      value: SlotImage3
+      objectReference: {fileID: 0}
     - target: {fileID: 8699676166477209528, guid: 4cd1a764ca31a9c4eb3b04570f539b94, type: 3}
       propertyPath: combineName
       value: 
@@ -25358,8 +25374,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   interactTextString: Open Door
-  combineName: 
-  combinedObject: {fileID: 0}
 --- !u!1001 &686981119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48063,8 +48077,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   interactTextString: Climb Tree
-  combineName: 
-  combinedObject: {fileID: 0}
 --- !u!1 &1756823245
 GameObject:
   m_ObjectHideFlags: 0
@@ -49757,8 +49769,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   interactTextString: Open Door
-  combineName: 
-  combinedObject: {fileID: 0}
 --- !u!61 &1948091898
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -84,6 +84,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         // Add the new item
         GameObject result = Instantiate(combinedItem);
         inventory.AddItem(result);
+
+        image.GetComponent<RectTransform>().position = originalPosition;
     }
 
     // get all UI elements that the mouse is hovering over
