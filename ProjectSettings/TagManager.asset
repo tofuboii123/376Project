@@ -49,6 +49,9 @@ TagManager:
   - name: Buildings
     uniqueID: 855930651
     locked: 0
+  - name: Furniture
+    uniqueID: 3207332335
+    locked: 0
   - name: Items
     uniqueID: 908013415
     locked: 0
