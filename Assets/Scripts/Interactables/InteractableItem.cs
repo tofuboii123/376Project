@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractableBed : Interactable
+public class InteractableItem : Interactable
 {
+    public string interactTextBody;
+
     public override void OnInteraction() {
-        MessageController.ShowMessage("It's not time to go to sleep yet.");
+        MessageController.ShowMessage(interactTextBody);
         canInteract = false;
     }
 }
