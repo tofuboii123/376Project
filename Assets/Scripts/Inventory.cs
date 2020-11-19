@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public List<string> items;
+    public List<int> items;
     public List<int> itemsQuantity;
 
     public List<Image> slotsBackgroundList;
@@ -52,9 +51,9 @@ public class Inventory : MonoBehaviour
             slotsBackgroundList[0].sprite = selected;
         }
 
-        items = new List<string>();
+        items = new List<int>();
         for (int i = 0; i < slotsBackgroundList.Count; i++) {
-            items.Add(null);
+            items.Add(-1);
             itemsQuantity.Add(0);
         }
 
@@ -92,10 +91,14 @@ public class Inventory : MonoBehaviour
     // add an item to the inventory
     public void AddItem(GameObject obj)
     {
-        int idx;
+        // Get information on the object
+        InteractableAddToInventory item = obj.GetComponent<InteractableAddToInventory>();
+        int objID = item.itemID;
+        string combineName = item.combineName;
+        GameObject combinedItem = item.combinedObject;
 
         // Check if we already have the item
-        idx = items.IndexOf(obj.name);
+        int idx = items.IndexOf(objID);
         if (idx >= 0) {
             // We already have the item in our inventory
             // Just add one to the quantity, not add a whole new item
@@ -107,19 +110,25 @@ public class Inventory : MonoBehaviour
         }
 
         // New item adding to inventory...check to see if we have space
-        idx = items.IndexOf(null);
+        idx = items.IndexOf(-1);
         if (idx < 0) {
             IsFull = true;
             return;
         }
 
         // It's a new item! Add it to the first open slot
-        items[idx] = obj.name;
+        items[idx] = objID;
 
         // Update image in inventory slot
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
         slotImages[idx].sprite = sprite;
         slotImages[idx].enabled = true;
+
+        // Provide the information needed for the item combination
+        DragAndDrop itemInInventory = slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
+        itemInInventory.originalItemID = items[idx];
+        itemInInventory.combineName = combineName;
+        itemInInventory.combinedItem = combinedItem;
 
         // Update item quantity
         itemsQuantity[idx]++;
@@ -129,13 +138,13 @@ public class Inventory : MonoBehaviour
         Destroy(obj); // Object not in game world anymore
     }
 
-    public bool ContainsSelectedItem(string item) {
-        return items[selectedItemIndex] == item;
+    public bool ContainsSelectedItem(int itemID) {
+        return items[selectedItemIndex] == itemID;
     }
 
     // Remove the item from the inventory.
-    public void DiscardItem(string item) {
-        int indexOfItem = items.IndexOf(item);
+    public void DiscardItem(int itemID) {
+        int indexOfItem = items.IndexOf(itemID);
         if (indexOfItem >= 0) {
             itemsQuantity[indexOfItem]--;
             if (itemsQuantity[indexOfItem] <= 0) {
@@ -145,7 +154,7 @@ public class Inventory : MonoBehaviour
 
                 slotImages[indexOfItem].enabled = false;
                 slotImages[indexOfItem].sprite = null;
-                items[indexOfItem] = null;
+                items[indexOfItem] = -1;
             } else {
                 slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
                 slotQuantities[indexOfItem].enabled = true;
