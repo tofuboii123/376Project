@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
+    protected GameObject player;
     protected Inventory inventory;
     protected TextMeshProUGUI interactTextObject;
 
@@ -18,7 +19,7 @@ public abstract class Interactable : MonoBehaviour
 
     private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         inventory = player.GetComponent<Inventory>();
         interactTextObject = player.GetComponent<PlayerController>().interactTextObject;
