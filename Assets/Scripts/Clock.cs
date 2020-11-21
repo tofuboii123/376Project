@@ -25,16 +25,23 @@ public class Clock : MonoBehaviour
     }
 
     IEnumerator StartClockHandRotation() {
-        float startRotation = arm.eulerAngles.z;
-        float endRotation = (direction == 1 ? startRotation + 720.0f : startRotation - 720.0f);
+        float startZRotation = arm.eulerAngles.z;
+        float endZRotation = (direction == 1 ? startZRotation + 720.0f : startZRotation - 720.0f);
 
-        float t = 0.0f;
+        float timer;
+        float zRotation;
 
-        while (t < 1.0f) {
-            t += Time.deltaTime;
-            float zRotation = Mathf.Lerp(startRotation, endRotation, Mathf.Sin(((t / 1.0f) * 0.5f) * Mathf.PI)) % 360.0f;
+        timer = 0.0f;
+        while (timer < 1.0f) {
+            timer += Time.deltaTime;
+
+            zRotation = Mathf.Lerp(startZRotation, endZRotation, Mathf.Sin(((timer / 1.0f) * 0.5f) * Mathf.PI)) % 360.0f;
             arm.eulerAngles = new Vector3(arm.eulerAngles.x, arm.eulerAngles.y, zRotation);
+
             yield return null;
         }
+
+        // Make sure that the arm is aligned correctly
+        arm.eulerAngles = new Vector3(arm.eulerAngles.x, arm.eulerAngles.y, endZRotation);
     }
 }

@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
-    private Rigidbody rb;
+    public static bool isTravelling;
     public PostProcessVolume volume;
     private Bloom bloom;
     private LensDistortion lensDistortion;
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         numOfTries = 0;
 
         CanMove = true;
+        isTravelling = false;
         timeIndicator.text = "Present";
     }
 
@@ -95,8 +96,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Go from past to present and vice-versa
-    void TimeShift()
-    {
+    public void TimeShift() {
         // Boolean switch
         inPast = !inPast;
 
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Time shift animation
-    IEnumerator StartPostProcessingEffect() {
+    public IEnumerator StartPostProcessingEffect() {
         CanMove = false;
         float timer;
 
@@ -162,6 +162,10 @@ public class PlayerController : MonoBehaviour
         }
 
         CanMove = true;
+
+        //is set to true from whichever script that cares if the player is travelling
+        isTravelling = false;
+
     }
 
     //just a major WIP, please ignore
