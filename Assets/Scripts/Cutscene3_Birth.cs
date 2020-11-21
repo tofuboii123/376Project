@@ -9,7 +9,6 @@ public class Cutscene3_Birth : MonoBehaviour
     //Actors
     public GameObject Mother;
     public GameObject Father;
-    public GameObject Daughter;
     public GameObject Player;
 
     //UI
@@ -20,10 +19,12 @@ public class Cutscene3_Birth : MonoBehaviour
 
     //Camera 
     public Camera c;
+
+    AudioSource baby;
     // Start is called before the first frame update
     void Start()
     {
-
+        baby = GetComponent<AudioSource>(); 
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class Cutscene3_Birth : MonoBehaviour
     {
         if (collision.tag.CompareTo("Player") == 0)
         {
+           
             StartCoroutine(Cutscene_Start());
 
         }
@@ -44,8 +46,9 @@ public class Cutscene3_Birth : MonoBehaviour
 
     IEnumerator Cutscene_Start()
     {
-        c.GetComponent<CameraMovement>().cutscene_mode = true;
         PlayerController.CanMove = false;
+
+        c.GetComponent<CameraMovement>().cutscene_mode = true;
         StartCoroutine(fadeIn());
 
         yield return new WaitForSeconds(0.1f);
@@ -54,24 +57,27 @@ public class Cutscene3_Birth : MonoBehaviour
         ClockText.SetActive(false);
         Inventory.SetActive(false);
         yield return new WaitForSeconds(0.01f);
-        c.transform.position = new Vector3(c.transform.position.x, 142.1f, c.transform.position.z);
         StartCoroutine(fadeOut());
 
         yield return new WaitForSeconds(1);
 
-        while (c.transform.position.x > -1.06)
+        while (c.transform.position.y < 124)
         {
-            c.transform.Translate(-Time.deltaTime * 4, 0, 0);
+            c.transform.Translate(0, Time.deltaTime * 3, 0);
             yield return null;
 
         }
-        yield return new WaitForSeconds(0.8f);
-
+        yield return new WaitForSeconds(1);
         MessageController.ShowMessage(new string[] { "Victoria:\nSabrina...I like it", "Benjamin:\nI feel like the happiest man in the world\nnow my dear. Our little Sabrina will bring\nus a lot of joy."});
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
+
+        baby.Play();
+
+        yield return new WaitForSeconds(2.5f);
+
 
         MessageController.ShowMessage(new string[] { "Victoria:\nShush..\nBen, I think there is something wrong with her..\nWhat should we do?", "Benjamin:\nDon't panic darling. You know babies cry\na lot. Remember when Abigail was this young? We\ncouldn't sleep a single night!", "Victoria:\nBut this feels different..", "Benjamin:\nShe's probably just hungry.\nLet me get the bottle."});
         while (MessageController.showMessage > 0)
@@ -79,26 +85,22 @@ public class Cutscene3_Birth : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log(Father.transform.position.y);
 
-        while (c.transform.position.x != Player.transform.position.x)
+        while (c.transform.position.y != Player.transform.position.y)
         {
 
-            if (Father.transform.position.y > 140)
-            {
-                Father.transform.Translate(0, -Time.deltaTime, 0);
-            }
+         
+            Father.transform.Translate(-Time.deltaTime, 0, 0);
+            
             c.transform.position = Vector3.MoveTowards(c.transform.position, new Vector3(Player.transform.position.x, Player.transform.position.y, c.transform.position.z), Time.deltaTime * 4.5f);
             yield return null;
 
         }
-        c.GetComponent<CameraMovement>().cutscene_mode = false;
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm not staying here for another second!" });
-        while (MessageController.showMessage > 0)
-        {
-            yield return null;
-        }
+
+        baby.Stop();
+
+        c.GetComponent<CameraMovement>().cutscene_mode = false;
 
         PlayerController.isTravelling = true;
         Player.GetComponent<PlayerController>().TimeShift();
@@ -110,11 +112,6 @@ public class Cutscene3_Birth : MonoBehaviour
         }
         yield return new WaitForSeconds(1);
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm safe here..They must be dead now..." });
-        while (MessageController.showMessage > 0)
-        {
-            yield return null;
-        }
 
         //clearing up
         Clock.SetActive(true);
@@ -150,4 +147,7 @@ public class Cutscene3_Birth : MonoBehaviour
         }
 
     }
+
+
+  
 }
