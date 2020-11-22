@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     float speed = 5.0f;
 
     [SerializeField]
-    bool inPast = false;
+    public bool inPast = false;
     private bool isSafeSpot;
     private int numOfTries;
 
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
 
         // HUD element
         // TODO change for cool animation
+        
         Clock.TimeTravel();
         timeIndicator.text = inPast ? "Past" : "Present";
 
@@ -112,6 +113,8 @@ public class PlayerController : MonoBehaviour
     public IEnumerator StartPostProcessingEffect() {
         CanMove = false;
         float timer;
+
+        MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
 
         timer = 0.0f;
         while (timer < 0.5f) {
@@ -127,8 +130,11 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        //this.transform.position = checkTeleportPosition();
-        this.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
+        float x = MrInvisible.transform.position.x;
+        float y = MrInvisible.transform.position.y;
+        MrInvisible.transform.position = new Vector2(-1000, -1000);
+
+        this.transform.position = new Vector2(x, y);
 
         grain.intensity.value = (inPast ? 1 : 0);
 
