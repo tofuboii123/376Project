@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public List<int> items;
-    public List<int> itemsQuantity;
+    public static List<int> items;
+    public static List<int> itemsQuantity;
 
     public List<Image> slotsBackgroundList;
     public List<Image> slotImages;
@@ -25,6 +25,9 @@ public class Inventory : MonoBehaviour
     public bool IsFull { get; set; }
 
     private void Start() {
+        items = new List<int>();
+        itemsQuantity = new List<int>();
+
         slotsBackgroundList = new List<Image>();
         slotImages = new List<Image>();
         slotQuantities = new List<TextMeshProUGUI>();
@@ -118,11 +121,14 @@ public class Inventory : MonoBehaviour
 
         // It's a new item! Add it to the first open slot
         items[idx] = objID;
+        InventoryFull.items[idx] = objID;
 
         // Update image in inventory slot
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
         slotImages[idx].sprite = sprite;
         slotImages[idx].enabled = true;
+        InventoryFull.slotImages[idx].sprite = sprite;
+        InventoryFull.slotImages[idx].enabled = true;
 
         // Provide the information needed for the item combination
         DragAndDrop itemInInventory = slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
@@ -134,6 +140,9 @@ public class Inventory : MonoBehaviour
         itemsQuantity[idx]++;
         slotQuantities[idx].text = "x" + itemsQuantity[idx];
         slotQuantities[idx].enabled = true;
+        InventoryFull.itemsQuantity[idx]++;
+        InventoryFull.slotQuantities[idx].text = "x" + itemsQuantity[idx];
+        InventoryFull.slotQuantities[idx].enabled = true;
 
         Destroy(obj); // Object not in game world anymore
     }
@@ -148,16 +157,24 @@ public class Inventory : MonoBehaviour
         if (indexOfItem >= 0) {
             itemsQuantity[indexOfItem]--;
             if (itemsQuantity[indexOfItem] <= 0) {
-                itemsQuantity[indexOfItem] = 0; // Probably not needed...
-                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem]; // Probably not needed...
+                itemsQuantity[indexOfItem] = 0;
+                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
                 slotQuantities[indexOfItem].enabled = false;
+                InventoryFull.itemsQuantity[indexOfItem] = 0;
+                InventoryFull.slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                InventoryFull.slotQuantities[indexOfItem].enabled = false;
 
                 slotImages[indexOfItem].enabled = false;
                 slotImages[indexOfItem].sprite = null;
                 items[indexOfItem] = -1;
+                InventoryFull.slotImages[indexOfItem].enabled = false;
+                InventoryFull.slotImages[indexOfItem].sprite = null;
+                InventoryFull.items[indexOfItem] = -1;
             } else {
                 slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
                 slotQuantities[indexOfItem].enabled = true;
+                InventoryFull.slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                InventoryFull.slotQuantities[indexOfItem].enabled = true;
             }
         }
     }
