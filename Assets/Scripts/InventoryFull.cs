@@ -7,9 +7,6 @@ using UnityEngine.EventSystems;
 using System;
 
 public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
-    public static List<int> items;
-    public static List<int> itemsQuantity;
-
     public static List<Image> slotsBackgroundList;
     public static List<Image> slotImages;
     public static List<TextMeshProUGUI> slotQuantities;
@@ -24,9 +21,6 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     // Start is called before the first frame update
     void Start() {
-        items = new List<int>();
-        itemsQuantity = new List<int>();
-
         slotsBackgroundList = new List<Image>();
         slotImages = new List<Image>();
         slotQuantities = new List<TextMeshProUGUI>();
@@ -47,12 +41,6 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     }
                 }
             }
-        }
-
-        items = new List<int>();
-        for (int i = 0; i < slotsBackgroundList.Count; i++) {
-            items.Add(-1);
-            itemsQuantity.Add(0);
         }
     }
 

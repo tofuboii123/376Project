@@ -40,22 +40,24 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
             if(item.gameObject.transform.childCount > 0) {
                 Transform child = item.gameObject.transform.GetChild(0);
-                print(child.gameObject.name);
+                if (child.transform.parent.name.StartsWith("SlotBackground")) {
+                    print("onEndDrag: " + child.gameObject.name);
 
-                // Check if items can be combined
-                validDrag = IsValidDrag(child);
+                    // Check if items can be combined
+                    validDrag = IsValidDrag(child);
 
-                // Get the other item's ID
-                otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
+                    // Get the other item's ID
+                    otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
+                }
             }
         }
 
         // If the combination is valid, combine the items!
-        if (validDrag)
+        if (validDrag) {
             CombineItems();
-        else
+        } else {
             image.GetComponent<RectTransform>().position = originalPosition;
-        
+        }
     }
 
     // Check if the combination is correct.

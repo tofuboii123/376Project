@@ -32,6 +32,7 @@ public class FullScreenInventory : MonoBehaviour {
         instance.clock.SetActive(false);
         instance.inventory.SetActive(false);
 
+        instance.gameObject.SetActive(true);
         instance.animator.SetTrigger("Start");
         instance.StartCoroutine(instance.onStartFullScreenInventory());
     }
