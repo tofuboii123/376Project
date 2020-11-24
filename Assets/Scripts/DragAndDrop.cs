@@ -34,6 +34,11 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (image == null || image.sprite == null) {
+            image.GetComponent<RectTransform>().position = originalPosition;
+            return;
+        }
+
         bool validCombinationDrag = false;
         bool validSwapDrag = false;
         int realOriginalItemIdx = -1;

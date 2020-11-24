@@ -108,7 +108,9 @@ public class Inventory : MonoBehaviour
             // We already have the item in our inventory
             // Just add one to the quantity, not add a whole new item
             itemsQuantity[idx]++;
-            slotQuantities[idx].text = "x" + itemsQuantity[idx];
+            if (idx < slotsBackgroundList.Count) {
+                slotQuantities[idx].text = "x" + itemsQuantity[idx];
+            }
             InventoryFull.slotQuantities[idx].text = "x" + itemsQuantity[idx];
 
             Destroy(obj); // Object not in game world anymore
@@ -198,9 +200,17 @@ public class Inventory : MonoBehaviour
     }
 
     public void SwapItems(int idx1, int idx2) {
+        // Store temp variables for the switch
         int tempItemID = items[idx1];
         int tempItemQuantity = itemsQuantity[idx1];
         Sprite tempItemImage = InventoryFull.slotImages[idx1].sprite;
+
+        DragAndDrop tempDragAndDrop = InventoryFull.slotImages[idx1].transform.parent.gameObject.GetComponent<DragAndDrop>();
+        int tempDragAndDropItemID = tempDragAndDrop.originalItemID;
+        string tempDragAndDropCombineName = tempDragAndDrop.combineName;
+        GameObject tempDragAndDropCombineItem = tempDragAndDrop.combinedItem;
+
+        DragAndDrop dragAndDropTo = InventoryFull.slotImages[idx2].transform.parent.gameObject.GetComponent<DragAndDrop>();
 
         items[idx1] = items[idx2];
         itemsQuantity[idx1] = itemsQuantity[idx2];
@@ -215,6 +225,27 @@ public class Inventory : MonoBehaviour
             InventoryFull.slotImages[idx1].sprite = slotImages[idx2].sprite;
         } else {
             InventoryFull.slotImages[idx1].sprite = InventoryFull.slotImages[idx2].sprite;
+        }
+
+        tempDragAndDrop.originalItemID = dragAndDropTo.originalItemID;
+        tempDragAndDrop.combineName = dragAndDropTo.combineName;
+        tempDragAndDrop.combinedItem = dragAndDropTo.combinedItem;
+
+        dragAndDropTo.originalItemID = tempDragAndDropItemID;
+        dragAndDropTo.combineName = tempDragAndDropCombineName;
+        dragAndDropTo.combinedItem = tempDragAndDropCombineItem;
+
+        if (idx1 < slotsBackgroundList.Count) {
+            DragAndDrop dragAndDrop1 = slotImages[idx1].transform.parent.gameObject.GetComponent<DragAndDrop>();
+            dragAndDrop1.originalItemID = tempDragAndDrop.originalItemID;
+            dragAndDrop1.combineName = tempDragAndDrop.combineName;
+            dragAndDrop1.combinedItem = tempDragAndDrop.combinedItem;
+        }
+        if (idx2 < slotsBackgroundList.Count) {
+            DragAndDrop dragAndDrop2 = slotImages[idx2].transform.parent.gameObject.GetComponent<DragAndDrop>();
+            dragAndDrop2.originalItemID = tempDragAndDrop.originalItemID;
+            dragAndDrop2.combineName = tempDragAndDrop.combineName;
+            dragAndDrop2.combinedItem = tempDragAndDrop.combinedItem;
         }
 
         items[idx2] = tempItemID;
@@ -232,21 +263,6 @@ public class Inventory : MonoBehaviour
         }
         InventoryFull.slotQuantities[idx1].text = "x" + itemsQuantity[idx1];
         InventoryFull.slotQuantities[idx2].text = "x" + itemsQuantity[idx2];
-
-        // TODO: Swap out DragAndDrop component?
-        /*
-        // Provide the information needed for the item combination
-        if (idx < slotsBackgroundList.Count) {
-            DragAndDrop itemInInventory = slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
-            itemInInventory.originalItemID = items[idx];
-            itemInInventory.combineName = combineName;
-            itemInInventory.combinedItem = combinedItem;
-        }
-        DragAndDrop itemInInventoryFull = InventoryFull.slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
-        itemInInventoryFull.originalItemID = items[idx];
-        itemInInventoryFull.combineName = combineName;
-        itemInInventoryFull.combinedItem = combinedItem;
-        */
 
         // The user dragged an item to an empty slot
         if (idx2 < slotsBackgroundList.Count) {
