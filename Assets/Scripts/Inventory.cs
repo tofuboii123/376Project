@@ -23,7 +23,9 @@ public class Inventory : MonoBehaviour
     Sprite selected;
 
     public static int selectedItemIndex = 0;
-    
+
+    public int totalInventorySize;
+
     public bool IsFull { get; set; }
 
     private void Start() {
@@ -55,7 +57,7 @@ public class Inventory : MonoBehaviour
 
         items = new List<int>();
         itemsQuantity = new List<int>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < totalInventorySize; i++) {
             items.Add(-1);
             itemsQuantity.Add(0);
         }
@@ -196,6 +198,66 @@ public class Inventory : MonoBehaviour
     }
 
     public void SwapItems(int idx1, int idx2) {
+        // Store in temp variables
+        int tempItemID = items[idx1];
+        int tempItemQuantity = itemsQuantity[idx1];
+        Sprite tempItemImage = InventoryFull.slotImages[idx1].sprite;
 
+        items[idx1] = items[idx2];
+        itemsQuantity[idx1] = itemsQuantity[idx2];
+        if (idx1 < slotsBackgroundList.Count && idx2 < slotsBackgroundList.Count) {
+            slotImages[idx1].sprite = slotImages[idx2].sprite;
+        }
+        if (idx2 < slotsBackgroundList.Count) {
+            InventoryFull.slotImages[idx1].sprite = slotImages[idx2].sprite;
+        } else {
+            InventoryFull.slotImages[idx1].sprite = InventoryFull.slotImages[idx2].sprite;
+        }
+
+        items[idx2] = tempItemID;
+        itemsQuantity[idx2] = tempItemQuantity;
+        if (idx2 < slotsBackgroundList.Count) {
+            slotImages[idx2].sprite = tempItemImage;
+        }
+        InventoryFull.slotImages[idx2].sprite = tempItemImage;
+
+        if (idx1 < slotsBackgroundList.Count) {
+            slotQuantities[idx1].text = "x" + itemsQuantity[idx1];
+        }
+        if (idx2 < slotsBackgroundList.Count) {
+            slotQuantities[idx2].text = "x" + itemsQuantity[idx2];
+        }
+        InventoryFull.slotQuantities[idx1].text = "x" + itemsQuantity[idx1];
+        InventoryFull.slotQuantities[idx2].text = "x" + itemsQuantity[idx2];
+
+        // The user dragged an item to an empty slot
+        if (idx2 < slotsBackgroundList.Count) {
+            if (!slotImages[idx2].enabled) {
+                slotQuantities[idx2].enabled = true;
+                slotImages[idx2].enabled = true;
+            }
+        }
+        if (!InventoryFull.slotImages[idx2].enabled) {
+            InventoryFull.slotQuantities[idx2].enabled = true;
+            InventoryFull.slotImages[idx2].enabled = true;
+        }
+
+        if (itemsQuantity[idx1] <= 0) {
+            if (idx1 < slotsBackgroundList.Count) {
+                if (slotImages[idx1].enabled) {
+                    slotImages[idx1].enabled = false;
+                    slotImages[idx1].sprite = null;
+
+                    slotQuantities[idx1].enabled = false;
+                }
+            }
+
+            if (InventoryFull.slotImages[idx1].enabled) {
+                InventoryFull.slotImages[idx1].enabled = false;
+                InventoryFull.slotImages[idx1].sprite = null;
+
+                InventoryFull.slotQuantities[idx1].enabled = false;
+            }
+        }
     }
 }

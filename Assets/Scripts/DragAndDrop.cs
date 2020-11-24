@@ -45,8 +45,6 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
             if (item.gameObject.transform.childCount > 0) {
                 Transform child = item.gameObject.transform.GetChild(0);
                 if (child.transform.parent.name.StartsWith("SlotBackground")) {
-                    print("onEndDrag: " + child.gameObject.name);
-
                     // Check if items can be combined
                     Image img = child.GetComponent<Image>();
                     validCombinationDrag = IsValidCombinationDrag(img);
@@ -60,8 +58,6 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
                         realNewItemIdx = newItemIdx - 1;
                     }
 
-                    Debug.Log("Swapping " + realOriginalItemIdx + " with " + realNewItemIdx);
-
                     // Get the other item's ID
                     otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
                 }
@@ -69,10 +65,14 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         }
 
         // Check if the drag is valid
-        if (validCombinationDrag) {
-            CombineItems();
-        } else if (validSwapDrag) {
-            SwapItems(realOriginalItemIdx, realNewItemIdx);
+        if (realOriginalItemIdx != realNewItemIdx) {
+            if (validCombinationDrag) {
+                CombineItems();
+            } else if (validSwapDrag) {
+                SwapItems(realOriginalItemIdx, realNewItemIdx);
+            } else {
+                image.GetComponent<RectTransform>().position = originalPosition;
+            }
         } else {
             image.GetComponent<RectTransform>().position = originalPosition;
         }
@@ -121,6 +121,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     private void SwapItems(int idx1, int idx2) {
         print("Swap!");
 
+        Debug.Log("Swapping items idx " + idx1 + " with " + idx2);
         inventory.SwapItems(idx1, idx2);
 
         image.GetComponent<RectTransform>().position = originalPosition;
