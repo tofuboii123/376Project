@@ -18,13 +18,18 @@ public class FullScreenInventory : MonoBehaviour {
     public GameObject clock;
     public GameObject inventory;
 
+    private CanvasGroup canvasGroup;
+
     void Start() {
         volume.profile.TryGetSettings(out depthOfField);
 
         inMenu = false;
         instance = this;
 
-        gameObject.SetActive(false);
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
     public static void startFullScreenInventory() {
@@ -34,7 +39,10 @@ public class FullScreenInventory : MonoBehaviour {
         instance.clock.SetActive(false);
         instance.inventory.SetActive(false);
 
-        instance.gameObject.SetActive(true);
+        instance.canvasGroup.alpha = 1;
+        instance.canvasGroup.interactable = true;
+        instance.canvasGroup.blocksRaycasts = true;
+
         instance.animator.SetTrigger("Start");
         instance.StartCoroutine(instance.onStartFullScreenInventory());
     }

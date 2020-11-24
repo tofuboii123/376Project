@@ -33,18 +33,23 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        bool validDrag = false;
+        bool validCombinationDrag = false;
+        bool validSwapDrag = false;
+        int originalItemIdx = -1;
+        int newItemIdx = -1;
+
         List<RaycastResult> test = GetEventSystemRaycastResults();
 
         foreach (RaycastResult item in test) {
-
-            if(item.gameObject.transform.childCount > 0) {
+            if (item.gameObject.transform.childCount > 0) {
                 Transform child = item.gameObject.transform.GetChild(0);
                 if (child.transform.parent.name.StartsWith("SlotBackground")) {
                     print("onEndDrag: " + child.gameObject.name);
 
                     // Check if items can be combined
-                    validDrag = IsValidDrag(child);
+                    Image img = child.GetComponent<Image>();
+                    validCombinationDrag = IsValidCombinationDrag(img);
+                    validSwapDrag = IsValidSwapDrag(img);
 
                     // Get the other item's ID
                     otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
@@ -52,25 +57,37 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
             }
         }
 
-        // If the combination is valid, combine the items!
-        if (validDrag) {
+        // Check if the drag is valid
+        if (validCombinationDrag) {
             CombineItems();
+        } else if (validSwapDrag) {
+            SwapItems();
         } else {
             image.GetComponent<RectTransform>().position = originalPosition;
         }
     }
 
     // Check if the combination is correct.
-    bool IsValidDrag(Transform child) {
+    bool IsValidCombinationDrag(Image img) {
         try {
-            Image img = child.GetComponent<Image>();
-
             if (img == null || img.sprite == null)
                 return false;
 
             return (img.sprite.name == combineName);
         }
         catch (UnassignedReferenceException) {
+            return false;
+        }
+    }
+
+    // Check if the swap is correct.
+    bool IsValidSwapDrag(Image img) {
+        try {
+            if (img == null || img.sprite == null)
+                return false;
+
+            return true;
+        } catch (UnassignedReferenceException) {
             return false;
         }
     }
@@ -86,6 +103,12 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         // Add the new item
         GameObject result = Instantiate(combinedItem);
         inventory.AddItem(result);
+
+        image.GetComponent<RectTransform>().position = originalPosition;
+    }
+
+    private void SwapItems() {
+        print("Swap!");
 
         image.GetComponent<RectTransform>().position = originalPosition;
     }

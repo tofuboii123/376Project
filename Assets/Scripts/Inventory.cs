@@ -167,19 +167,28 @@ public class Inventory : MonoBehaviour
             itemsQuantity[indexOfItem]--;
             if (itemsQuantity[indexOfItem] <= 0) {
                 itemsQuantity[indexOfItem] = 0;
-                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
-                slotQuantities[indexOfItem].enabled = false;
+
+                if (indexOfItem < slotsBackgroundList.Count) {
+                    slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                    slotQuantities[indexOfItem].enabled = false;
+                }
                 InventoryFull.slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
                 InventoryFull.slotQuantities[indexOfItem].enabled = false;
 
-                slotImages[indexOfItem].enabled = false;
-                slotImages[indexOfItem].sprite = null;
-                items[indexOfItem] = -1;
+                if (indexOfItem < slotsBackgroundList.Count) {
+                    slotImages[indexOfItem].enabled = false;
+                    slotImages[indexOfItem].sprite = null;
+                }
+
                 InventoryFull.slotImages[indexOfItem].enabled = false;
                 InventoryFull.slotImages[indexOfItem].sprite = null;
+
+                items[indexOfItem] = -1;
             } else {
-                slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
-                slotQuantities[indexOfItem].enabled = true;
+                if (indexOfItem < slotsBackgroundList.Count) {
+                    slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                    slotQuantities[indexOfItem].enabled = true;
+                }
                 InventoryFull.slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
                 InventoryFull.slotQuantities[indexOfItem].enabled = true;
             }
