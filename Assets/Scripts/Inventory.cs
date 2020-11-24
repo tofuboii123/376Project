@@ -243,9 +243,9 @@ public class Inventory : MonoBehaviour
         }
         if (idx2 < slotsBackgroundList.Count) {
             DragAndDrop dragAndDrop2 = slotImages[idx2].transform.parent.gameObject.GetComponent<DragAndDrop>();
-            dragAndDrop2.originalItemID = tempDragAndDrop.originalItemID;
-            dragAndDrop2.combineName = tempDragAndDrop.combineName;
-            dragAndDrop2.combinedItem = tempDragAndDrop.combinedItem;
+            dragAndDrop2.originalItemID = dragAndDropTo.originalItemID;
+            dragAndDrop2.combineName = dragAndDropTo.combineName;
+            dragAndDrop2.combinedItem = dragAndDropTo.combinedItem;
         }
 
         items[idx2] = tempItemID;
