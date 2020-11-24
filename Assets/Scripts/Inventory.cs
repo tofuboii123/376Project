@@ -194,4 +194,8 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    public void SwapItems(int idx1, int idx2) {
+
+    }
 }

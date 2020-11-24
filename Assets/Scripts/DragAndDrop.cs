@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 {
@@ -35,8 +36,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         bool validCombinationDrag = false;
         bool validSwapDrag = false;
-        int originalItemIdx = -1;
-        int newItemIdx = -1;
+        int realOriginalItemIdx = -1;
+        int realNewItemIdx = -1;
 
         List<RaycastResult> test = GetEventSystemRaycastResults();
 
@@ -51,6 +52,16 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
                     validCombinationDrag = IsValidCombinationDrag(img);
                     validSwapDrag = IsValidSwapDrag(img);
 
+                    if (Int32.TryParse(image.name.Remove(0, 9), out int originalItemIdx)) {
+                        realOriginalItemIdx = originalItemIdx - 1;
+                    }
+
+                    if (Int32.TryParse(child.transform.parent.name.Remove(0, 14), out int newItemIdx)) {
+                        realNewItemIdx = newItemIdx - 1;
+                    }
+
+                    Debug.Log("Swapping " + realOriginalItemIdx + " with " + realNewItemIdx);
+
                     // Get the other item's ID
                     otherID = child.transform.parent.GetComponent<DragAndDrop>().originalItemID;
                 }
@@ -61,7 +72,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         if (validCombinationDrag) {
             CombineItems();
         } else if (validSwapDrag) {
-            SwapItems();
+            SwapItems(realOriginalItemIdx, realNewItemIdx);
         } else {
             image.GetComponent<RectTransform>().position = originalPosition;
         }
@@ -83,8 +94,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     // Check if the swap is correct.
     bool IsValidSwapDrag(Image img) {
         try {
-            if (img == null || img.sprite == null)
-                return false;
+            //if (img == null || img.sprite == null)
+                //return false;
 
             return true;
         } catch (UnassignedReferenceException) {
@@ -107,8 +118,10 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         image.GetComponent<RectTransform>().position = originalPosition;
     }
 
-    private void SwapItems() {
+    private void SwapItems(int idx1, int idx2) {
         print("Swap!");
+
+        inventory.SwapItems(idx1, idx2);
 
         image.GetComponent<RectTransform>().position = originalPosition;
     }
