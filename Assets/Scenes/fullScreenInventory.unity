@@ -50901,6 +50901,14 @@ PrefabInstance:
       propertyPath: fullScreenInventory
       value: 
       objectReference: {fileID: 574347075}
+    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: inventorySize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: totalInventorySize
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199431, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
