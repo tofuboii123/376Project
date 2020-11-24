@@ -198,15 +198,18 @@ public class Inventory : MonoBehaviour
     }
 
     public void SwapItems(int idx1, int idx2) {
-        // Store in temp variables
         int tempItemID = items[idx1];
         int tempItemQuantity = itemsQuantity[idx1];
         Sprite tempItemImage = InventoryFull.slotImages[idx1].sprite;
 
         items[idx1] = items[idx2];
         itemsQuantity[idx1] = itemsQuantity[idx2];
-        if (idx1 < slotsBackgroundList.Count && idx2 < slotsBackgroundList.Count) {
-            slotImages[idx1].sprite = slotImages[idx2].sprite;
+        if (idx1 < slotsBackgroundList.Count) {
+            if (idx2 < slotsBackgroundList.Count) {
+                slotImages[idx1].sprite = slotImages[idx2].sprite;
+            } else {
+                slotImages[idx1].sprite = InventoryFull.slotImages[idx2].sprite;
+            }
         }
         if (idx2 < slotsBackgroundList.Count) {
             InventoryFull.slotImages[idx1].sprite = slotImages[idx2].sprite;
