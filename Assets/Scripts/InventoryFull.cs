@@ -16,7 +16,7 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField]
     Sprite selected;
 
-    private GameObject selectedGameObject;
+    //private GameObject selectedGameObject;
     private int realIdx;
 
     // Start is called before the first frame update
@@ -48,12 +48,16 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         GameObject gObject = eventData.pointerCurrentRaycast.gameObject;
 
         if (gObject.name.StartsWith("SlotBackground")) {
-            selectedGameObject = gObject;
+            //selectedGameObject = gObject;
 
             if (Int32.TryParse(gObject.name.Remove(0, 14), out int idx)) {
                 realIdx = idx - 1;
 
                 slotsBackgroundList[realIdx].sprite = selected;
+
+                int itemID = Inventory.items[realIdx];
+                ItemInformation itemInformation = ItemDescriptions.GetItemDescription(itemID);
+                Debug.Log("Item Name: " + itemInformation.itemName + " Item Description: " + itemInformation.itemDescription);
             }
         }
     }
