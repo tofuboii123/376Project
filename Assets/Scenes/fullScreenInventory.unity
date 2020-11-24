@@ -24908,6 +24908,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 565703436}
   m_CullTransparentMesh: 0
+--- !u!1 &574347075 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6028650939856865405, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
+  m_PrefabInstance: {fileID: 6028650940878414427}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &587652976
 GameObject:
   m_ObjectHideFlags: 0
@@ -50880,6 +50885,10 @@ PrefabInstance:
       propertyPath: invent
       value: 
       objectReference: {fileID: 1510260352}
+    - target: {fileID: 4684393574480199428, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
+      propertyPath: fullScreenInventory
+      value: 
+      objectReference: {fileID: 574347075}
     - target: {fileID: 4684393574480199431, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
@@ -56148,7 +56157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028650939856865405, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6028650940247297718, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour
     public List<Image> slotImages;
     public List<TextMeshProUGUI> slotQuantities;
 
+    public GameObject fullScreenInventory;
+
     [SerializeField]
     GameObject invent = null;
 

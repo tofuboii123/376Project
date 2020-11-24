@@ -23,6 +23,8 @@ public class FullScreenInventory : MonoBehaviour {
 
         inMenu = false;
         instance = this;
+
+        gameObject.SetActive(false);
     }
 
     public static void startFullScreenInventory() {
