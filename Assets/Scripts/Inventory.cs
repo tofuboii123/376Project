@@ -233,6 +233,21 @@ public class Inventory : MonoBehaviour
         InventoryFull.slotQuantities[idx1].text = "x" + itemsQuantity[idx1];
         InventoryFull.slotQuantities[idx2].text = "x" + itemsQuantity[idx2];
 
+        // TODO: Swap out DragAndDrop component?
+        /*
+        // Provide the information needed for the item combination
+        if (idx < slotsBackgroundList.Count) {
+            DragAndDrop itemInInventory = slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
+            itemInInventory.originalItemID = items[idx];
+            itemInInventory.combineName = combineName;
+            itemInInventory.combinedItem = combinedItem;
+        }
+        DragAndDrop itemInInventoryFull = InventoryFull.slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
+        itemInInventoryFull.originalItemID = items[idx];
+        itemInInventoryFull.combineName = combineName;
+        itemInInventoryFull.combinedItem = combinedItem;
+        */
+
         // The user dragged an item to an empty slot
         if (idx2 < slotsBackgroundList.Count) {
             if (!slotImages[idx2].enabled) {
