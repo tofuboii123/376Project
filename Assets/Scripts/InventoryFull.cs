@@ -11,6 +11,9 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public static List<Image> slotImages;
     public static List<TextMeshProUGUI> slotQuantities;
 
+    public TextMeshProUGUI itemNameText;
+    public TextMeshProUGUI itemDescriptionText;
+
     [SerializeField]
     Sprite empty;
     [SerializeField]
@@ -21,6 +24,9 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     // Start is called before the first frame update
     void Start() {
+        itemNameText.text = "";
+        itemDescriptionText.text = "";
+
         slotsBackgroundList = new List<Image>();
         slotImages = new List<Image>();
         slotQuantities = new List<TextMeshProUGUI>();
@@ -57,12 +63,19 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
                 int itemID = Inventory.items[realIdx];
                 ItemInformation itemInformation = ItemDescriptions.GetItemDescription(itemID);
-                Debug.Log("Item Name: " + itemInformation.itemName + " Item Description: " + itemInformation.itemDescription);
+
+                itemNameText.text = itemInformation.itemName;
+                itemDescriptionText.text = itemInformation.itemDescription;
+
+                //Debug.Log("Item Name: " + itemInformation.itemName + " Item Description: " + itemInformation.itemDescription);
             }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         slotsBackgroundList[realIdx].sprite = empty;
+
+        itemNameText.text = "";
+        itemDescriptionText.text = "";
     }
 }

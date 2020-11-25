@@ -1,7 +1,0 @@
-@ITEM 1
-#ItemName: Plant 1
-#Description: This is the first plant
-
-@ITEM 2
-#ItemName: Plant 2
-#Description: This is the second plant

@@ -26,7 +26,7 @@ public class ItemDescriptions : MonoBehaviour {
     void Start() {
         items = new Dictionary<int, ItemInformation>();
 
-        string readFromFilePath = Application.streamingAssetsPath + "/Items/ItemDescriptions.txt";
+        string readFromFilePath = Application.streamingAssetsPath + "/Items/ItemInformation.txt";
         List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
 
         int itemID = -1;
