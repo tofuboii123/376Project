@@ -3,11 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using TMPro;
 
 public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    Vector2 originalPosition;
     Image image;
+    TextMeshProUGUI quantityText;
+
+    Vector2 imageOriginalPosition;
+    Vector2 quantityTextOriginalPosition;
+
+    Vector2 quantityAndImageDiff;
 
     public int originalItemID;          // Original item's ID
     int otherID;                        // Compared item's ID
@@ -20,22 +26,38 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public GameObject combinedItem;     // The result of the combination
 
+    public static bool isDragging;
+
     void Start()
     {
         inventory = player.GetComponent<Inventory>();
+
         image = GetComponentsInChildren<Image>()[1];
-        originalPosition = image.GetComponent<RectTransform>().position;
+        quantityText = GetComponentsInChildren<TextMeshProUGUI>()[0];
+
+        imageOriginalPosition = image.GetComponent<RectTransform>().position;
+        quantityTextOriginalPosition = quantityText.GetComponent<RectTransform>().position;
+
+        quantityAndImageDiff = new Vector2(imageOriginalPosition.x - quantityTextOriginalPosition.x, imageOriginalPosition.y - quantityTextOriginalPosition.y);
+
+        isDragging = false;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        isDragging = true;
+
         image.GetComponent<RectTransform>().position = Input.mousePosition;
+        quantityText.GetComponent<RectTransform>().position = new Vector2(Input.mousePosition.x - quantityAndImageDiff.x, Input.mousePosition.y - quantityAndImageDiff.y);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        isDragging = false;
+
         if (image == null || image.sprite == null) {
-            image.GetComponent<RectTransform>().position = originalPosition;
+            image.GetComponent<RectTransform>().position = imageOriginalPosition;
+            quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
             return;
         }
 
@@ -76,10 +98,12 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
             } else if (validSwapDrag) {
                 SwapItems(realOriginalItemIdx, realNewItemIdx);
             } else {
-                image.GetComponent<RectTransform>().position = originalPosition;
+                image.GetComponent<RectTransform>().position = imageOriginalPosition;
+                quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
             }
         } else {
-            image.GetComponent<RectTransform>().position = originalPosition;
+            image.GetComponent<RectTransform>().position = imageOriginalPosition;
+            quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
         }
     }
 
@@ -122,7 +146,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         GameObject result = Instantiate(itemToSpawn);
         inventory.AddItem(result);
 
-        image.GetComponent<RectTransform>().position = originalPosition;
+        image.GetComponent<RectTransform>().position = imageOriginalPosition;
+        quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
     }
 
     private void SwapItems(int idx1, int idx2) {
@@ -131,7 +156,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         //Debug.Log("Swapping items idx " + idx1 + " with " + idx2);
         inventory.SwapItems(idx1, idx2);
 
-        image.GetComponent<RectTransform>().position = originalPosition;
+        image.GetComponent<RectTransform>().position = imageOriginalPosition;
+        quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
     }
 
     // get all UI elements that the mouse is hovering over

@@ -61,19 +61,25 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
                 slotsBackgroundList[realIdx].sprite = selected;
 
+                if (DragAndDrop.isDragging) {
+                    return;
+                }
+
                 int itemID = Inventory.items[realIdx];
                 ItemInformation itemInformation = ItemDescriptions.GetItemDescription(itemID);
 
                 itemNameText.text = itemInformation.itemName;
                 itemDescriptionText.text = itemInformation.itemDescription;
-
-                //Debug.Log("Item Name: " + itemInformation.itemName + " Item Description: " + itemInformation.itemDescription);
             }
         }
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         slotsBackgroundList[realIdx].sprite = empty;
+
+        if (DragAndDrop.isDragging) {
+            return;
+        }
 
         itemNameText.text = "";
         itemDescriptionText.text = "";
