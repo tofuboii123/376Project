@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9165267702841861464}
   - component: {fileID: 9165267702841861463}
+  - component: {fileID: 1131630542}
   m_Layer: 5
   m_Name: Clock
   m_TagString: Untagged
@@ -50,6 +51,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d0f9ef6d4bdd5489b42df7ccc128bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &1131630542
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9165267702841861465}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &9165267703117863326
 GameObject:
   m_ObjectHideFlags: 0
