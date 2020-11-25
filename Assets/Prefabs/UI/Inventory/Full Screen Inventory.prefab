@@ -4040,6 +4040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50609dbde8703c46b0351949a83c3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemNameText: {fileID: 1924213872}
+  itemDescriptionText: {fileID: 3688362085375363096}
   empty: {fileID: 21300000, guid: 219c18dd6c1b5274eb6a2346a6e8ba21, type: 3}
   selected: {fileID: 21300000, guid: c44e7d9e3eed6d646ba1d360e78ebb07, type: 3}
 --- !u!1 &1556336556740555142
@@ -5151,6 +5153,7 @@ MonoBehaviour:
   text: {fileID: 0}
   clock: {fileID: 0}
   inventory: {fileID: 0}
+  xInteractText: {fileID: 0}
 --- !u!225 &574347077
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -5175,6 +5178,7 @@ GameObject:
   - component: {fileID: 6028650940247297716}
   - component: {fileID: 6028650940247297717}
   - component: {fileID: 6028650940247297707}
+  - component: {fileID: 1243954758}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -5262,6 +5266,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!225 &1243954758
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6028650940247297719}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6805553681396644878
 GameObject:
   m_ObjectHideFlags: 0

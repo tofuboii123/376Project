@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     public static List<int> itemsQuantity;
 
     public List<Image> slotsBackgroundList;
-    public List<Image> slotImages;
+    public static List<Image> slotImages;
     public List<TextMeshProUGUI> slotQuantities;
 
     public GameObject fullScreenInventory;
@@ -173,6 +173,17 @@ public class Inventory : MonoBehaviour
                 itemsQuantity[indexOfItem] = 0;
 
                 if (indexOfItem < slotsBackgroundList.Count) {
+                    DragAndDrop itemInInventory = slotImages[indexOfItem].transform.parent.gameObject.GetComponent<DragAndDrop>();
+                    itemInInventory.originalItemID = 0;
+                    itemInInventory.combineName = "";
+                    itemInInventory.combinedItem = null;
+                }
+                DragAndDrop itemInInventoryFull = InventoryFull.slotImages[indexOfItem].transform.parent.gameObject.GetComponent<DragAndDrop>();
+                itemInInventoryFull.originalItemID = 0;
+                itemInInventoryFull.combineName = "";
+                itemInInventoryFull.combinedItem = null;
+
+                if (indexOfItem < slotsBackgroundList.Count) {
                     slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
                     slotQuantities[indexOfItem].enabled = false;
                 }
@@ -183,7 +194,6 @@ public class Inventory : MonoBehaviour
                     slotImages[indexOfItem].enabled = false;
                     slotImages[indexOfItem].sprite = null;
                 }
-
                 InventoryFull.slotImages[indexOfItem].enabled = false;
                 InventoryFull.slotImages[indexOfItem].sprite = null;
 

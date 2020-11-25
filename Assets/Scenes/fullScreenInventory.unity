@@ -23561,17 +23561,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &262974233 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1924213872, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
-  m_PrefabInstance: {fileID: 6028650940878414427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &312853834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23949,10 +23938,6 @@ PrefabInstance:
     - target: {fileID: 9165267702841861465, guid: 30bf2ffac361c7f4c9bb33fa3a1f2626, type: 3}
       propertyPath: m_Name
       value: Clock
-      objectReference: {fileID: 0}
-    - target: {fileID: 9165267702841861465, guid: 30bf2ffac361c7f4c9bb33fa3a1f2626, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30bf2ffac361c7f4c9bb33fa3a1f2626, type: 3}
@@ -25774,6 +25759,7 @@ GameObject:
   - component: {fileID: 803887508}
   - component: {fileID: 803887510}
   - component: {fileID: 803887509}
+  - component: {fileID: 803887511}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -25842,6 +25828,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 803887507}
   m_CullTransparentMesh: 0
+--- !u!225 &803887511
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 803887507}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &859943957
 GameObject:
   m_ObjectHideFlags: 0
@@ -45670,17 +45668,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8f1e55d9d59d8f4989af047a255f12a, type: 3}
---- !u!114 &1100171758 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3688362085375363096, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
-  m_PrefabInstance: {fileID: 6028650940878414427}
+--- !u!1 &1106233977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 161667263590745505, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
+  m_PrefabInstance: {fileID: 1429312450}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1131630540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9165267702841861465, guid: 30bf2ffac361c7f4c9bb33fa3a1f2626, type: 3}
@@ -48026,7 +48018,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 161667263590745507, guid: 28f1345434734e14e8f560059a733ae4, type: 3}
   m_PrefabInstance: {fileID: 1429312450}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1106233977}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -51555,14 +51547,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
-    - target: {fileID: 1500942785047259144, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
-      propertyPath: itemNameText
-      value: 
-      objectReference: {fileID: 262974233}
-    - target: {fileID: 1500942785047259144, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
-      propertyPath: itemDescriptionText
-      value: 
-      objectReference: {fileID: 1100171758}
     - target: {fileID: 3911644701479714468, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
       propertyPath: player
       value: 
@@ -51591,6 +51575,10 @@ PrefabInstance:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1510260352}
+    - target: {fileID: 6028650939856865395, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
+      propertyPath: xInteractText
+      value: 
+      objectReference: {fileID: 1106233977}
     - target: {fileID: 6028650939856865404, guid: 97a4d9c83bb9f35439e9b74957238be2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

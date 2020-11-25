@@ -110,23 +110,25 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     // Combine the two items and add a new item
     void CombineItems() {
-        print("Combination!");
+        //print("Combination!");
+
+        GameObject itemToSpawn = combinedItem;
         
         // Delete the 2 original items
         inventory.DiscardItem(originalItemID);
         inventory.DiscardItem(otherID);
 
         // Add the new item
-        GameObject result = Instantiate(combinedItem);
+        GameObject result = Instantiate(itemToSpawn);
         inventory.AddItem(result);
 
         image.GetComponent<RectTransform>().position = originalPosition;
     }
 
     private void SwapItems(int idx1, int idx2) {
-        print("Swap!");
+        //print("Swap!");
 
-        Debug.Log("Swapping items idx " + idx1 + " with " + idx2);
+        //Debug.Log("Swapping items idx " + idx1 + " with " + idx2);
         inventory.SwapItems(idx1, idx2);
 
         image.GetComponent<RectTransform>().position = originalPosition;

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1500942784475757597}
+  - component: {fileID: 6376465192922712978}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -40,6 +41,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0.000030518, y: 81.36423}
   m_SizeDelta: {x: 927.4833, y: 162.72845}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &6376465192922712978
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1500942784475757596}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &3719050823288044648
 PrefabInstance:
   m_ObjectHideFlags: 0
