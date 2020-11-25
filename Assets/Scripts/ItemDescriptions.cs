@@ -41,8 +41,7 @@ public class ItemDescriptions : MonoBehaviour {
                 itemName = line.Remove(0, 11);
             } else if (line.StartsWith("#Description: ")) {
                 itemDescription = line.Remove(0, 14);
-
-                // End on description
+            } else if (line.StartsWith("@ENDITEM")) {
                 itemInformation = new ItemInformation(itemName, itemDescription);
                 items.Add(itemID, itemInformation);
             }
