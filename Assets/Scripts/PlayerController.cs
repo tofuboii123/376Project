@@ -63,11 +63,19 @@ public class PlayerController : MonoBehaviour
     {
         // Full screen inventory
         if (Input.GetButtonDown("FullScreenInventory")) {
+            if (FullScreenInventory.inHelpScreen) {
+                return;
+            }
+
             if (Time.time < canFullScreenInventory) {
                 return;
             }
 
-            canFullScreenInventory = Time.time + 0.55f;
+            if (isTravelling) {
+                return;
+            }
+
+            canFullScreenInventory = Time.time + 0.5f;
 
             if (FullScreenInventory.inMenu) {
                 CanMove = true;
@@ -114,6 +122,9 @@ public class PlayerController : MonoBehaviour
 
     // Go from past to present and vice-versa
     public void TimeShift() {
+        CanMove = false;
+        isTravelling = true;
+
         // Boolean switch
         inPast = !inPast;
 
@@ -128,7 +139,6 @@ public class PlayerController : MonoBehaviour
 
     // Time shift animation
     public IEnumerator StartPostProcessingEffect() {
-        CanMove = false;
         float timer;
 
         MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
@@ -188,7 +198,6 @@ public class PlayerController : MonoBehaviour
 
         //is set to true from whichever script that cares if the player is travelling
         isTravelling = false;
-
     }
 
     //just a major WIP, please ignore

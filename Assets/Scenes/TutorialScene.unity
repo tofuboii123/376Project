@@ -23621,7 +23621,7 @@ PrefabInstance:
     - target: {fileID: 7948647900779527850, guid: 532bb6a3abafa064fbb92117501a6512, type: 3}
       propertyPath: face
       value: 
-      objectReference: {fileID: 1342953741}
+      objectReference: {fileID: 1715231653}
     - target: {fileID: 7948647900779527850, guid: 532bb6a3abafa064fbb92117501a6512, type: 3}
       propertyPath: faceSprites.Array.data[4]
       value: 
@@ -45837,17 +45837,6 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 9176226280421329897, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
   m_PrefabInstance: {fileID: 1859175468}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1342953741 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6022484129728243324, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
-  m_PrefabInstance: {fileID: 1859175468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1378208392 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6251363696530658260, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
@@ -46147,6 +46136,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9176226280701936662, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
   m_PrefabInstance: {fileID: 1859175468}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1715231653 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3654544214955701122, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+  m_PrefabInstance: {fileID: 1859175468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1723116990 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4684393574480199450, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
@@ -47576,6 +47576,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 10735942965295813, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1723116990}
     - target: {fileID: 390507220865446371, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
       propertyPath: player
       value: 
@@ -47620,6 +47624,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
+    - target: {fileID: 812375096173033259, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2047801766412364471, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1723116990}
+    - target: {fileID: 3141766403768337466, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1723116990}
     - target: {fileID: 3349054455389423895, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
       propertyPath: player
       value: 
@@ -47633,6 +47649,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1723116990}
     - target: {fileID: 4426861927956190343, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1723116990}
+    - target: {fileID: 4654842322965368314, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
@@ -47741,6 +47761,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1723116990}
     - target: {fileID: 7981871052947291688, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1723116990}
+    - target: {fileID: 8691192096576875638, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
