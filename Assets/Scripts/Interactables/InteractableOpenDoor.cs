@@ -38,6 +38,7 @@ public class InteractableOpenDoor : Interactable
                     alsoUnlock.GetComponent<InteractableOpenDoor>().requiredItemID = 0;
                 }
 
+                inventory.DiscardItem(requiredItemID);
                 isLocked = false;
                 requiredItemID = 0;
                 MessageController.ShowMessage(unlockDoorText, Face.Happy);
