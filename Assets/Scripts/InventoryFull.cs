@@ -14,6 +14,10 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public TextMeshProUGUI itemNameText;
     public TextMeshProUGUI itemDescriptionText;
 
+    public Image faceImage;
+    public SpriteRenderer faceImageSpriteRenderer;
+    public Sprite[] faceSprites = new Sprite[2];
+
     [SerializeField]
     Sprite empty;
     [SerializeField]
@@ -48,6 +52,8 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 }
             }
         }
+
+        faceImage.sprite = faceSprites[0];
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -68,8 +74,12 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 int itemID = Inventory.items[realIdx];
                 ItemInformation itemInformation = ItemDescriptions.GetItemDescription(itemID);
 
-                itemNameText.text = itemInformation.itemName;
-                itemDescriptionText.text = itemInformation.itemDescription;
+                if (itemInformation.itemName != "") {
+                    itemNameText.text = itemInformation.itemName;
+                    itemDescriptionText.text = itemInformation.itemDescription;
+
+                    faceImage.sprite = faceSprites[1];
+                }
             }
         }
     }
@@ -83,5 +93,7 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         itemNameText.text = "";
         itemDescriptionText.text = "";
+
+        faceImage.sprite = faceSprites[0];
     }
 }

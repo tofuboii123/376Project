@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
+    private float canFullScreenInventory;
+
     void Start()
     {
         volume.profile.TryGetSettings(out bloom);
@@ -59,18 +61,35 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Full screen inventory
+        if (Input.GetButtonDown("FullScreenInventory")) {
+            if (FullScreenInventory.inHelpScreen) {
+                return;
+            }
+
+            if (Time.time < canFullScreenInventory) {
+                return;
+            }
+
+            if (isTravelling) {
+                return;
+            }
+
+            canFullScreenInventory = Time.time + 0.5f;
+
+            if (FullScreenInventory.inMenu) {
+                CanMove = true;
+                FullScreenInventory.exitFullScreenInventory();
+            } else {
+                CanMove = false;
+                FullScreenInventory.startFullScreenInventory();
+            }
+        }
+
         if (CanMove) {
             // Time travel.
-            if (Input.GetButtonDown("TimeShift"))
+            if (Input.GetButtonDown("TimeShift")) {
                 TimeShift();
-
-            // Full screen inventory
-            if (Input.GetButtonDown("FullScreenInventory")) {
-                if (FullScreenInventory.inMenu) {
-                    FullScreenInventory.exitFullScreenInventory();
-                } else {
-                    FullScreenInventory.startFullScreenInventory();
-                }
             }
         } else {
             animator.SetFloat("Speed", 0);
@@ -103,6 +122,9 @@ public class PlayerController : MonoBehaviour
 
     // Go from past to present and vice-versa
     public void TimeShift() {
+        CanMove = false;
+        isTravelling = true;
+
         // Boolean switch
         inPast = !inPast;
 
@@ -117,7 +139,6 @@ public class PlayerController : MonoBehaviour
 
     // Time shift animation
     public IEnumerator StartPostProcessingEffect() {
-        CanMove = false;
         float timer;
 
         MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
@@ -177,7 +198,6 @@ public class PlayerController : MonoBehaviour
 
         //is set to true from whichever script that cares if the player is travelling
         isTravelling = false;
-
     }
 
     //just a major WIP, please ignore
