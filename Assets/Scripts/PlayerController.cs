@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
+    private float canFullScreenInventory;
+
     void Start()
     {
         volume.profile.TryGetSettings(out bloom);
@@ -59,18 +61,27 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Full screen inventory
+        if (Input.GetButtonDown("FullScreenInventory")) {
+            if (Time.time < canFullScreenInventory) {
+                return;
+            }
+
+            canFullScreenInventory = Time.time + 0.7f;
+
+            if (FullScreenInventory.inMenu) {
+                CanMove = true;
+                FullScreenInventory.exitFullScreenInventory();
+            } else {
+                CanMove = false;
+                FullScreenInventory.startFullScreenInventory();
+            }
+        }
+
         if (CanMove) {
             // Time travel.
-            if (Input.GetButtonDown("TimeShift"))
+            if (Input.GetButtonDown("TimeShift")) {
                 TimeShift();
-
-            // Full screen inventory
-            if (Input.GetButtonDown("FullScreenInventory")) {
-                if (FullScreenInventory.inMenu) {
-                    FullScreenInventory.exitFullScreenInventory();
-                } else {
-                    FullScreenInventory.startFullScreenInventory();
-                }
             }
         } else {
             animator.SetFloat("Speed", 0);
