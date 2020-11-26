@@ -1,0 +1,12 @@
+@ITEM 1
+#ItemName: Plant 1
+#Description: This is the first plant
+@ENDITEM
+@ITEM 2
+#ItemName: Plant 2
+#Description: This is the second plant
+@ENDITEM
+@ITEM 456
+#ItemName: Clock
+#Description: Wow! This clock came from 2 plants! Wonder what this does?
+@ENDITEM
