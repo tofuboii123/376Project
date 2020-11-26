@@ -21,7 +21,9 @@ public class Clock : MonoBehaviour
     {
         direction *= -1;
 
-        instance.StartCoroutine(instance.StartClockHandRotation());
+        if (instance.gameObject.activeInHierarchy) {
+            instance.StartCoroutine(instance.StartClockHandRotation());
+        }
     }
 
     IEnumerator StartClockHandRotation() {
