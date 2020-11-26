@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
-            canFullScreenInventory = Time.time + 0.7f;
+            canFullScreenInventory = Time.time + 0.55f;
 
             if (FullScreenInventory.inMenu) {
                 CanMove = true;
