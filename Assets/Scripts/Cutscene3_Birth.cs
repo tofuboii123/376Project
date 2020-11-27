@@ -68,7 +68,7 @@ public class Cutscene3_Birth : MonoBehaviour
 
         }
         yield return new WaitForSeconds(1);
-        MessageController.ShowMessage(new string[] { "Victoria:\nSabrina...I like it", "Benjamin:\nI feel like the happiest man in the world\nnow my dear. Our little Sabrina will bring\nus a lot of joy."});
+        MessageController.ShowMessage(new string[] { "???:\nA baby..Could that be..me?","Victoria:\nSabrina...I like it", "???:\nOk that's definitely not me.\nBut I feel very close to her..and her mom.","Benjamin:\nI feel like the happiest man in the world\nnow my dear. Our little Sabrina will bring\nus a lot of joy."});
         while (MessageController.showMessage > 0)
         {
             yield return null;
@@ -79,7 +79,7 @@ public class Cutscene3_Birth : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
 
-        MessageController.ShowMessage(new string[] { "Victoria:\nShush..\nBen, I think there is something wrong with her..\nWhat should we do?", "Benjamin:\nDon't panic darling. You know babies cry\na lot. Remember when Abigail was this young? We\ncouldn't sleep a single night!", "Victoria:\nBut this feels different..", "Benjamin:\nShe's probably just hungry.\nLet me get the bottle."});
+        MessageController.ShowMessage(new string[] { "Victoria:\nShush..She's crying again..\nShe was crying all day yesterday.\nBen, I think there is something wrong with her..", "Benjamin:\nDon't panic darling. You know babies cry\na lot. Remember when Abigail was this young? We\ncouldn't sleep a single night!", "Victoria:\nBut this feels different..", "Benjamin:\nShe's probably just hungry.\nLet me get the bottle."});
         while (MessageController.showMessage > 0)
         {
             yield return null;
