@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class InteractableGrandfatherClock : Interactable
 {
-    private bool isDoorUnlocked = false;
-    private bool collectedItems = false;
+    private static bool isDoorUnlocked = false;
+    private static bool collectedItems = false;
 
     public override void OnInteraction()
     {

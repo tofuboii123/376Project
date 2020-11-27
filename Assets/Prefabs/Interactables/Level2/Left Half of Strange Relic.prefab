@@ -97,8 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 28
   interactTextString: 
-  combineName: 
-  combinedObject: {fileID: 0}
+  combineName: Right Half of Strange Relic
+  combinedObject: {fileID: 8829156747367919140, guid: 10dd596849a993b4aa523bf003d35eb2, type: 3}
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.
