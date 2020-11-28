@@ -1,6 +1,6 @@
 @ITEM 1
 #ItemName: Plant 1
-#Description: This is the first plant
+#Description: This is the first plant! This is a very long description to test word wrapping@!!!!!!!! AHHHHH!!
 @ENDITEM
 @ITEM 2
 #ItemName: Plant 2

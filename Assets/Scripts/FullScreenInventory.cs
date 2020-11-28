@@ -9,10 +9,14 @@ public class FullScreenInventory : MonoBehaviour {
     private DepthOfField depthOfField;
 
     public static bool inMenu;
+    public static bool inHelpScreen;
 
     private static FullScreenInventory instance;
 
     public Animator animator;
+
+    public GameObject background;
+    public GameObject helpScreen;
 
     public GameObject text;
     public GameObject clock;
@@ -41,14 +45,14 @@ public class FullScreenInventory : MonoBehaviour {
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+
+        helpScreen.SetActive(false);
+
+        inHelpScreen = false;
     }
 
     public static void startFullScreenInventory() {
         inMenu = true;
-
-        //instance.text.SetActive(false);
-        //instance.clock.SetActive(false);
-        //instance.inventory.SetActive(false);
 
         instance.canvasGroup.alpha = 1;
         instance.canvasGroup.interactable = true;
@@ -60,10 +64,6 @@ public class FullScreenInventory : MonoBehaviour {
 
     public static void exitFullScreenInventory() {
         inMenu = false;
-
-        //instance.text.SetActive(true);
-        //instance.clock.SetActive(true);
-        //instance.inventory.SetActive(true);
 
         instance.animator.SetTrigger("Exit");
         instance.StartCoroutine(instance.onExitFullScreenInventory());
@@ -103,5 +103,23 @@ public class FullScreenInventory : MonoBehaviour {
 
             yield return null;
         }
+    }
+
+    public void OnHelpClicked() {
+        inHelpScreen = true;
+
+        background.SetActive(false);
+        helpScreen.SetActive(true);
+    }
+
+    public void OnHelpBackClicked() {
+        inHelpScreen = false;
+
+        background.SetActive(true);
+        helpScreen.SetActive(false);
+    }
+
+    public void OnExitGameClicked() {
+        Debug.Log("Exit Game button clicked");
     }
 }
