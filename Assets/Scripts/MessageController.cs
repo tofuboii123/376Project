@@ -101,6 +101,7 @@ public class MessageController : MonoBehaviour
             if (faces == null || faces.Length == 0)
             {
                 faceIndex = 0;
+                faceIndexArray = faces;
             }
             else
             {
