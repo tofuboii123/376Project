@@ -1,12 +1,108 @@
 @ITEM 1
 #ItemName: Plant 1
-#Description: This is the first plant! This is a very long description to test word wrapping@!!!!!!!! AHHHHH!!
+#Description: Description here
 @ENDITEM
-@ITEM 2
-#ItemName: Plant 2
-#Description: This is the second plant
+@ITEM 11
+#ItemName: Bathroom Key
+#Description: Looks like a key. Probably just a key. I wonder what it opens.
 @ENDITEM
-@ITEM 456
-#ItemName: Clock
-#Description: Wow! This clock came from 2 plants! Wonder what this does?
+@ITEM 12
+#ItemName: Empty Cup
+#Description: Just an empty cup. It’s eerily clean...
+@ENDITEM
+@ITEM 13
+#ItemName: Full Cup
+#Description: Gotta be careful not to spill this.
+@ENDITEM
+@ITEM 14
+#ItemName: Hammer
+#Description: A pretty sturdy hammer. Seems like it can come in handy if I ever feel like smashing something.
+@ENDITEM
+@ITEM 15
+#ItemName: Staircase Key
+#Description: Another key. Let’s see what this one opens.
+@ENDITEM
+@ITEM 16
+#ItemName: Safe Combination
+#Description: There’s some numbers on this piece of paper. Looks like a lock combination.
+@ENDITEM
+@ITEM 17
+#ItemName: Oddly-Shaped Key
+#Description: It’s a key. It’s oddly shaped. It’s pretty dang creepy.
+@ENDITEM
+@ITEM 21
+#ItemName: Lower Half Key
+#Description: Is that half of a key? Who cuts a key in half?
+@ENDITEM
+@ITEM 22
+#ItemName: Upper Half Key
+#Description: Oh, this looks like the other half.
+@ENDITEM
+@ITEM 23
+#ItemName: Bedroom B Key
+#Description: Now it’s a full key!
+@ENDITEM
+@ITEM 24
+#ItemName: Pieces of metal
+#Description: Description here
+@ENDITEM
+@ITEM 25
+#ItemName: Duct Tape
+#Description: Duct tape fixes everything!
+@ENDITEM
+@ITEM 26
+#ItemName: Crowbar
+#Description: Great for unjamming things.
+@ENDITEM
+@ITEM 27
+#ItemName: Bedroom A Key
+#Description: Another key means another lock.
+@ENDITEM
+@ITEM 28
+#ItemName: Strange Relic (Left)
+#Description: I... Don’t even know how to describe this.
+@ENDITEM
+@ITEM 29
+#ItemName: Teddy Bear
+#Description: A fuzzy little buddy. Seems like something is stuck inside of it.
+@ENDITEM
+@ITEM 210
+#ItemName: Kitchen Knife
+#Description: Gotta be careful with sharp objects.
+@ENDITEM
+@ITEM 211
+#ItemName: Battery
+#Description: Let’s hope there’s still some juice left.
+@ENDITEM
+@ITEM 212
+#ItemName: Radio
+#Description: Description here
+@ENDITEM
+@ITEM 213
+#ItemName: Rusty Key
+#Description: Looks rusted to all hell. I don’t think it’ll fit in anything in its current state though.
+@ENDITEM
+@ITEM 214
+#ItemName: Bottle of Vinegar
+#Description: Very acidic, but great on chips.
+@ENDITEM
+@ITEM 215
+#ItemName: Basement Key
+#Description: Much better. Now to find the lock.
+@ENDITEM
+@ITEM 216
+#ItemName: Strange Relic (Right)
+#Description: Great… Another creepy thing...
+@ENDITEM
+@ITEM 217
+#ItemName: Strange Relic
+#Description: Description here
+@ENDITEM
+@ITEM 218
+#ItemName: Small Key
+#Description: This key is particularly small. I need to find an equally small lock.
+@ENDITEM
+@ITEM 219
+#ItemName: Oddly-Shaped Chest
+#Description: Description here
 @ENDITEM
