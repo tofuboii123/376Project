@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 908013415
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 03a3810a65ad8804588e4c473ba298c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,8 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 219
   interactTextString: Take chest
-  combineName: 
-  combinedObject: {fileID: 0}
+  combineName: Oddly Shaped Key
+  combinedObject: {fileID: 613267878175897469, guid: bb5032c6129d3ee49bcbdbbedce244cd, type: 3}
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.

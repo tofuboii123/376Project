@@ -97,8 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 17
   interactTextString: 
-  combineName: 
-  combinedObject: {fileID: 0}
+  combineName: Oddly Shaped Chest
+  combinedObject: {fileID: 613267878175897469, guid: bb5032c6129d3ee49bcbdbbedce244cd, type: 3}
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.

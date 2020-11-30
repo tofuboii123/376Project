@@ -134,6 +134,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &140040201
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.055878
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.96047264
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -99.20938
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1617864265975192987, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4563370542227965906, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: img
+      value: 
+      objectReference: {fileID: 614265361}
+    - target: {fileID: 7838985839379710137, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: m_Name
+      value: TutorialController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
 --- !u!1 &198524028
 GameObject:
   m_ObjectHideFlags: 0
@@ -23466,6 +23527,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &614265361 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6575391296028912, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+  m_PrefabInstance: {fileID: 1859175468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &615047952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65735,6 +65807,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 0
   interactTextString: Climb Tree
+  img: {fileID: 0}
 --- !u!1 &1756823245
 GameObject:
   m_ObjectHideFlags: 0

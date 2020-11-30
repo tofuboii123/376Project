@@ -1,9 +1,14 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class InteractableTree : Interactable
 {
+    public Image img;
+
     public override void OnInteraction() {
-        //SceneManager.LoadScene(1);
-        print("Load level 1");
+        TutorialController tutorialController = GameObject.Find("TutorialController").GetComponent<TutorialController>();
+        StartCoroutine(tutorialController.LevelEnd());
     }
 }

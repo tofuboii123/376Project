@@ -24,7 +24,8 @@ public class InteractableLevel1ExitDoor : Interactable
         }
         else
         {
-            print("Load level 2 / start transition");
+            Level1Controller level1Controller = GameObject.Find("Level1Controller").GetComponent<Level1Controller>();
+            StartCoroutine(level1Controller.LevelEnd());
         }
     }
 }

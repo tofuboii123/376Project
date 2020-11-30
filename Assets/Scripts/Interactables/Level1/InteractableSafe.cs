@@ -10,6 +10,7 @@ public class InteractableSafe : Interactable
         {
             inventory.DiscardItem(16);
             inventory.AddItem(GameObject.Find("Oddly Shaped Key"));
+            PlayerController.hasOddKey = true;
             MessageController.ShowMessage("I opened the safe! Looks like there's a strange key inside. I'll keep it just in case.", Face.Happy);
         }
         else

@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
 
     public static bool isTravelling;
     public PostProcessVolume volume;
+
+    public static bool hasOddKey = false;
+
     private Bloom bloom;
     private LensDistortion lensDistortion;
     private Grain grain;
