@@ -55,6 +55,6 @@ public class Level1Controller : MonoBehaviour
             yield return null;
         }
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("Level2");
     }
 }

@@ -54,6 +54,6 @@ public class TutorialController : MonoBehaviour
             yield return null;
         }
         
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Level1");
     }
 }
