@@ -17,6 +17,8 @@ public class Cutscene2_Happy_Family : MonoBehaviour
     public GameObject Clock;
     public GameObject ClockText;
     public GameObject Inventory;
+    public bool isActive;
+    public GameObject PresentTrigger;
 
     //Camera 
     public Camera c;
@@ -36,7 +38,11 @@ public class Cutscene2_Happy_Family : MonoBehaviour
     {
         if (collision.tag.CompareTo("Player") == 0)
         {
+           
+            if(!isActive){
             StartCoroutine(Cutscene_Start());
+            isActive = true;
+           }
 
         }
     }
@@ -44,6 +50,18 @@ public class Cutscene2_Happy_Family : MonoBehaviour
 
     IEnumerator Cutscene_Start()
     {
+        PlayerController.inCutscene = true;
+        if (Cutscene_Present.inPresentTriggered){
+            while(PlayerController.isTravelling == true){
+                yield return null;
+            }
+        }
+
+        PlayerController.CanMove = false;
+        Cutscene_Present.inPresentTriggered = false;
+
+        Object.Destroy(PresentTrigger);
+
         c.GetComponent<CameraMovement>().cutscene_mode = true;
         PlayerController.CanMove = false;
         StartCoroutine(fadeIn());
@@ -121,6 +139,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         ClockText.SetActive(true);
         Inventory.SetActive(true);
         PlayerController.CanMove = true;
+        PlayerController.inCutscene = false;
         Object.Destroy(gameObject);
 
     }

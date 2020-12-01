@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     // Getter and setter
     public static bool CanMove { get; set; }
+    public static bool inCutscene = false;
     public GameObject MrInvisible;
     [SerializeField]
     float speed = 5.0f;
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
         numOfTries = 0;
 
         CanMove = true;
+        inCutscene = false;
         isTravelling = false;
         timeIndicator.text = "Present";
     }
@@ -92,7 +94,11 @@ public class PlayerController : MonoBehaviour
         if (CanMove) {
             // Time travel.
             if (Input.GetButtonDown("TimeShift")) {
+                if (!Cutscene5_Finale.goodEndingTriggered){
                 TimeShift();
+                }else{
+                StartCoroutine(ClockNotWorking());
+                };
             }
         } else {
             animator.SetFloat("Speed", 0);
@@ -101,7 +107,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (CanMove)
+        if (CanMove && !inCutscene)
         {
             MovePlayer();
         }
@@ -202,7 +208,16 @@ public class PlayerController : MonoBehaviour
         //is set to true from whichever script that cares if the player is travelling
         isTravelling = false;
     }
+public IEnumerator ClockNotWorking() {
 
+    CanMove = false;
+     MessageController.ShowMessage(new string[] { "???\nThe watch seems to have stopped working.."});
+        while (MessageController.showMessage > 0)
+        {
+            yield return null;
+        }
+        CanMove = true;
+}
     //just a major WIP, please ignore
     Vector3 checkTeleportPosition()
     {

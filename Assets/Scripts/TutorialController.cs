@@ -7,11 +7,23 @@ using UnityEngine.UI;
 public class TutorialController : MonoBehaviour
 {
     public Image img;
+    public static bool firstAppreance = true;
+    public GameObject grave;
+    public GameObject plant;
+    public GameObject tree;
+    public Animator animator;
+    public GameObject Player;
 
     // Start is called before the first frame update
     void Start()
     {
+        if(firstAppreance){
         StartCoroutine(LevelStart());
+        } else{
+            Player.transform.position = new Vector3(0.1f,-5.19f,Player.transform.position.z);
+            plant.SetActive(false);
+            tree.GetComponent<InteractableTree>().interactTextString = "Bury Sabrina";
+        }
     }
 
     IEnumerator LevelStart()
@@ -53,7 +65,50 @@ public class TutorialController : MonoBehaviour
             img.color = new Color(0, 0, 0, i);
             yield return null;
         }
-        
+        firstAppreance = false;
         SceneManager.LoadScene("Level1");
+    }
+
+    
+    public IEnumerator GameEnd()
+    {
+        PlayerController.inCutscene = true;
+        MessageController.ShowMessage(new string[] {
+            "I can bury her right next to this tree.\nAfter all these years..Her soul can finally\nrest in peace.",
+        }, new int[] {
+           
+            Face.Thinking
+        });
+
+        while (MessageController.showMessage > 0) {
+            yield return null;
+        }
+     
+        yield return new WaitForSeconds(1);
+        grave.transform.position = new Vector3(Player.transform.position.x+1.5f,grave.transform.position.y,grave.transform.position.z);
+        grave.SetActive(true);
+        yield return new WaitForSeconds(2);
+
+        MessageController.ShowMessage(new string[] {
+            "Victoria\nThank you Ashton..\nI shall leave your body now.",
+        }, new int[] {
+           
+            Face.Thinking
+        });
+
+          while (MessageController.showMessage > 0) {
+            yield return null;
+        }
+        yield return new WaitForSeconds(0.5f);
+
+        for (float i = 0; i <= 3; i += Time.deltaTime)
+        {
+            // set color with i as alpha
+            img.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+        PlayerController.inCutscene = false;
+
+        
     }
 }

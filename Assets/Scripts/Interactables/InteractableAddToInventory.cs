@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InteractableAddToInventory : Interactable
 {
-
     public string combineName = null;       // The name of the item it can be combined with
     public GameObject combinedObject;       // The result of the combination
     public int requiredItemID = 0;

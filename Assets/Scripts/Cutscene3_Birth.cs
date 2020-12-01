@@ -16,15 +16,20 @@ public class Cutscene3_Birth : MonoBehaviour
     public GameObject Clock;
     public GameObject ClockText;
     public GameObject Inventory;
+    public bool isActive;
 
     //Camera 
     public Camera c;
 
     AudioSource baby;
+
+    public GameObject PresentTrigger;
     // Start is called before the first frame update
     void Start()
     {
         baby = GetComponent<AudioSource>(); 
+        isActive = false;
+
     }
 
     // Update is called once per frame
@@ -38,7 +43,10 @@ public class Cutscene3_Birth : MonoBehaviour
         if (collision.tag.CompareTo("Player") == 0)
         {
            
+            if(!isActive){
             StartCoroutine(Cutscene_Start());
+            isActive = true;
+           }
 
         }
     }
@@ -46,8 +54,17 @@ public class Cutscene3_Birth : MonoBehaviour
 
     IEnumerator Cutscene_Start()
     {
-        PlayerController.CanMove = false;
+        PlayerController.inCutscene = true;
+        if (Cutscene_Present.inPresentTriggered){
+            while(PlayerController.isTravelling == true){
+                yield return null;
+            }
+        }
 
+        PlayerController.CanMove = false;
+        Cutscene_Present.inPresentTriggered = false;
+
+        Object.Destroy(PresentTrigger);
         c.GetComponent<CameraMovement>().cutscene_mode = true;
         StartCoroutine(fadeIn());
 
@@ -118,6 +135,7 @@ public class Cutscene3_Birth : MonoBehaviour
         ClockText.SetActive(true);
         Inventory.SetActive(true);
         PlayerController.CanMove = true;
+        PlayerController.inCutscene = false;
         Object.Destroy(gameObject);
 
     }

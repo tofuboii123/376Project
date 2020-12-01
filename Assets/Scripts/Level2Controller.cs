@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Level2Controller : MonoBehaviour
 {
@@ -35,5 +36,24 @@ public class Level2Controller : MonoBehaviour
             Face.None,
             Face.None
         });
+    }
+
+     public IEnumerator LevelEnd()
+    {
+        PlayerController.inCutscene= true;
+        MessageController.ShowMessage("The door is unlocked..I know this is what\nVictoria wants. I just need to bury her daughter\nthen I go home..", Face.Thinking);
+        while (MessageController.showMessage > 0)
+        {
+            yield return null;
+        }
+        for (float i = 0; i <= 3; i += Time.deltaTime)
+        {
+            // set color with i as alpha
+            img.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+        PlayerController.inCutscene= false;
+
+        SceneManager.LoadScene("TutorialScene");
     }
 }

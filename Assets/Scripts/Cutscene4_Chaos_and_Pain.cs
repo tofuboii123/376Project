@@ -22,12 +22,16 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
     public Camera c;
 
     public Animator animator;
+    public GameObject PresentTrigger;
+    public bool isActive;
 
 
     // Start is called before the first frame update
     void Start()
     {
      animator = Mother.GetComponent<Animator>();   
+             isActive = false;
+
     }
 
     // Update is called once per frame
@@ -40,7 +44,10 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
         if (collision.tag.CompareTo("Player") == 0)
         {
            
+             if(!isActive){
             StartCoroutine(Cutscene_Start());
+            isActive = true;
+           }
 
         }
     }
@@ -48,8 +55,16 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
 
     IEnumerator Cutscene_Start()
     {
+        PlayerController.inCutscene = true;
+        if (Cutscene_Present.inPresentTriggered){
+            while(PlayerController.isTravelling == true){
+                yield return null;
+            }
+        }
         PlayerController.CanMove = false;
+        Cutscene_Present.inPresentTriggered = false;
 
+        Object.Destroy(PresentTrigger);
         c.GetComponent<CameraMovement>().cutscene_mode = true;
         StartCoroutine(fadeIn());
 
@@ -123,6 +138,7 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
 
         PlayerController.isTravelling = true;
         Player.GetComponent<PlayerController>().TimeShift();
+        PlayerController.CanMove = false;
 
         while (PlayerController.isTravelling)
         {
@@ -137,6 +153,7 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
         ClockText.SetActive(true);
         Inventory.SetActive(true);
         PlayerController.CanMove = true;
+        PlayerController.inCutscene = false;
         Object.Destroy(gameObject);
 
     }
