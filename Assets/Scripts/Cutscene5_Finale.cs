@@ -24,7 +24,7 @@ public class Cutscene5_Finale : MonoBehaviour
     // Start is called before the first frame update
 
     public GameObject PresentTrigger;
-    public static bool goodEnding = true;
+    public static bool goodEnding = false;
 
     public static bool goodEndingTriggered;
 
