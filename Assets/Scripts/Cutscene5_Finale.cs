@@ -31,7 +31,8 @@ public class Cutscene5_Finale : MonoBehaviour
     public bool isActive;
     void Start()
     {
-        animator = Mother.GetComponent<Animator>();   
+        animator = Mother.GetComponent<Animator>();
+        goodEnding = false;
         goodEndingTriggered = false;
         baby = GetComponent<AudioSource>(); 
         isActive = false;
