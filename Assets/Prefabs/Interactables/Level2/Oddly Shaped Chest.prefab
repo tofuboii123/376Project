@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6323888923566340630}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.48, y: 36.75, z: 0}
-  m_LocalScale: {x: 0.15841506, y: 0.15841506, z: 0.15841506}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 27, y: 27, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 908013415
   m_SortingLayer: 6
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 03a3810a65ad8804588e4c473ba298c8, type: 3}
+  m_Sprite: {fileID: 5476465732459600056, guid: cdf393303ee91e14287d1ebf6ab915bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,18 +97,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.6888602, y: -0.2295798}
+  m_Offset: {x: -0.00087186694, y: -0.0014164634}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.53, y: 4.73}
+    oldSize: {x: 0.16, y: 0.13}
     newSize: {x: 5.53, y: 4.73}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.90772, y: 7.9447966}
+  m_Size: {x: 0.19428438, y: 0.18059862}
   m_EdgeRadius: 0
 --- !u!114 &1710896534985451144
 MonoBehaviour:
@@ -125,7 +125,7 @@ MonoBehaviour:
   itemID: 219
   interactTextString: Take chest
   combineName: Oddly Shaped Key
-  combinedObject: {fileID: 613267878175897469, guid: bb5032c6129d3ee49bcbdbbedce244cd, type: 3}
+  combinedObject: {fileID: 4909940392233426730, guid: b3a226f1131bc114fb306f2904ad6ecc, type: 3}
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.

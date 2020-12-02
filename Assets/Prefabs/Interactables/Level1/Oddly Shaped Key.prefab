@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 4059048617837278525}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 27, y: 27, z: 10.566358}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f54c7398bedd7fe48901bf99dd0d6f32, type: 3}
+  m_Sprite: {fileID: 8421650241873815529, guid: cdf393303ee91e14287d1ebf6ab915bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   itemID: 17
   interactTextString: 
   combineName: Oddly Shaped Chest
-  combinedObject: {fileID: 613267878175897469, guid: bb5032c6129d3ee49bcbdbbedce244cd, type: 3}
+  combinedObject: {fileID: 4909940392233426730, guid: b3a226f1131bc114fb306f2904ad6ecc, type: 3}
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.
