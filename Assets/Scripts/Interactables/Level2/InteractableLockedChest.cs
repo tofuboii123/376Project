@@ -6,6 +6,11 @@ public class InteractableLockedChest : Interactable
 {
     private static bool tookKey = false;
 
+    private void Start()
+    {
+        tookKey = false;
+    }
+
     public override void OnInteraction()
     {
         if (InteractableRadio.heardNumbers)

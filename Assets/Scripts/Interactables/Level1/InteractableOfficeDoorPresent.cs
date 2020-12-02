@@ -12,6 +12,11 @@ public class InteractableOfficeDoorPresent : Interactable
     public static bool rustIsApplied = false;
     private bool firstMessageShown = false;
 
+    private void Start()
+    {
+        rustIsApplied = false;
+    }
+
     public override void OnInteraction()
     {
         if (rustIsApplied)

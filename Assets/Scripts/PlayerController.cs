@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     public bool inPast = false;
-    private bool isSafeSpot;
-    private int numOfTries;
 
     Vector2 telePosition;
     [SerializeField]
@@ -53,9 +51,6 @@ public class PlayerController : MonoBehaviour
         volume.profile.TryGetSettings(out depthOfField);
         volume.profile.TryGetSettings(out colorGrading);
         volume.profile.TryGetSettings(out chromaticAberration);
-
-        isSafeSpot = true;
-        numOfTries = 0;
 
         CanMove = true;
         inCutscene = false;
@@ -226,7 +221,6 @@ public IEnumerator ClockNotWorking() {
 
         if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
         {
-            isSafeSpot = false;
             /*
             RaycastHit2D hit = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
 

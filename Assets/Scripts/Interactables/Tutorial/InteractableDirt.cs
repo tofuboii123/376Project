@@ -5,8 +5,6 @@ using UnityEngine;
 public class InteractableDirt : Interactable
 {
     [SerializeField]
-    string keyItemName = "Plant";
-    [SerializeField]
     GameObject tree;
 
     private void Start() {

@@ -7,6 +7,12 @@ public class InteractableGrandfatherClock : Interactable
     private static bool isDoorUnlocked = false;
     private static bool collectedItems = false;
 
+    private void Start()
+    {
+        isDoorUnlocked = false;
+        collectedItems = false;
+    }
+
     public override void OnInteraction()
     {
         if (isDoorUnlocked)
