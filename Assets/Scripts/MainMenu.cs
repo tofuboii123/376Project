@@ -25,6 +25,14 @@ public class MainMenu : MonoBehaviour {
         StartCoroutine(S());
     }
 
+    public void Help() {
+        Debug.Log("HELP");
+    }
+
+    public void Demo() {
+        Debug.Log("DEMO");
+    }
+
     public void QuitGame() {
         #if UNITY_EDITOR
             // Application.Quit() does not work in the editor so
