@@ -1,5 +1,5 @@
 @ITEM 1
-#ItemName: Plant 1
+#ItemName: Plant
 #Description: Description here
 @ENDITEM
 @ITEM 11
@@ -39,7 +39,7 @@
 #Description: Oh, this looks like the other half.
 @ENDITEM
 @ITEM 23
-#ItemName: Bedroom B Key
+#ItemName: Bedroom Key
 #Description: Now it’s a full key!
 @ENDITEM
 @ITEM 24
@@ -55,7 +55,7 @@
 #Description: Great for unjamming things.
 @ENDITEM
 @ITEM 27
-#ItemName: Bedroom A Key
+#ItemName: Bedroom Key
 #Description: Another key means another lock.
 @ENDITEM
 @ITEM 28
