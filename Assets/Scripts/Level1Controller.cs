@@ -8,6 +8,8 @@ public class Level1Controller : MonoBehaviour
 {
     public Image img;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +44,13 @@ public class Level1Controller : MonoBehaviour
             Face.Thinking
         });
 
-
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
+
+        GetAudioManager();
+        audioManager.Play("Open Door");
 
         for (float i = 0; i <= 3; i += Time.deltaTime)
         {
@@ -56,5 +60,11 @@ public class Level1Controller : MonoBehaviour
         }
 
         SceneManager.LoadScene("Level2");
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

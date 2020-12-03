@@ -21,32 +21,24 @@ public class Cutscene3_Birth : MonoBehaviour
     //Camera 
     public Camera c;
 
-    AudioSource baby;
+    //Audio
+    private AudioManager audioManager;
 
     public GameObject PresentTrigger;
+
     // Start is called before the first frame update
     void Start()
     {
-        baby = GetComponent<AudioSource>(); 
         isActive = false;
-
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag.CompareTo("Player") == 0) {
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag.CompareTo("Player") == 0)
-        {
-           
-            if(!isActive){
-            StartCoroutine(Cutscene_Start());
-            isActive = true;
-           }
+            if (!isActive) {
+                StartCoroutine(Cutscene_Start());
+                isActive = true;
+            }
 
         }
     }
@@ -63,6 +55,9 @@ public class Cutscene3_Birth : MonoBehaviour
 
         PlayerController.CanMove = false;
         Cutscene_Present.inPresentTriggered = false;
+
+        GetAudioManager();
+        audioManager.Play("Cutscene Start");
 
         Object.Destroy(PresentTrigger);
         c.GetComponent<CameraMovement>().cutscene_mode = true;
@@ -91,7 +86,8 @@ public class Cutscene3_Birth : MonoBehaviour
             yield return null;
         }
 
-        baby.Play();
+        GetAudioManager();
+        audioManager.Play("Baby Crying");
 
         yield return new WaitForSeconds(2.5f);
 
@@ -114,8 +110,7 @@ public class Cutscene3_Birth : MonoBehaviour
 
         }
 
-
-        baby.Stop();
+        audioManager.StopFadeOut("Baby Crying", 0.5f);
 
         c.GetComponent<CameraMovement>().cutscene_mode = false;
 
@@ -165,7 +160,9 @@ public class Cutscene3_Birth : MonoBehaviour
         }
 
     }
-
-
-  
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
+    }
 }

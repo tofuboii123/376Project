@@ -20,8 +20,8 @@ public class Cutscene5_Finale : MonoBehaviour
     public Camera c;
     public Animator animator;
 
-    AudioSource baby;
-    // Start is called before the first frame update
+    //Audio
+    private AudioManager audioManager;
 
     public GameObject PresentTrigger;
     public static bool goodEnding = false;
@@ -33,14 +33,7 @@ public class Cutscene5_Finale : MonoBehaviour
     {
         animator = Mother.GetComponent<Animator>();   
         goodEndingTriggered = false;
-        baby = GetComponent<AudioSource>(); 
         isActive = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,7 +56,11 @@ public class Cutscene5_Finale : MonoBehaviour
                 yield return null;
             }
         }
+
         Cutscene_Present.inPresentTriggered = false;
+
+        GetAudioManager();
+        audioManager.Play("Cutscene Start");
 
         Object.Destroy(PresentTrigger);
         c.GetComponent<CameraMovement>().cutscene_mode = true;
@@ -81,7 +78,9 @@ public class Cutscene5_Finale : MonoBehaviour
         animator.SetFloat("Vertical", 0);
         animator.SetFloat("Horizontal", -1);        
         animator.SetFloat("Speed", 2.5f);
-        baby.Play();
+
+        GetAudioManager();
+        audioManager.Play("Baby Crying");
 
         while ((c.transform.position.y < 168.9 || c.transform.position.x > -166.1) || (Mother.transform.position.x > -168.97 || Mother.transform.position.y<170.2 ))
         {
@@ -140,7 +139,9 @@ public class Cutscene5_Finale : MonoBehaviour
         {
             yield return null;
         }
-        baby.Stop();
+
+        GetAudioManager();
+        audioManager.StopFadeOut("Baby Crying", 0.5f);
 
         //insert killing animation here
         yield return new WaitForSeconds(1.5f);
@@ -290,11 +291,9 @@ public class Cutscene5_Finale : MonoBehaviour
         }
 
     }
- IEnumerator fadeInBlack()
-    {
+    IEnumerator fadeInBlack() {
 
-        for (float i = 0; i <= 1; i += Time.deltaTime)
-        {
+        for (float i = 0; i <= 1; i += Time.deltaTime) {
             // set color with i as alpha
             black.color = new Color(0, 0, 0, i);
             yield return null;
@@ -302,5 +301,9 @@ public class Cutscene5_Finale : MonoBehaviour
 
     }
 
-  
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
+    }
 }

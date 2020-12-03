@@ -12,6 +12,8 @@ public class InteractableOfficeDoorPresent : Interactable
     public static bool rustIsApplied = false;
     private bool firstMessageShown = false;
 
+    private AudioManager audioManager;
+
     public override void OnInteraction()
     {
         if (rustIsApplied)
@@ -45,6 +47,9 @@ public class InteractableOfficeDoorPresent : Interactable
 
         PlayerController.CanMove = false;
 
+        GetAudioManager();
+        audioManager.Play("Open Door");
+
         for (float i = 0; i <= 1; i += Time.deltaTime * 2)
         {
             // set color with i as alpha
@@ -63,5 +68,11 @@ public class InteractableOfficeDoorPresent : Interactable
         img.color = new Color(0, 0, 0, 0);
         PlayerController.CanMove = true;
 
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

@@ -130,14 +130,28 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Menu Open
     clip: {fileID: 8300000, guid: 3f37c11479fe4204daafdc261bcb5a87, type: 3}
-    volume: 1
+    volume: 0.6
     pitch: 1
     playOnAwake: 0
     loop: 0
     source: {fileID: 0}
   - name: Menu Close
     clip: {fileID: 8300000, guid: 766470e39d393a843bea9c75fc864b48, type: 3}
-    volume: 1
+    volume: 0.6
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Open Door
+    clip: {fileID: 8300000, guid: e8d753a286661ad43b969a2eed7f1572, type: 3}
+    volume: 0.3
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Baby Crying
+    clip: {fileID: 8300000, guid: 0474c165da1aa0746846baf60f2b367d, type: 3}
+    volume: 0.6
     pitch: 1
     playOnAwake: 0
     loop: 0

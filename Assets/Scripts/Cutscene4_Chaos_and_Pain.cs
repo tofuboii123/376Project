@@ -25,6 +25,8 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
     public GameObject PresentTrigger;
     public bool isActive;
 
+    //Audio
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +65,9 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
         }
         PlayerController.CanMove = false;
         Cutscene_Present.inPresentTriggered = false;
+
+        GetAudioManager();
+        audioManager.Play("Cutscene Start");
 
         Object.Destroy(PresentTrigger);
         c.GetComponent<CameraMovement>().cutscene_mode = true;
@@ -182,5 +187,11 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

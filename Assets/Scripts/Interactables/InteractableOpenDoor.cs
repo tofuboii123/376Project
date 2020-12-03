@@ -14,6 +14,8 @@ public class InteractableOpenDoor : Interactable
     public int requiredItemID = 0;
     public GameObject alsoUnlock = null;
 
+    private AudioManager audioManager;
+
     public override void OnInteraction()
     {
         // if no item is required
@@ -52,8 +54,10 @@ public class InteractableOpenDoor : Interactable
 
     IEnumerator Transition()
     {
-
         PlayerController.CanMove = false;
+
+        GetAudioManager();
+        audioManager.Play("Open Door");
 
         for (float i = 0; i <= 1; i += Time.deltaTime * 2)
         {
@@ -75,4 +79,9 @@ public class InteractableOpenDoor : Interactable
 
     }
 
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
+    }
 }

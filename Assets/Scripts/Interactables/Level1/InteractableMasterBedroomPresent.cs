@@ -11,6 +11,8 @@ public class InteractableMasterBedroomPresent : Interactable
     
     private bool doorIsBroken = false;
 
+    private AudioManager audioManager;
+
     public override void OnInteraction()
     {
         if (InteractableBreakableWindow.windowIsBroken)
@@ -44,6 +46,9 @@ public class InteractableMasterBedroomPresent : Interactable
 
         PlayerController.CanMove = false;
 
+        GetAudioManager();
+        audioManager.Play("Open Door");
+
         for (float i = 0; i <= 1; i += Time.deltaTime * 2)
         {
             // set color with i as alpha
@@ -62,5 +67,11 @@ public class InteractableMasterBedroomPresent : Interactable
         img.color = new Color(0, 0, 0, 0);
         PlayerController.CanMove = true;
 
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }
