@@ -30,6 +30,8 @@ public class FullScreenInventory : MonoBehaviour {
 
     private CanvasGroup canvasGroup;
 
+    private AudioManager audioManager;
+
     void Start() {
         volume.profile.TryGetSettings(out depthOfField);
 
@@ -54,6 +56,9 @@ public class FullScreenInventory : MonoBehaviour {
     public static void startFullScreenInventory() {
         inMenu = true;
 
+        instance.GetAudioManager();
+        instance.audioManager.Play("Menu Open");
+
         instance.canvasGroup.alpha = 1;
         instance.canvasGroup.interactable = true;
         instance.canvasGroup.blocksRaycasts = true;
@@ -64,6 +69,9 @@ public class FullScreenInventory : MonoBehaviour {
 
     public static void exitFullScreenInventory() {
         inMenu = false;
+
+        instance.GetAudioManager();
+        instance.audioManager.Play("Menu Close");
 
         instance.animator.SetTrigger("Exit");
         instance.StartCoroutine(instance.onExitFullScreenInventory());
@@ -127,5 +135,11 @@ public class FullScreenInventory : MonoBehaviour {
         #else
             Application.Quit();
         #endif
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

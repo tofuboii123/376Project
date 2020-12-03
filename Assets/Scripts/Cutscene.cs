@@ -8,16 +8,13 @@ public class Cutscene : MonoBehaviour
 {
     public Image img;
     public GameObject car;
+
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(Cutscene_Start());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     IEnumerator Cutscene_Start()
@@ -42,14 +39,26 @@ public class Cutscene : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.0f);
 
+        GetAudioManager();
+        audioManager.PlayFadeIn("Car Driving", 1.5f);
+
+        bool isFadingOutSound = false;
         while (car.transform.position.x > -1.7)
         {
             car.transform.Translate(-Time.deltaTime*4, 0, 0);
-            yield return null;
 
+            if (car.transform.position.x <= 2.5f) {
+                if (!isFadingOutSound) {
+                    isFadingOutSound = true;
+                    audioManager.StopFadeOut("Car Driving", 3.1f);
+                }
+            }
+
+            yield return null;
         }
+
         car.GetComponent<Animator>().speed = 0;
         yield return new WaitForSeconds(0.3f);
 
@@ -104,6 +113,12 @@ public class Cutscene : MonoBehaviour
             // set color with i as alpha
             img.color = new Color(0, 0, 0, i);
             yield return null;
+        }
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
         }
     }
 }

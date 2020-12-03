@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
     public Sound[] sounds;
+    private Dictionary<string, Sound> soundsList;
 
     public static AudioManager instance;
-
-    private Dictionary<string, Sound> soundsList;
 
     void Awake() {
         if (instance == null) {

@@ -22,17 +22,9 @@ public class Cutscene2_Happy_Family : MonoBehaviour
 
     //Camera 
     public Camera c;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //Audio
+    private AudioManager audioManager;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,6 +42,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
 
     IEnumerator Cutscene_Start()
     {
+
         PlayerController.inCutscene = true;
         if (Cutscene_Present.inPresentTriggered){
             while(PlayerController.isTravelling == true){
@@ -64,6 +57,10 @@ public class Cutscene2_Happy_Family : MonoBehaviour
 
         c.GetComponent<CameraMovement>().cutscene_mode = true;
         PlayerController.CanMove = false;
+
+        GetAudioManager();
+        audioManager.Play("Cutscene Start");
+
         StartCoroutine(fadeIn());
 
         yield return new WaitForSeconds(0.1f);
@@ -168,5 +165,11 @@ public class Cutscene2_Happy_Family : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

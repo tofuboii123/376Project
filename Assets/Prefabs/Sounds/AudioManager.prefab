@@ -109,6 +109,34 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Typewriter
     clip: {fileID: 8300000, guid: 95ddc17b86f572841afbf30aa722c472, type: 3}
+    volume: 0.8
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Car Driving
+    clip: {fileID: 8300000, guid: 33f6939f6c534ef438210a3713da81fe, type: 3}
+    volume: 0.1
+    pitch: 1
+    playOnAwake: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Cutscene Start
+    clip: {fileID: 8300000, guid: 28ecf490c7f61f047a58b429fe397235, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Menu Open
+    clip: {fileID: 8300000, guid: 3f37c11479fe4204daafdc261bcb5a87, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Menu Close
+    clip: {fileID: 8300000, guid: 766470e39d393a843bea9c75fc864b48, type: 3}
     volume: 1
     pitch: 1
     playOnAwake: 0

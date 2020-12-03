@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour {
     public void PlayGame() {
         GetAudioManager();
         audioManager.Play("Mouse Click");
-        audioManager.StopFadeOut("Main Menu Music", 1.0f);
+        audioManager.StopFadeOut("Main Menu Music", 2.0f);
 
         StartCoroutine(StartGame());
     }
@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviour {
     public void Demo() {
         GetAudioManager();
         audioManager.Play("Mouse Click");
-        //audioManager.StopFadeOut("Main Menu Music", 1.0f);
+        audioManager.StopFadeOut("Main Menu Music", 2.0f);
 
         Debug.Log("DEMO");
     }
@@ -52,7 +52,7 @@ public class MainMenu : MonoBehaviour {
     public void QuitGame() {
         GetAudioManager();
         audioManager.Play("Mouse Click");
-        audioManager.StopFadeOut("Main Menu Music", 5.0f);
+        audioManager.Stop("Main Menu Music");
 
         #if UNITY_EDITOR
             // Application.Quit() does not work in the editor so

@@ -61,7 +61,7 @@ public class TutorialController : MonoBehaviour
         }
 
         GetAudioManager();
-        audioManager.Play("Climb Tree");
+        audioManager.PlayFadeIn("Climb Tree", 0.5f);
 
         for (float i = 0; i <= 3; i += Time.deltaTime)
         {
@@ -70,12 +70,11 @@ public class TutorialController : MonoBehaviour
             yield return null;
         }
 
-        audioManager.StopFadeOut("Climb Tree", 1.0f);
+        audioManager.StopFadeOut("Climb Tree", 1.5f);
 
         firstAppreance = false;
         SceneManager.LoadScene("Level1");
     }
-
     
     public IEnumerator GameEnd()
     {
