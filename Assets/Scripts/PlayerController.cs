@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
         volume.profile.TryGetSettings(out colorGrading);
         volume.profile.TryGetSettings(out chromaticAberration);
 
+        bloom.active = false;
+        lensDistortion.active = false;
+        depthOfField.active = false;
+        colorGrading.active = false;
+        chromaticAberration.active = false;
+
         isSafeSpot = true;
         numOfTries = 0;
 
@@ -173,6 +179,11 @@ public class PlayerController : MonoBehaviour
     public IEnumerator StartPostProcessingEffect() {
         float timer;
 
+        bloom.active = true;
+        lensDistortion.active = true;
+        depthOfField.active = true;
+        chromaticAberration.active = true;
+
         MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
 
         timer = 0.0f;
@@ -200,6 +211,7 @@ public class PlayerController : MonoBehaviour
         if (inPast)
         {
             colorGrading.active = true;
+
             colorGrading.mixerBlueOutGreenIn.value = 50;
             colorGrading.mixerBlueOutBlueIn.value = 50;
             colorGrading.mixerBlueOutRedIn.value = 50;
@@ -207,6 +219,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             colorGrading.active = false;
+
             colorGrading.mixerBlueOutGreenIn.value = 0;
             colorGrading.mixerBlueOutBlueIn.value = 0;
             colorGrading.mixerBlueOutRedIn.value = 0;
@@ -224,6 +237,13 @@ public class PlayerController : MonoBehaviour
             }
 
             yield return null;
+        }
+
+        bloom.active = false;
+        lensDistortion.active = false;
+        depthOfField.active = false;
+        if (!inPast) {
+            chromaticAberration.active = false;
         }
 
         CanMove = true;
