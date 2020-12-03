@@ -43,7 +43,10 @@ public class PlayerController : MonoBehaviour
     private ColorGrading colorGrading;
     private ChromaticAberration chromaticAberration;
 
+    private AudioManager audioManager;
+
     private float canFullScreenInventory;
+    private float canPlayWalkSoundAgain;
 
     void Start()
     {
@@ -61,6 +64,9 @@ public class PlayerController : MonoBehaviour
         inCutscene = false;
         isTravelling = false;
         timeIndicator.text = "Present";
+
+        audioManager = FindObjectOfType<AudioManager>();
+        canPlayWalkSoundAgain = -1;
     }
 
     // Update is called once per frame
@@ -94,11 +100,11 @@ public class PlayerController : MonoBehaviour
         if (CanMove) {
             // Time travel.
             if (Input.GetButtonDown("TimeShift")) {
-                if (!Cutscene5_Finale.goodEndingTriggered){
-                TimeShift();
-                }else{
-                StartCoroutine(ClockNotWorking());
-                };
+                if (!Cutscene5_Finale.goodEndingTriggered) {
+                    TimeShift();
+                } else {
+                    StartCoroutine(ClockNotWorking());
+                }
             }
         } else {
             animator.SetFloat("Speed", 0);
@@ -122,6 +128,14 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
+
+            if (Time.time >= canPlayWalkSoundAgain) {
+                canPlayWalkSoundAgain = Time.time + 0.42f;
+
+                GetAudioManager();
+                string walkingSound = (Random.Range(0.0f, 1.0f) < 0.5f ? "Walking 1" : "Walking 2");
+                audioManager.PlayIfNotPlaying(walkingSound);
+            }
         }
 
         animator.SetFloat("Speed", movement.sqrMagnitude);
@@ -137,8 +151,17 @@ public class PlayerController : MonoBehaviour
         // Boolean switch
         inPast = !inPast;
 
-        // HUD element
-        // TODO change for cool animation
+        GetAudioManager();
+        string soundToPlay;
+        if (inPast) {
+            soundToPlay = "Time Travel To Past";
+            audioManager.PlayFadeIn("In Past", 1.0f);
+        } else {
+            soundToPlay = "Time Travel To Present";
+            audioManager.StopFadeOut("In Past", 1.0f);
+        }
+
+        audioManager.Play(soundToPlay);
         
         Clock.TimeTravel();
         timeIndicator.text = inPast ? "Past" : "Present";
@@ -208,16 +231,16 @@ public class PlayerController : MonoBehaviour
         //is set to true from whichever script that cares if the player is travelling
         isTravelling = false;
     }
-public IEnumerator ClockNotWorking() {
+    public IEnumerator ClockNotWorking() {
 
-    CanMove = false;
-     MessageController.ShowMessage(new string[] { "???\nThe watch seems to have stopped working.."});
-        while (MessageController.showMessage > 0)
-        {
+        CanMove = false;
+        MessageController.ShowMessage(new string[] { "???\nThe watch seems to have stopped working.." });
+        while (MessageController.showMessage > 0) {
             yield return null;
         }
         CanMove = true;
-}
+    }
+
     //just a major WIP, please ignore
     Vector3 checkTeleportPosition()
     {
@@ -268,4 +291,9 @@ public IEnumerator ClockNotWorking() {
         return telePosition;
     }
 
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
+    }
 }

@@ -32,24 +32,49 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void Play(string name) {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = FindSoundByName(name);
         if (s == null) {
-            Debug.LogWarning("Sound: " + name + " not found!");
             return;
         }
 
+        s.source.volume = s.volume;
         s.source.Play();
     }
 
-    public void Stop(string name) {
-        Sound s = Array.Find(sounds, item => item.name == name);
+    public void PlayIfNotPlaying(string name) {
+        Sound s = FindSoundByName(name);
         if (s == null) {
-            Debug.LogWarning("Sound: " + base.name + " not found!");
             return;
         }
 
-        //s.source.volume = s.volume * (1f + UnityEngine.Random.Range(-s.volumeVariance / 2f, s.volumeVariance / 2f));
-        //s.source.pitch = s.pitch * (1f + UnityEngine.Random.Range(-s.pitchVariance / 2f, s.pitchVariance / 2f));
+        if (s.source.isPlaying) {
+            return;
+        }
+
+        s.source.volume = s.volume;
+        s.source.Play();
+    }
+
+    public void PlayFadeIn(string name) {
+        PlayFadeIn(name, 1.0f);
+    }
+
+    public void PlayFadeIn(string name, float secondsToFadeIn) {
+        Sound s = FindSoundByName(name);
+        if (s == null) {
+            return;
+        }
+
+        AudioSource audioSource = s.source;
+        float targetVolume = s.volume;
+        StartCoroutine(FadeIn(audioSource, secondsToFadeIn, targetVolume));
+    }
+
+    public void Stop(string name) {
+        Sound s = FindSoundByName(name);
+        if (s == null) {
+            return;
+        }
 
         s.source.Stop();
     }
@@ -59,9 +84,8 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void StopFadeOut(string name, float secondsToFadeOut) {
-        Sound s = Array.Find(sounds, item => item.name == name);
+        Sound s = FindSoundByName(name);
         if (s == null) {
-            Debug.LogWarning("Sound: " + base.name + " not found!");
             return;
         }
 
@@ -71,9 +95,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     IEnumerator FadeOut(float startingVolume, AudioSource audioSource, float secondsToFadeOut) {
-        float timer;
-
-        timer = 0.0f;
+        float timer = 0.0f;
         while (timer < secondsToFadeOut) {
             timer += Time.deltaTime;
 
@@ -83,5 +105,30 @@ public class AudioManager : MonoBehaviour {
 
         audioSource.volume = 0;
         audioSource.Stop();
+    }
+
+    IEnumerator FadeIn(AudioSource audioSource, float secondsToFadeIn, float targetVolume) {
+        audioSource.volume = 0.0f;
+        audioSource.Play();
+
+        float timer = 0.0f;
+        while (timer < secondsToFadeIn) {
+            timer += Time.deltaTime;
+
+            audioSource.volume = Mathf.Lerp(0.0f, targetVolume, timer / secondsToFadeIn);
+            yield return null;
+        }
+
+        audioSource.volume = targetVolume;
+    }
+
+    private Sound FindSoundByName(string name) {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null) {
+            Debug.LogWarning("Sound: " + name + " not found!");
+            return null;
+        }
+
+        return s;
     }
 }

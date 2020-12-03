@@ -14,13 +14,15 @@ public class TutorialController : MonoBehaviour
     public Animator animator;
     public GameObject Player;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        if(firstAppreance){
-        StartCoroutine(LevelStart());
-        } else{
-            Player.transform.position = new Vector3(0.1f,-5.19f,Player.transform.position.z);
+        if (firstAppreance) {
+            StartCoroutine(LevelStart());
+        } else {
+            Player.transform.position = new Vector3(0.1f, -5.19f, Player.transform.position.z);
             plant.SetActive(false);
             tree.GetComponent<InteractableTree>().interactTextString = "Bury Sabrina";
         }
@@ -54,17 +56,22 @@ public class TutorialController : MonoBehaviour
             Face.Thinking
         });
 
-
         while (MessageController.showMessage > 0) {
             yield return null;
         }
-        
+
+        GetAudioManager();
+        audioManager.Play("Climb Tree");
+
         for (float i = 0; i <= 3; i += Time.deltaTime)
         {
             // set color with i as alpha
             img.color = new Color(0, 0, 0, i);
             yield return null;
         }
+
+        audioManager.StopFadeOut("Climb Tree", 1.0f);
+
         firstAppreance = false;
         SceneManager.LoadScene("Level1");
     }
@@ -110,5 +117,11 @@ public class TutorialController : MonoBehaviour
         PlayerController.inCutscene = false;
 
         
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

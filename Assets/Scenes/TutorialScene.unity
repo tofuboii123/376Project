@@ -22008,6 +22008,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 588575588446527572, guid: 934d0393a7677534cb19b6e4f7a5a9fe, type: 3}
+      propertyPath: sounds.Array.data[9].volume
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 588575588446527573, guid: 934d0393a7677534cb19b6e4f7a5a9fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 571.8269
@@ -22158,7 +22162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -23771,7 +23775,7 @@ PrefabInstance:
     - target: {fileID: 7948647900779527850, guid: 532bb6a3abafa064fbb92117501a6512, type: 3}
       propertyPath: audio
       value: 
-      objectReference: {fileID: 1312153974}
+      objectReference: {fileID: 0}
     - target: {fileID: 7948647900779527850, guid: 532bb6a3abafa064fbb92117501a6512, type: 3}
       propertyPath: face
       value: 
@@ -23810,7 +23814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7948647900779527851, guid: 532bb6a3abafa064fbb92117501a6512, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7948647900779527851, guid: 532bb6a3abafa064fbb92117501a6512, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -65526,11 +65530,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 9176226280421329901, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
   m_PrefabInstance: {fileID: 1859175468}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &1312153974 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 9176226280421329897, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
-  m_PrefabInstance: {fileID: 1859175468}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1378208392 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6251363696530658260, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
@@ -65621,7 +65620,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1449752949
 MonoBehaviour:
@@ -65710,7 +65709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4684393574480199448, guid: 8c7586aeefc2a9b449f7fd43b5877ae8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

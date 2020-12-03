@@ -22,12 +22,12 @@ public class MainMenu : MonoBehaviour {
         depthOfField.focalLength.value = 80.0f;
         bloom.intensity.value = 10.0f;
 
-        audioManager = FindObjectOfType<AudioManager>();
-
+        GetAudioManager();
         audioManager.Play("Main Menu Music");
     }
 
     public void PlayGame() {
+        GetAudioManager();
         audioManager.Play("Mouse Click");
         audioManager.StopFadeOut("Main Menu Music", 1.0f);
 
@@ -35,12 +35,14 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Help() {
+        GetAudioManager();
         audioManager.Play("Mouse Click");
 
         Debug.Log("HELP");
     }
 
     public void Demo() {
+        GetAudioManager();
         audioManager.Play("Mouse Click");
         //audioManager.StopFadeOut("Main Menu Music", 1.0f);
 
@@ -48,6 +50,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void QuitGame() {
+        GetAudioManager();
         audioManager.Play("Mouse Click");
         audioManager.StopFadeOut("Main Menu Music", 5.0f);
 
@@ -61,6 +64,7 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void onMyPointerEnter() {
+        GetAudioManager();
         audioManager.Play("Mouse Hover");
     }
 
@@ -77,5 +81,11 @@ public class MainMenu : MonoBehaviour {
         }
 
         SceneManager.LoadScene("Cutscene");
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

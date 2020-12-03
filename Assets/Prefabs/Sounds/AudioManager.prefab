@@ -65,3 +65,52 @@ MonoBehaviour:
     playOnAwake: 0
     loop: 1
     source: {fileID: 0}
+  - name: Time Travel To Past
+    clip: {fileID: 8300000, guid: 8d0dfd78a40d56d46990df0ee8bc3870, type: 3}
+    volume: 0.7
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Time Travel To Present
+    clip: {fileID: 8300000, guid: 14830fb11657e0b4789d10a158956299, type: 3}
+    volume: 0.7
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: In Past
+    clip: {fileID: 8300000, guid: 45467c7faa51abb4b937464eaff7d99d, type: 3}
+    volume: 0.15
+    pitch: 1
+    playOnAwake: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Walking 1
+    clip: {fileID: 8300000, guid: b24def78dd4c6164bac60f60e2b0926d, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Walking 2
+    clip: {fileID: 8300000, guid: 66ca33a3d294d2e4d9eff1a06c6ea71c, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Climb Tree
+    clip: {fileID: 8300000, guid: 9922091b3995ffb4c878054c8cc0e840, type: 3}
+    volume: 0.2
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Typewriter
+    clip: {fileID: 8300000, guid: 95ddc17b86f572841afbf30aa722c472, type: 3}
+    volume: 1
+    pitch: 1
+    playOnAwake: 0
+    loop: 0
+    source: {fileID: 0}

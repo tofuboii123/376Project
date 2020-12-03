@@ -17,7 +17,7 @@ public class MessageController : MonoBehaviour
     public GameObject messageBox;
     public GameObject messageText;
     public GameObject closeMessageText;
-    public new AudioSource audio;
+    //public new AudioSource audio;
     public Sprite[] faceSprites = new Sprite[5];
     public Image face;
     
@@ -33,12 +33,13 @@ public class MessageController : MonoBehaviour
     private string currentText = "";
     private static bool skipText = false;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         messageBox.SetActive(false);
         closeMessageText.SetActive(false);
-        audio.GetComponent<AudioSource>();
         face.GetComponent<SpriteRenderer>();
         showMessage = 0;
     }
@@ -123,6 +124,9 @@ public class MessageController : MonoBehaviour
 
     private IEnumerator ShowText()
     {
+        Text messageTextComponent = messageText.GetComponent<Text>();
+        GetAudioManager();
+
         textIsTyping = true;
         textFinishedTyping = false;
         for(int i = 0; i < textToShow.Length; i++)
@@ -130,15 +134,17 @@ public class MessageController : MonoBehaviour
             // skip text typing
             if (skipText)
             {
-                messageText.GetComponent<Text>().text = textToShow;
+                messageTextComponent.text = textToShow;
                 break;
             }
 
             // only play typewriter sound for every other character
-            if(i % 3 == 0)
-                audio.Play();
+            if (i % 3 == 0) {
+                audioManager.Play("Typewriter");
+            }
+
             currentText = textToShow.Substring(0, i + 1);
-            messageText.GetComponent<Text>().text = currentText;
+            messageTextComponent.text = currentText;
 
             // add short pause after periods, except the last period
             if (i-1 >= 0 && textToShow[i - 1].Equals('.'))
@@ -162,4 +168,9 @@ public class MessageController : MonoBehaviour
         skipText = false;
     }
 
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
+    }
 }
