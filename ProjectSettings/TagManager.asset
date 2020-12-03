@@ -7,7 +7,6 @@ TagManager:
   - Collectible
   - PlayerItemCollider
   - BreakableWindow
-  - ItemDescriptions
   layers:
   - Default
   - TransparentFX

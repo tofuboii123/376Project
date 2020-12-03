@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8852479222370621212}
   - component: {fileID: 8852479222370621211}
-  - component: {fileID: 8852479222370621213}
   m_Layer: 0
   m_Name: Item Descriptions
-  m_TagString: ItemDescriptions
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,16 +43,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe05640030fec94aaf7643ddcba2cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8852479222370621213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8852479222370621210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d22a5e7b3a861ca4f84356503e8444e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagName: ItemDescriptions

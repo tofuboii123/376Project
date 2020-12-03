@@ -23,7 +23,18 @@ public class ItemInformation {
 public class ItemDescriptions : MonoBehaviour {
     private static Dictionary<int, ItemInformation> items;
 
-    void Start() {
+    public static ItemDescriptions instance;
+
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+
         items = new Dictionary<int, ItemInformation>();
 
         string readFromFilePath = Application.streamingAssetsPath + "/Items/ItemInformation.txt";

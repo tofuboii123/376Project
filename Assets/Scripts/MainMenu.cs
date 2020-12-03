@@ -12,6 +12,8 @@ public class MainMenu : MonoBehaviour {
 
     public Image image;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start() {
         volume.profile.TryGetSettings(out depthOfField);
@@ -19,21 +21,36 @@ public class MainMenu : MonoBehaviour {
 
         depthOfField.focalLength.value = 80.0f;
         bloom.intensity.value = 10.0f;
+
+        audioManager = FindObjectOfType<AudioManager>();
+
+        audioManager.Play("Main Menu Music");
     }
 
-    public void StartGame() {
-        StartCoroutine(S());
+    public void PlayGame() {
+        audioManager.Play("Mouse Click");
+        audioManager.StopFadeOut("Main Menu Music", 1.0f);
+
+        StartCoroutine(StartGame());
     }
 
     public void Help() {
+        audioManager.Play("Mouse Click");
+
         Debug.Log("HELP");
     }
 
     public void Demo() {
+        audioManager.Play("Mouse Click");
+        //audioManager.StopFadeOut("Main Menu Music", 1.0f);
+
         Debug.Log("DEMO");
     }
 
     public void QuitGame() {
+        audioManager.Play("Mouse Click");
+        audioManager.StopFadeOut("Main Menu Music", 5.0f);
+
         #if UNITY_EDITOR
             // Application.Quit() does not work in the editor so
             // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
@@ -43,8 +60,11 @@ public class MainMenu : MonoBehaviour {
         #endif
     }
 
+    public void onMyPointerEnter() {
+        audioManager.Play("Mouse Hover");
+    }
 
-    IEnumerator S() {
+    IEnumerator StartGame() {
         float timer;
 
         timer = 0.0f;
