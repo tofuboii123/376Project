@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour {
     public Sound[] sounds;
     private Dictionary<string, Sound> soundsList;
 
+    public bool disableAllSounds;
+
     public static AudioManager instance;
 
     void Awake() {
@@ -75,6 +77,24 @@ public class AudioManager : MonoBehaviour {
         StartCoroutine(FadeIn(audioSource, secondsToFadeIn, targetVolume));
     }
 
+    public void Pause(string name) {
+        Sound s = FindSoundByName(name);
+        if (s == null) {
+            return;
+        }
+
+        s.source.Pause();
+    }
+
+    public void UnPause(string name) {
+        Sound s = FindSoundByName(name);
+        if (s == null) {
+            return;
+        }
+
+        s.source.UnPause();
+    }
+
     public void Stop(string name) {
         Sound s = FindSoundByName(name);
         if (s == null) {
@@ -128,13 +148,19 @@ public class AudioManager : MonoBehaviour {
     }
 
     private Sound FindSoundByName(string name) {
-        Sound s = soundsList[name];
-        //Sound s = Array.Find(sounds, sound => sound.name == name);
-        if (s == null) {
-            Debug.LogWarning("Sound: " + name + " not found!");
+        if (soundsList == null) {
             return null;
         }
 
-        return s;
+        if (disableAllSounds) {
+            return null;
+        }
+
+        if (soundsList.ContainsKey(name)) {
+            return soundsList[name];
+        }
+
+        Debug.LogWarning("Sound: " + name + " not found!");
+        return null;
     }
 }
