@@ -1,4 +1,7 @@
-﻿using UnityEngine.Audio;
+﻿// Inspired by Brackeys video: https://www.youtube.com/watch?v=6OT43pvUyfY
+// Added functionality + optimized to use a Dictionary instead of array for playing sounds
+
+using UnityEngine.Audio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
