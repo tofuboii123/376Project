@@ -17,7 +17,11 @@ public class InteractableLevel2Exit : Interactable
 
     public override void OnInteraction()
     {
-        if (doorIsUnlocked)
+        if (inventory.ContainsItem(220))
+        {
+            MessageController.ShowMessage("There's nothing left for me to do in the basement.", Face.Thinking);
+        }
+        else if (doorIsUnlocked)
         {
             StartCoroutine(Transition());
         }

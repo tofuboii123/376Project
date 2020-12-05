@@ -17,11 +17,11 @@ public class MessageController : MonoBehaviour
     public GameObject messageBox;
     public GameObject messageText;
     public GameObject closeMessageText;
-    public new AudioSource audio;
+    public AudioSource audioPlayer;
     public Sprite[] faceSprites = new Sprite[5];
     public Image face;
     
-    private float typeDelay = 13.0f;
+    private float typeDelay = 0.015f;
     private static int faceIndex = 0;
     private static bool messageBoxActive = false;
     private static bool textIsTyping = false;
@@ -38,7 +38,7 @@ public class MessageController : MonoBehaviour
     {
         messageBox.SetActive(false);
         closeMessageText.SetActive(false);
-        audio.GetComponent<AudioSource>();
+        audioPlayer.GetComponent<AudioSource>();
         face.GetComponent<SpriteRenderer>();
         showMessage = 0;
     }
@@ -136,7 +136,7 @@ public class MessageController : MonoBehaviour
 
             // only play typewriter sound for every fifth character
             if(i % 5 == 0)
-                audio.Play();
+                audioPlayer.Play();
             currentText = textToShow.Substring(0, i + 1);
             messageText.GetComponent<Text>().text = currentText;
 
@@ -145,7 +145,7 @@ public class MessageController : MonoBehaviour
             {
                 yield return new WaitForSeconds(0.5f);
             }
-            yield return new WaitForSeconds(typeDelay * Time.deltaTime);
+            yield return new WaitForSecondsRealtime(typeDelay);
         }
         textFinishedTyping = true;
         closeMessageText.SetActive(true);
