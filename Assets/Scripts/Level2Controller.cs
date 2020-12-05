@@ -16,6 +16,7 @@ public class Level2Controller : MonoBehaviour
 
     IEnumerator LevelStart()
     {
+        PlayerController.CanMove = false;
         // loop over 1 second backwards
         for (float i = 2; i >= 0; i -= Time.deltaTime)
         {
@@ -36,6 +37,7 @@ public class Level2Controller : MonoBehaviour
             Face.None,
             Face.None
         });
+        PlayerController.CanMove = true;
     }
 
      public IEnumerator LevelEnd()

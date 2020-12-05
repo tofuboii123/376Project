@@ -33,6 +33,7 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator FadeOut()
     {
+        PlayerController.CanMove = false;
         // loop over 1 second backwards
         for (float i = 2; i >= 0; i -= Time.deltaTime)
         {
@@ -40,10 +41,12 @@ public class TutorialController : MonoBehaviour
             img.color = new Color(0, 0, 0, i);
             yield return null;
         }
+        PlayerController.CanMove = true;
     }
 
     IEnumerator LevelStart()
     {
+        PlayerController.CanMove = false;
         // loop over 1 second backwards
         for (float i = 2; i >= 0; i -= Time.deltaTime)
         {
@@ -58,6 +61,7 @@ public class TutorialController : MonoBehaviour
             Face.Thinking,
             Face.None
         });
+        PlayerController.CanMove = true;
     }
 
     public IEnumerator LevelEnd()
