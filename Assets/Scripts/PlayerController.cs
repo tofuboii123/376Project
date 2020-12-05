@@ -61,9 +61,6 @@ public class PlayerController : MonoBehaviour
         colorGrading.active = false;
         chromaticAberration.active = false;
 
-        isSafeSpot = true;
-        numOfTries = 0;
-
         CanMove = true;
         inCutscene = false;
         isTravelling = false;
