@@ -7,6 +7,11 @@ public class InteractableRadio : Interactable
     public static bool heardNumbers = false;
     private bool hasBattery = false;
 
+    private void Start()
+    {
+        heardNumbers = false;
+    }
+
     public override void OnInteraction()
     {
         if (hasBattery)

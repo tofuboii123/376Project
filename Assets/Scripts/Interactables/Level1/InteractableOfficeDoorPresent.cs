@@ -13,6 +13,11 @@ public class InteractableOfficeDoorPresent : Interactable
     private bool firstMessageShown = false;
 
     private AudioManager audioManager;
+    
+    private void Start()
+    {
+        rustIsApplied = false;
+    }
 
     public override void OnInteraction()
     {

@@ -164,6 +164,19 @@ public class Inventory : MonoBehaviour
         return items[selectedItemIndex] == itemID;
     }
 
+    public bool ContainsItem(int itemID)
+    {
+        foreach (int item in Inventory.items)
+        {
+            if (item == itemID)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     // Remove the item from the inventory.
     public void DiscardItem(int itemID) {
         int indexOfItem = items.IndexOf(itemID);

@@ -17,7 +17,7 @@ public abstract class Interactable : MonoBehaviour
 
     private bool messageShowing = false;
 
-    private void Start()
+    private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 

@@ -6,6 +6,11 @@ public class InteractableBreakableWindow : Interactable
 {
     public static bool windowIsBroken = false;
 
+    private void Start()
+    {
+        windowIsBroken = false;
+    }
+
     public override void OnInteraction()
     {
         if (inventory.ContainsSelectedItem(14))

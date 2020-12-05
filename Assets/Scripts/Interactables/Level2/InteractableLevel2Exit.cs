@@ -1,17 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractableLevel2Exit : Interactable
 {
+    public float DestX;
+    public float DestY;
+    public Image img;
     private static bool doorIsUnlocked = false;
+
+    private void Start()
+    {
+        doorIsUnlocked = false;
+    }
 
     public override void OnInteraction()
     {
-        if (doorIsUnlocked)
+        if (inventory.ContainsItem(220))
         {
-            interactTextString = "Enter basement";
-            print("load basement");
+            MessageController.ShowMessage("There's nothing left for me to do in the basement.", Face.Thinking);
+        }
+        else if (doorIsUnlocked)
+        {
+            StartCoroutine(Transition());
         }
         else
         {
@@ -19,6 +31,7 @@ public class InteractableLevel2Exit : Interactable
             {
                 doorIsUnlocked = true;
                 inventory.DiscardItem(215);
+                interactTextString = "Enter basement";
 
                 MessageController.ShowMessage(new string[] {
                     "I finally unlocked the door to the basement!",
@@ -39,5 +52,30 @@ public class InteractableLevel2Exit : Interactable
                 });
             }
         }
+    }
+
+    IEnumerator Transition()
+    {
+
+        PlayerController.CanMove = false;
+
+        for (float i = 0; i <= 1; i += Time.deltaTime * 2)
+        {
+            // set color with i as alpha
+            img.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+
+        player.transform.position = new Vector3(DestX, DestY, player.transform.position.z);
+
+        for (float i = 1; i >= 0; i -= Time.deltaTime * 2)
+        {
+            // set color with i as alpha
+            img.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+        img.color = new Color(0, 0, 0, 0);
+        PlayerController.CanMove = true;
+
     }
 }

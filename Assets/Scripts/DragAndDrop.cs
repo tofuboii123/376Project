@@ -146,6 +146,13 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         GameObject result = Instantiate(itemToSpawn);
         inventory.AddItem(result);
 
+        //good ending check
+        if (result.name.Contains("Heart Key"))
+        {
+            Cutscene5_Finale.goodEnding = true;
+            PlayerController.hasOddKey = false;
+        }
+
         image.GetComponent<RectTransform>().position = imageOriginalPosition;
         quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
     }

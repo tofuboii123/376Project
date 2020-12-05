@@ -8,9 +8,20 @@ public class InteractableSink : Interactable
     private static bool keyInSink = false;
     private static bool filledSink = false;
 
+    private void Start()
+    {
+        tookKey = false;
+        keyInSink = false;
+        filledSink = false;
+    }
+
     public override void OnInteraction()
     {
-        if (!keyInSink)
+        if (tookKey)
+        {
+            MessageController.ShowMessage("There's nothing left for me to do here.", Face.Thinking);
+        }
+        else if (!keyInSink)
         {
             if (filledSink)
             {

@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8859086176549690176}
   - component: {fileID: 3878162277921486547}
-  - component: {fileID: 178991923862276046}
+  - component: {fileID: 3719461376807902480}
+  - component: {fileID: 3658682775533292258}
   m_Layer: 0
   m_Name: The Heart
   m_TagString: Untagged
@@ -83,7 +84,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &178991923862276046
+--- !u!61 &3719461376807902480
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613267878175897469}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.11}
+    newSize: {x: 8.85, y: 7.68}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.16, y: 0.11}
+  m_EdgeRadius: 0
+--- !u!114 &3658682775533292258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 220
-  interactTextString: 
+  interactTextString: Open Chest
   combineName: 
   combinedObject: {fileID: 0}
-  requiredItemID: 0
-  getItemString: I'll take this.
-  noItemString: I don't have what I need.
+  requiredItemID: 221
+  getItemString: This is what I've been looking for.
+  noItemString: This chest requies a special key to open. I think I have what I need.

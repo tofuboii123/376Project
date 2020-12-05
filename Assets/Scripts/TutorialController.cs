@@ -19,12 +19,26 @@ public class TutorialController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (firstAppreance) {
+        if (firstAppreance){
             StartCoroutine(LevelStart());
-        } else {
-            Player.transform.position = new Vector3(0.1f, -5.19f, Player.transform.position.z);
+        } else{
+            StartCoroutine(FadeOut());
+            Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+            inventory.AddItem(GameObject.Find("The Heart"));
+            Player.transform.position = new Vector3(0.1f,-5.19f,Player.transform.position.z);
             plant.SetActive(false);
             tree.GetComponent<InteractableTree>().interactTextString = "Bury Sabrina";
+        }
+    }
+
+    IEnumerator FadeOut()
+    {
+        // loop over 1 second backwards
+        for (float i = 2; i >= 0; i -= Time.deltaTime)
+        {
+            // set color with i as alpha
+            img.color = new Color(0, 0, 0, i);
+            yield return null;
         }
     }
 
@@ -44,6 +58,7 @@ public class TutorialController : MonoBehaviour
             Face.Thinking,
             Face.None
         });
+        firstAppreance = false;
     }
 
     public IEnumerator LevelEnd()
@@ -96,7 +111,7 @@ public class TutorialController : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         MessageController.ShowMessage(new string[] {
-            "Victoria\nThank you Ashton..\nI shall leave your body now.",
+            "Victoria:\nThank you Ashton..\nI shall leave your body now.",
         }, new int[] {
            
             Face.Thinking
@@ -115,7 +130,7 @@ public class TutorialController : MonoBehaviour
         }
         PlayerController.inCutscene = false;
 
-        
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void GetAudioManager() {

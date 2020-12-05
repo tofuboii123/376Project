@@ -6,6 +6,11 @@ public class InteractableLevel1ExitDoor : Interactable
 {
     private static bool doorIsUnlocked = false;
 
+    private void Start()
+    {
+        doorIsUnlocked = false;
+    }
+
     public override void OnInteraction()
     {
         if (!doorIsUnlocked)
