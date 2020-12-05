@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     // Getter and setter
     public static bool CanMove { get; set; }
     public static bool inCutscene = false;
+
     public GameObject MrInvisible;
     [SerializeField]
     float speed = 5.0f;
@@ -61,7 +62,6 @@ public class PlayerController : MonoBehaviour
         colorGrading.active = false;
         chromaticAberration.active = false;
 
-        CanMove = true;
         inCutscene = false;
         isTravelling = false;
         timeIndicator.text = "Present";
@@ -179,7 +179,7 @@ public class PlayerController : MonoBehaviour
         depthOfField.active = true;
         chromaticAberration.active = true;
 
-        MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + 150 : this.transform.position.y - 150);
+        MrInvisible.transform.position = new Vector2(this.transform.position.x, inPast ? this.transform.position.y + travel : this.transform.position.y - travel);
 
         timer = 0.0f;
         while (timer < 0.5f) {
@@ -254,55 +254,6 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         CanMove = true;
-    }
-
-    //just a major WIP, please ignore
-    Vector3 checkTeleportPosition()
-    {
-        telePosition = this.transform.position + new Vector3(0, (inPast ? travel : -travel), 0);
-        RaycastHit2D hit = Physics2D.Raycast(telePosition, Vector2.up);
-
-        if (hit.collider != null && hit.collider.bounds.Contains(new Vector3(telePosition.x, telePosition.y, hit.transform.position.z)))
-        {
-            /*
-            RaycastHit2D hit = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
-
-            if  (hit.collider != null && hit.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-            {
-                Debug.Log("up");
-                //up
-                MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y + (hit.collider.bounds.size.y/2));
-                RaycastHit2D hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
-
-                //If up is occupied
-                if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-                {
-                    Debug.Log("down");
-
-                    //down
-                    MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x, hit.collider.bounds.center.y - (hit.collider.bounds.size.y / 2) );
-                    hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.down);
-
-                    //if down is occupied
-                    if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x + MrInvisible.GetComponent<BoxCollider2D>().offset.x, MrInvisible.transform.position.y + MrInvisible.GetComponent<BoxCollider2D>().offset.y, hit.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-                    {
-                        Debug.Log("left");
-
-                        //left
-                        MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x - (hit.collider.bounds.size.x / 2) - (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
-                        hit2 = Physics2D.Raycast(MrInvisible.transform.position, Vector2.up);
-                        if (hit2.collider != null && hit2.collider.bounds.Contains(new Vector3(MrInvisible.transform.position.x, MrInvisible.transform.position.y, hit2.transform.position.z)) && (hit.collider.gameObject.layer != 10))
-                        {
-                            Debug.Log("right");
-
-                            MrInvisible.transform.position = new Vector2(hit.collider.bounds.center.x + (hit.collider.bounds.size.x / 2) + (this.gameObject.GetComponent<BoxCollider2D>().size.x / 1.8f), hit.collider.bounds.center.y);
-                        }
-                    }
-                }
-            }*/
-        }
-
-        return telePosition;
     }
 
     private void GetAudioManager() {

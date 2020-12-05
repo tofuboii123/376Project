@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Cutscene5_Finale : MonoBehaviour
@@ -265,6 +266,7 @@ public class Cutscene5_Finale : MonoBehaviour
 
         Object.Destroy(gameObject);
 
+        SceneManager.LoadScene("MainMenu");
     }
 
     IEnumerator fadeOut()

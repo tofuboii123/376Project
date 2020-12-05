@@ -94,7 +94,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log(Father.transform.position.y);
+        //Debug.Log(Father.transform.position.y);
 
         while (c.transform.position.x != Player.transform.position.x)
         {

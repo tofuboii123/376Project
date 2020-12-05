@@ -40,7 +40,7 @@ public abstract class Interactable : MonoBehaviour
             messageShowing = true;
         }
 
-        if (Input.GetButtonDown("Interact") && canInteract && !messageShowing)
+        if (Input.GetButtonDown("Interact") && canInteract && !messageShowing && !PlayerController.isTravelling)
         {
             OnInteraction();
         }
