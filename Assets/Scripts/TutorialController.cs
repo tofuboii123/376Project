@@ -58,7 +58,6 @@ public class TutorialController : MonoBehaviour
             Face.Thinking,
             Face.None
         });
-        firstAppreance = false;
     }
 
     public IEnumerator LevelEnd()
@@ -129,7 +128,7 @@ public class TutorialController : MonoBehaviour
             yield return null;
         }
         PlayerController.inCutscene = false;
-
+        firstAppreance = true;
         SceneManager.LoadScene("MainMenu");
     }
 
