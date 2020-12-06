@@ -92,7 +92,7 @@
 @ENDITEM
 @ITEM 216
 #ItemName: Strange Relic (Right)
-#Description: Great… Another creepy thing...
+#Description: Great... Another creepy thing...
 @ENDITEM
 @ITEM 217
 #ItemName: Strange Relic
@@ -104,5 +104,13 @@
 @ENDITEM
 @ITEM 219
 #ItemName: Oddly-Shaped Chest
+#Description: Description here
+@ENDITEM
+@ITEM 220
+#ItemName: The Heart
+#Description: Description here
+@ENDITEM
+@ITEM 221
+#ItemName: Heart Key
 #Description: Description here
 @ENDITEM
