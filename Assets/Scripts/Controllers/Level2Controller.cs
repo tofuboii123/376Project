@@ -42,6 +42,10 @@ public class Level2Controller : MonoBehaviour
             Face.None
         });
 
+        while (MessageController.showMessage > 0) {
+            yield return null;
+        }
+
         PlayerController.CanMove = true;
         xInteractText.SetActive(true);
     }

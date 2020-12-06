@@ -61,10 +61,15 @@ public class TutorialController : MonoBehaviour
 
         MessageController.ShowMessage(new string[] {
             "I need to get inside the mansion. Something awaits me in the basement.",
-            "Use WASD to move.\nPress X to interact with objects.\nPress O to open your inventory." }, new int[] {
+            "Use WASD to move.\n\nPress F to interact with objects.\nPress R or ESC to open your inventory.\nPress space to travel between time periods.\nPress Q/E to cycle through your inventory" }, new int[] {
             Face.Thinking,
-            Face.None
+            Face.None,
         });
+
+        while (MessageController.showMessage > 0) {
+            yield return null;
+        }
+
         PlayerController.CanMove = true;
         xInteractText.SetActive(true);
     }

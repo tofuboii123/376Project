@@ -38,6 +38,11 @@ public class Level1Controller : MonoBehaviour
             Face.Disappointed,
             Face.Thinking
         });
+
+        while (MessageController.showMessage > 0) {
+            yield return null;
+        }
+
         PlayerController.CanMove = true;
         xInteractText.SetActive(true);
     }

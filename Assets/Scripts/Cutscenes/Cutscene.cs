@@ -39,10 +39,12 @@ public class Cutscene : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
 
         GetAudioManager();
         audioManager.PlayFadeIn("Car Driving", 1.5f);
+
+        yield return new WaitForSeconds(1.0f);
 
         bool isFadingOutSound = false;
         while (car.transform.position.x > -1.7)
@@ -59,6 +61,7 @@ public class Cutscene : MonoBehaviour
             yield return null;
         }
 
+        isFadingOutSound = false;
         car.GetComponent<Animator>().speed = 0;
         yield return new WaitForSeconds(0.3f);
 
@@ -82,7 +85,11 @@ public class Cutscene : MonoBehaviour
         {
             yield return null;
         }
+
         car.GetComponent<Animator>().speed = 1;
+
+        GetAudioManager();
+        audioManager.PlayFadeIn("Car Driving", 1.5f);
 
         this.gameObject.GetComponent<SpriteRenderer>().color = new Color (1, 1, 1, 0);
         StartCoroutine(fadeIn());
@@ -90,6 +97,13 @@ public class Cutscene : MonoBehaviour
         {
             car.transform.Translate(-Time.deltaTime * 4.5f, 0, 0);
             yield return null;
+
+            if (car.transform.position.x <= -20) {
+                if (!isFadingOutSound) {
+                    isFadingOutSound = true;
+                    audioManager.StopFadeOut("Car Driving", 3.1f);
+                }
+            }
 
         }
         SceneManager.LoadScene("TutorialScene");
