@@ -24,10 +24,10 @@ public class TutorialController : MonoBehaviour
             StartCoroutine(LevelStart());
         } else{
             StartCoroutine(FadeOut());
-            Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-            inventory.AddItem(GameObject.Find("The Heart"));
+
             Player.transform.position = new Vector3(0.1f,-5.19f,Player.transform.position.z);
             plant.SetActive(false);
+
             tree.GetComponent<InteractableTree>().interactTextString = "Bury Sabrina";
         }
     }
@@ -108,7 +108,7 @@ public class TutorialController : MonoBehaviour
         }, new int[] {
            
             Face.Thinking
-        });
+        }, false);
 
         while (MessageController.showMessage > 0) {
             yield return null;
@@ -124,7 +124,7 @@ public class TutorialController : MonoBehaviour
         }, new int[] {
            
             Face.Thinking
-        });
+        }, false);
 
           while (MessageController.showMessage > 0) {
             yield return null;
@@ -139,6 +139,7 @@ public class TutorialController : MonoBehaviour
         }
 
         PlayerController.inCutscene = false;
+        Cutscene5_Finale.goodEndingTriggered = false;
         SceneManager.LoadScene("MainMenu");
     }
 

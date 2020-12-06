@@ -6,18 +6,19 @@ using UnityEngine.UI;
 public class InteractableTree : Interactable {
     public Image img;
 
-    private bool isClimbingTree;
+    private bool isInteractingWithTree;
 
     void Start() {
-        isClimbingTree = false;
+        isInteractingWithTree = false;
     }
 
     public override void OnInteraction() {
-        if (isClimbingTree) {
+        if (isInteractingWithTree) {
             return;
         }
 
-        isClimbingTree = true;
+        isInteractingWithTree = true;
+
         if (!inventory.ContainsItem(220)) {
             TutorialController tutorialController = GameObject.Find("TutorialController").GetComponent<TutorialController>();
             StartCoroutine(tutorialController.LevelEnd());

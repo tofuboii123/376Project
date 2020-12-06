@@ -9,6 +9,8 @@ public class Cutscene5_Finale : MonoBehaviour {
     public GameObject Mother;
     public GameObject Player;
 
+    private Inventory inventory;
+
     //UI
     public Image img;
     public GameObject Clock;
@@ -24,7 +26,7 @@ public class Cutscene5_Finale : MonoBehaviour {
     private AudioManager audioManager;
 
     public GameObject PresentTrigger;
-    public static bool goodEnding = false;
+    private bool goodEnding;
 
     public static bool goodEndingTriggered;
 
@@ -34,11 +36,15 @@ public class Cutscene5_Finale : MonoBehaviour {
         goodEnding = false;
         goodEndingTriggered = false;
         isActive = false;
+
+        inventory = Player.GetComponent<Inventory>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.tag.CompareTo("Player") == 0) {
             if (!isActive) {
+                goodEnding = inventory.ContainsItem(221);
+
                 StartCoroutine(Cutscene_Start());
                 isActive = true;
             }
@@ -167,10 +173,7 @@ public class Cutscene5_Finale : MonoBehaviour {
         c.GetComponent<CameraMovement>().cutscene_mode = false;
 
         if (goodEnding) {
-
-
-            //good ending
-
+            // good ending
 
             PlayerController.isTravelling = true;
             Clock.SetActive(true);
@@ -179,8 +182,8 @@ public class Cutscene5_Finale : MonoBehaviour {
             Player.GetComponent<PlayerController>().TimeShift();
             while (PlayerController.isTravelling) {
                 yield return null;
-
             }
+
             yield return new WaitForSeconds(0.3f);
 
             MessageController.ShowMessage(new string[] { "???:\nThat baby...She was never buried. She could\nnever rest in peace..I know what I need to do\nnow." });
@@ -193,8 +196,8 @@ public class Cutscene5_Finale : MonoBehaviour {
             PlayerController.CanMove = true;
             Object.Destroy(gameObject);
         } else {
+            // bad ending
 
-            //bad ending
             MessageController.ShowMessage(new string[] { "???:\nI need to run away! She's out of her mind!" });
             while (MessageController.showMessage > 0) {
                 yield return null;

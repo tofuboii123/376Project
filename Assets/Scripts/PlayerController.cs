@@ -85,12 +85,20 @@ public class PlayerController : MonoBehaviour
                 return;
             }
 
+            if (MessageController.showMessage > 0) {
+                return;
+            }
+
             canFullScreenInventory = Time.time + 0.5f;
 
             if (FullScreenInventory.inMenu) {
                 CanMove = true;
                 FullScreenInventory.exitFullScreenInventory();
             } else {
+                if (!CanMove) {
+                    return;
+                }
+
                 CanMove = false;
                 FullScreenInventory.startFullScreenInventory();
             }

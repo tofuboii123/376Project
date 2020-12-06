@@ -50,9 +50,13 @@ public abstract class Interactable : MonoBehaviour
     {
         if (other.CompareTag("PlayerItemCollider"))
         {
-            interactTextObject.text = "F - " + interactTextString;
-            interactTextObject.enabled = true;
+            if (interactTextString != "") {
+                interactTextObject.text = "F - " + interactTextString;
+            } else {
+                interactTextObject.text = "F - Interact";
+            }
 
+            interactTextObject.enabled = true;
             canInteract = true;
         }
     }
