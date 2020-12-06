@@ -10,6 +10,8 @@ public class InteractableLevel2Exit : Interactable
     public Image img;
     private static bool doorIsUnlocked = false;
 
+    private AudioManager audioManager;
+
     private void Start()
     {
         doorIsUnlocked = false;
@@ -23,6 +25,9 @@ public class InteractableLevel2Exit : Interactable
         }
         else if (doorIsUnlocked)
         {
+            GetAudioManager();
+            audioManager.Play("Open Door");
+
             StartCoroutine(Transition());
         }
         else
@@ -77,5 +82,11 @@ public class InteractableLevel2Exit : Interactable
         img.color = new Color(0, 0, 0, 0);
         PlayerController.CanMove = true;
 
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

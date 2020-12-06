@@ -9,17 +9,31 @@ public class Cutscene : MonoBehaviour
     public Image img;
     public GameObject car;
 
+    public GameObject text;
+    public GameObject clock;
+    public GameObject inventory;
+    public GameObject interactText;
+
     private AudioManager audioManager;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Awake() {
+        img.color = new Color(0, 0, 0, 1);
+
+        text.SetActive(false);
+        clock.SetActive(false);
+        inventory.SetActive(false);
+        interactText.SetActive(false);
+
+        car.SetActive(false);
+    }
+
+    void Start() {
         StartCoroutine(Cutscene_Start());
     }
 
     IEnumerator Cutscene_Start()
     {
-
         yield return new WaitForSeconds(2);
         MessageController.ShowMessage(new string[] {
             "???:\n1666 Avenue Ravensheart, Hamilton...",
@@ -39,6 +53,9 @@ public class Cutscene : MonoBehaviour
         {
             yield return null;
         }
+
+        car.SetActive(true);
+
         yield return new WaitForSeconds(1.0f);
 
         GetAudioManager();
@@ -106,6 +123,7 @@ public class Cutscene : MonoBehaviour
             }
 
         }
+
         SceneManager.LoadScene("TutorialScene");
     }
 

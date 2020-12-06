@@ -10,6 +10,8 @@ public class Level2Controller : MonoBehaviour
 
     public GameObject xInteractText;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,14 +54,25 @@ public class Level2Controller : MonoBehaviour
         {
             yield return null;
         }
+
+        GetAudioManager();
+        audioManager.Play("Open Door");
+
         for (float i = 0; i <= 3; i += Time.deltaTime)
         {
             // set color with i as alpha
             img.color = new Color(0, 0, 0, i);
             yield return null;
         }
-        PlayerController.inCutscene= false;
+
+        PlayerController.inCutscene = false;
 
         SceneManager.LoadScene("TutorialScene");
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }
