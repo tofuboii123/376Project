@@ -18,7 +18,7 @@ public class InteractableTree : Interactable {
         }
 
         isClimbingTree = true;
-        if (TutorialController.firstAppreance) {
+        if (!inventory.ContainsItem(220)) {
             TutorialController tutorialController = GameObject.Find("TutorialController").GetComponent<TutorialController>();
             StartCoroutine(tutorialController.LevelEnd());
         } else {

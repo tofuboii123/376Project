@@ -51,6 +51,17 @@ public class Inventory : MonoBehaviour
             } else if (image.name.StartsWith("SlotBackground")) {
                 slotsBackgroundList.Add(image);
 
+                DragAndDrop dragAndDropComponent = image.GetComponent<DragAndDrop>();
+                if (Int32.TryParse(image.name.Remove(0, 14), out int num2)) {
+                    itemIdx = num2 - 1;
+
+                    if (ItemsOwned.items[itemIdx] != -1) {
+                        dragAndDropComponent.originalItemID = ItemsOwned.dragAndDropItemID[itemIdx];
+                        dragAndDropComponent.combineName = ItemsOwned.dragAndDropCombineName[itemIdx];
+                        dragAndDropComponent.combinedItem = ItemsOwned.dragAndDropCombineObject[itemIdx];
+                    }
+                }
+
                 TextMeshProUGUI[] texts = image.GetComponentsInChildren<TextMeshProUGUI>();
                 foreach (TextMeshProUGUI text in texts) {
                     if (text.name.StartsWith("SlotQuantity")) {
@@ -178,6 +189,10 @@ public class Inventory : MonoBehaviour
         itemInInventoryFull.combineName = combineName;
         itemInInventoryFull.combinedItem = combinedItem;
 
+        ItemsOwned.dragAndDropItemID[idx] = ItemsOwned.items[idx];
+        ItemsOwned.dragAndDropCombineName[idx] = combineName;
+        ItemsOwned.dragAndDropCombineObject[idx] = combinedItem;
+
         // Update item quantity
         ItemsOwned.itemsQuantity[idx]++;
         if (idx < slotsBackgroundList.Count) {
@@ -226,6 +241,10 @@ public class Inventory : MonoBehaviour
                 itemInInventoryFull.combineName = "";
                 itemInInventoryFull.combinedItem = null;
 
+                ItemsOwned.dragAndDropItemID[indexOfItem] = 0;
+                ItemsOwned.dragAndDropCombineName[indexOfItem] = "";
+                ItemsOwned.dragAndDropCombineObject[indexOfItem] = null;
+
                 if (indexOfItem < slotsBackgroundList.Count) {
                     slotQuantities[indexOfItem].text = "x" + ItemsOwned.itemsQuantity[indexOfItem];
                     slotQuantities[indexOfItem].enabled = false;
@@ -257,6 +276,11 @@ public class Inventory : MonoBehaviour
         int tempItemID = ItemsOwned.items[idx1];
         int tempItemQuantity = ItemsOwned.itemsQuantity[idx1];
         Sprite tempItemSprite = ItemsOwned.itemsSprite[idx1];
+
+        int tempItemsOwnedDragAndDropItemID = ItemsOwned.dragAndDropItemID[idx1];
+        string tempItemsOwnedDragAndDropCombineName = ItemsOwned.dragAndDropCombineName[idx1];
+        GameObject tempItemsOwnedDragAndDropCombineObject = ItemsOwned.dragAndDropCombineObject[idx1];
+
         Sprite tempItemImage = InventoryFull.slotImages[idx1].sprite;
 
         DragAndDrop tempDragAndDrop = InventoryFull.slotImages[idx1].transform.parent.gameObject.GetComponent<DragAndDrop>();
@@ -269,6 +293,11 @@ public class Inventory : MonoBehaviour
         ItemsOwned.items[idx1] = ItemsOwned.items[idx2];
         ItemsOwned.itemsQuantity[idx1] = ItemsOwned.itemsQuantity[idx2];
         ItemsOwned.itemsSprite[idx1] = ItemsOwned.itemsSprite[idx2];
+
+        ItemsOwned.dragAndDropItemID[idx1] = ItemsOwned.dragAndDropItemID[idx2];
+        ItemsOwned.dragAndDropCombineName[idx1] = ItemsOwned.dragAndDropCombineName[idx2];
+        ItemsOwned.dragAndDropCombineObject[idx1] = ItemsOwned.dragAndDropCombineObject[idx2];
+
         if (idx1 < slotsBackgroundList.Count) {
             if (idx2 < slotsBackgroundList.Count) {
                 slotImages[idx1].sprite = slotImages[idx2].sprite;
@@ -306,6 +335,11 @@ public class Inventory : MonoBehaviour
         ItemsOwned.items[idx2] = tempItemID;
         ItemsOwned.itemsQuantity[idx2] = tempItemQuantity;
         ItemsOwned.itemsSprite[idx2] = tempItemSprite;
+
+        ItemsOwned.dragAndDropItemID[idx2] = tempItemsOwnedDragAndDropItemID;
+        ItemsOwned.dragAndDropCombineName[idx2] = tempItemsOwnedDragAndDropCombineName;
+        ItemsOwned.dragAndDropCombineObject[idx2] = tempItemsOwnedDragAndDropCombineObject;
+
         if (idx2 < slotsBackgroundList.Count) {
             slotImages[idx2].sprite = tempItemImage;
         }

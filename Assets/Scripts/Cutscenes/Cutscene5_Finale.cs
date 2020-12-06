@@ -230,7 +230,7 @@ public class Cutscene5_Finale : MonoBehaviour {
             black.gameObject.SetActive(true);
             StartCoroutine(fadeInBlack());
             yield return new WaitForSeconds(1.5f);
-            MessageController.ShowMessage(new string[] { "That clearly wasn't the good ending...\nBye now." });
+            MessageController.ShowMessage(new string[] { "That clearly wasn't the good ending...\nBye now." }, new int[] { Face.None }, false);
             while (MessageController.showMessage > 0) {
                 yield return null;
             }

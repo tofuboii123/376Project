@@ -135,7 +135,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     // Combine the two items and add a new item
     void CombineItems(int realNewItemIdx) {
         GameObject itemToSpawn = combinedItem;
-        
+
         // Delete the 2 original items
         inventory.DiscardItem(originalItemID);
         inventory.DiscardItem(otherID);

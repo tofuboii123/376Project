@@ -54,6 +54,17 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             } else if (image.name.StartsWith("SlotBackground")) {
                 slotsBackgroundList.Add(image);
 
+                DragAndDrop dragAndDropComponent = image.GetComponent<DragAndDrop>();
+                if (Int32.TryParse(image.name.Remove(0, 14), out int num2)) {
+                    itemIdx = num2 - 1;
+
+                    if (ItemsOwned.items[itemIdx] != -1) {
+                        dragAndDropComponent.originalItemID = ItemsOwned.dragAndDropItemID[itemIdx];
+                        dragAndDropComponent.combineName = ItemsOwned.dragAndDropCombineName[itemIdx];
+                        dragAndDropComponent.combinedItem = ItemsOwned.dragAndDropCombineObject[itemIdx];
+                    }
+                }
+
                 TextMeshProUGUI[] texts = image.GetComponentsInChildren<TextMeshProUGUI>();
                 foreach (TextMeshProUGUI text in texts) {
                     if (text.name.StartsWith("SlotQuantity")) {

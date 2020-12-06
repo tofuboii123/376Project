@@ -8,13 +8,14 @@ public class InteractableDirt : Interactable
     GameObject tree;
 
     private void Start() {
-        if(TutorialController.firstAppreance){
-        tree.SetActive(false);
-        }
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         inventory = player.GetComponent<Inventory>(); // Need this for some reason?
         interactTextObject = player.GetComponent<PlayerController>().interactTextObject; // Need this for some reason?
+
+        if (!inventory.ContainsItem(220)) {
+            tree.SetActive(false);
+        }
     }
 
     public override void OnInteraction() {

@@ -32,6 +32,8 @@ public class MessageController : MonoBehaviour
     private string currentText = "";
     private static bool skipText = false;
 
+    private static bool canSkip;
+
     private AudioManager audioManager;
 
     // Start is called before the first frame update
@@ -73,7 +75,7 @@ public class MessageController : MonoBehaviour
             {
                 closeMessageText.SetActive(false);
                 GoToNextPage();
-            } else if (Input.GetButtonDown("Interact") && currentText.Length > 1)
+            } else if (Input.GetButtonDown("Interact") && currentText.Length > 1 && canSkip)
             {
                 skipText = true;
             }
@@ -91,13 +93,14 @@ public class MessageController : MonoBehaviour
             faceIndex = faceIndexArray[faceIndexArray.Length - showMessage];
     }
 
-    public static void ShowMessage(string[] text, int[] faces = null)
+    public static void ShowMessage(string[] text, int[] faces = null, bool canSkipText = true)
     {
         if (!messageBoxActive)
         {
             showMessage = text.Length;
             textArray = text;
             textToShow = textArray[0];
+            canSkip = canSkipText;
             if (faces == null || faces.Length == 0)
             {
                 faceIndex = 0;
@@ -111,13 +114,14 @@ public class MessageController : MonoBehaviour
         }
     }
 
-    public static void ShowMessage(string text, int face = Face.Thinking)
+    public static void ShowMessage(string text, int face = Face.Thinking, bool canSkipText = true)
     {
         if (!messageBoxActive)
         {
             showMessage = 1;
             textToShow = text;
             faceIndex = face;
+            canSkip = canSkipText;
         }
     }
 

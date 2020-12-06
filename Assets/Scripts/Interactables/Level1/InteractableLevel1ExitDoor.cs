@@ -6,13 +6,20 @@ public class InteractableLevel1ExitDoor : Interactable
 {
     private static bool doorIsUnlocked = false;
 
+    private bool isEnteringDoor;
+
     private void Start()
     {
         doorIsUnlocked = false;
+        isEnteringDoor = false;
     }
 
     public override void OnInteraction()
     {
+        if (isEnteringDoor) {
+            return;
+        }
+
         if (!doorIsUnlocked)
         {
             if (inventory.ContainsSelectedItem(15))
@@ -29,6 +36,7 @@ public class InteractableLevel1ExitDoor : Interactable
         }
         else
         {
+            isEnteringDoor = true;
             Level1Controller level1Controller = GameObject.Find("Level1Controller").GetComponent<Level1Controller>();
             StartCoroutine(level1Controller.LevelEnd());
         }

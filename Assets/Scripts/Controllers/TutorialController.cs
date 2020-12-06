@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class TutorialController : MonoBehaviour
 {
     public Image img;
-    public static bool firstAppreance = true;
     public GameObject grave;
     public GameObject plant;
     public GameObject tree;
@@ -21,7 +20,7 @@ public class TutorialController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (firstAppreance){
+        if (!Player.GetComponent<Inventory>().ContainsItem(220)) {
             StartCoroutine(LevelStart());
         } else{
             StartCoroutine(FadeOut());
@@ -98,7 +97,6 @@ public class TutorialController : MonoBehaviour
 
         audioManager.StopFadeOut("Climb Tree", 1.5f);
 
-        firstAppreance = false;
         SceneManager.LoadScene("Level1");
     }
     
@@ -139,8 +137,8 @@ public class TutorialController : MonoBehaviour
             img.color = new Color(0, 0, 0, i);
             yield return null;
         }
+
         PlayerController.inCutscene = false;
-        firstAppreance = true;
         SceneManager.LoadScene("MainMenu");
     }
 
