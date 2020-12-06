@@ -128,7 +128,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6124637848294562848, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
   m_PrefabInstance: {fileID: 1859175468}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1213460226}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: tree
       value: 
       objectReference: {fileID: 1755141996}
+    - target: {fileID: 4563370542227965906, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
+      propertyPath: xInteractText
+      value: 
+      objectReference: {fileID: 1213460226}
     - target: {fileID: 7838985839379710137, guid: ef444b323bf9efa4d8cbc5740d766c18, type: 3}
       propertyPath: m_Name
       value: TutorialController
@@ -63425,6 +63429,11 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 3
   m_ColliderType: 1
+--- !u!1 &1213460226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6124637848294562850, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+  m_PrefabInstance: {fileID: 1859175468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1230396461
 GameObject:
   m_ObjectHideFlags: 0

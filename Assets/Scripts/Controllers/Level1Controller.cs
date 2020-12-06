@@ -8,6 +8,8 @@ public class Level1Controller : MonoBehaviour
 {
     public Image img;
 
+    public GameObject xInteractText;
+
     private AudioManager audioManager;
 
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class Level1Controller : MonoBehaviour
     IEnumerator LevelStart()
     {
         PlayerController.CanMove = false;
+        xInteractText.SetActive(false);
         // loop over 1 second backwards
         for (float i = 2; i >= 0; i -= Time.deltaTime)
         {
@@ -36,6 +39,7 @@ public class Level1Controller : MonoBehaviour
             Face.Thinking
         });
         PlayerController.CanMove = true;
+        xInteractText.SetActive(true);
     }
 
     public IEnumerator LevelEnd()

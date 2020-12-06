@@ -14,6 +14,8 @@ public class TutorialController : MonoBehaviour
     public Animator animator;
     public GameObject Player;
 
+    public GameObject xInteractText;
+
     private AudioManager audioManager;
 
     // Start is called before the first frame update
@@ -41,12 +43,14 @@ public class TutorialController : MonoBehaviour
             img.color = new Color(0, 0, 0, i);
             yield return null;
         }
+
         PlayerController.CanMove = true;
     }
 
     IEnumerator LevelStart()
     {
         PlayerController.CanMove = false;
+        xInteractText.SetActive(false);
         // loop over 1 second backwards
         for (float i = 2; i >= 0; i -= Time.deltaTime)
         {
@@ -62,6 +66,7 @@ public class TutorialController : MonoBehaviour
             Face.None
         });
         PlayerController.CanMove = true;
+        xInteractText.SetActive(true);
     }
 
     public IEnumerator LevelEnd() {
