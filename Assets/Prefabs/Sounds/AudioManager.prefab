@@ -81,7 +81,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: In Past
     clip: {fileID: 8300000, guid: 45467c7faa51abb4b937464eaff7d99d, type: 3}
-    volume: 0.15
+    volume: 0.3
     pitch: 1
     playOnAwake: 0
     loop: 1
