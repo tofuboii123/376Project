@@ -23,7 +23,6 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField]
     Sprite selected;
 
-    //private GameObject selectedGameObject;
     private int realIdx;
 
     // Start is called before the first frame update
@@ -35,11 +34,23 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         slotImages = new List<Image>();
         slotQuantities = new List<TextMeshProUGUI>();
 
+        int itemIdx;
+
         Image[] images = gameObject.GetComponentsInChildren<Image>();
         foreach (Image image in images) {
             if (image.name.StartsWith("SlotImage")) {
                 slotImages.Add(image);
-                image.enabled = false;
+
+                if (Int32.TryParse(image.name.Remove(0, 9), out int num)) {
+                    itemIdx = num - 1;
+
+                    image.enabled = ItemsOwned.items[itemIdx] != -1;
+                    if (image.enabled) {
+                        image.sprite = ItemsOwned.itemsSprite[itemIdx];
+                    }
+                } else {
+                    image.enabled = false;
+                }
             } else if (image.name.StartsWith("SlotBackground")) {
                 slotsBackgroundList.Add(image);
 
@@ -47,7 +58,17 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 foreach (TextMeshProUGUI text in texts) {
                     if (text.name.StartsWith("SlotQuantity")) {
                         slotQuantities.Add(text);
-                        text.enabled = false;
+
+                        if (Int32.TryParse(text.name.Remove(0, 12), out int num)) {
+                            itemIdx = num - 1;
+
+                            text.enabled = ItemsOwned.items[itemIdx] != -1;
+                            if (text.enabled) {
+                                text.text = "x" + ItemsOwned.itemsQuantity[itemIdx];
+                            }
+                        } else {
+                            text.enabled = false;
+                        }
                     }
                 }
             }
@@ -60,8 +81,6 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         GameObject gObject = eventData.pointerCurrentRaycast.gameObject;
 
         if (gObject.name.StartsWith("SlotBackground")) {
-            //selectedGameObject = gObject;
-
             if (Int32.TryParse(gObject.name.Remove(0, 14), out int idx)) {
                 realIdx = idx - 1;
 
@@ -71,7 +90,7 @@ public class InventoryFull : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     return;
                 }
 
-                int itemID = Inventory.items[realIdx];
+                int itemID = ItemsOwned.items[realIdx];
                 ItemInformation itemInformation = ItemDescriptions.GetItemDescription(itemID);
 
                 if (itemInformation.itemName != "") {

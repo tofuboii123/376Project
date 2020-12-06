@@ -29,12 +29,6 @@ public class Level2Controller : MonoBehaviour
             yield return null;
         }
 
-        Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        if (PlayerController.hasOddKey)
-        {
-            inventory.AddItem(GameObject.Find("Oddly Shaped Key"));
-        }
-
         MessageController.ShowMessage(new string[] {
             "You can combine two items by dragging one over the other using your mouse.",
             "Combine the two halves of a key on the floor nearby."}, new int[] {

@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public static List<int> items;
-    public static List<int> itemsQuantity;
-
+    [HideInInspector]
     public List<Image> slotsBackgroundList;
+
     public static List<Image> slotImages;
+
+    [HideInInspector]
     public List<TextMeshProUGUI> slotQuantities;
 
     public GameObject fullScreenInventory;
@@ -22,10 +24,6 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     Sprite selected;
 
-    public static int selectedItemIndex = 0;
-
-    public int totalInventorySize;
-
     public bool IsFull { get; set; }
 
     private void Start() {
@@ -33,11 +31,23 @@ public class Inventory : MonoBehaviour
         slotImages = new List<Image>();
         slotQuantities = new List<TextMeshProUGUI>();
 
+        int itemIdx;
+
         Image[] images = invent.GetComponentsInChildren<Image>();
         foreach (Image image in images) {
             if (image.name.StartsWith("SlotImage")) {
                 slotImages.Add(image);
-                image.enabled = false;
+
+                if (Int32.TryParse(image.name.Remove(0, 9), out int num)) {
+                    itemIdx = num - 1;
+
+                    image.enabled = ItemsOwned.items[itemIdx] != -1;
+                    if (image.enabled) {
+                        image.sprite = ItemsOwned.itemsSprite[itemIdx];
+                    }
+                } else {
+                    image.enabled = false;
+                }
             } else if (image.name.StartsWith("SlotBackground")) {
                 slotsBackgroundList.Add(image);
 
@@ -45,21 +55,24 @@ public class Inventory : MonoBehaviour
                 foreach (TextMeshProUGUI text in texts) {
                     if (text.name.StartsWith("SlotQuantity")) {
                         slotQuantities.Add(text);
-                        text.enabled = false;
+
+                        if (Int32.TryParse(text.name.Remove(0, 12), out int num)) {
+                            itemIdx = num - 1;
+
+                            text.enabled = ItemsOwned.items[itemIdx] != -1;
+                            if (text.enabled) {
+                                text.text = "x" + ItemsOwned.itemsQuantity[itemIdx];
+                            }
+                        } else {
+                            text.enabled = false;
+                        }
                     }
                 }
             }
         }
 
-        if (slotsBackgroundList[0] != null) {
-            slotsBackgroundList[0].sprite = selected;
-        }
-
-        items = new List<int>();
-        itemsQuantity = new List<int>();
-        for (int i = 0; i < totalInventorySize; i++) {
-            items.Add(-1);
-            itemsQuantity.Add(0);
+        if (slotsBackgroundList[ItemsOwned.selectedItemIndex] != null) {
+            slotsBackgroundList[ItemsOwned.selectedItemIndex].sprite = selected;
         }
 
         IsFull = false;
@@ -71,25 +84,25 @@ public class Inventory : MonoBehaviour
 
     private void CheckInventoryMovement() {
         if (Input.GetButtonDown("ChoseItemLeft")) {
-            slotsBackgroundList[selectedItemIndex].sprite = empty;
+            slotsBackgroundList[ItemsOwned.selectedItemIndex].sprite = empty;
 
-            selectedItemIndex--;
-            if (selectedItemIndex < 0) {
-                selectedItemIndex = slotsBackgroundList.Count - 1;
+            ItemsOwned.selectedItemIndex--;
+            if (ItemsOwned.selectedItemIndex < 0) {
+                ItemsOwned.selectedItemIndex = slotsBackgroundList.Count - 1;
             }
 
-            slotsBackgroundList[selectedItemIndex].sprite = selected;
+            slotsBackgroundList[ItemsOwned.selectedItemIndex].sprite = selected;
         }
 
         if (Input.GetButtonDown("ChoseItemRight")) {
-            slotsBackgroundList[selectedItemIndex].sprite = empty;
+            slotsBackgroundList[ItemsOwned.selectedItemIndex].sprite = empty;
 
-            selectedItemIndex++;
-            if (selectedItemIndex > slotsBackgroundList.Count - 1) {
-                selectedItemIndex = 0;
+            ItemsOwned.selectedItemIndex++;
+            if (ItemsOwned.selectedItemIndex > slotsBackgroundList.Count - 1) {
+                ItemsOwned.selectedItemIndex = 0;
             }
 
-            slotsBackgroundList[selectedItemIndex].sprite = selected;
+            slotsBackgroundList[ItemsOwned.selectedItemIndex].sprite = selected;
         }
     }
 
@@ -109,21 +122,21 @@ public class Inventory : MonoBehaviour
 
         // Check if we already have the item
         if (!didPassIndex) {
-            idx = items.IndexOf(objID);
+            idx = ItemsOwned.items.IndexOf(objID);
             hasItemCheck = (idx >= 0);
         } else {
             idx = passedIndex;
-            hasItemCheck = items[idx] != -1;
+            hasItemCheck = ItemsOwned.items[idx] != -1;
         }
 
         if (hasItemCheck) {
             // We already have the item in our inventory
             // Just add one to the quantity, not add a whole new item
-            itemsQuantity[idx]++;
+            ItemsOwned.itemsQuantity[idx]++;
             if (idx < slotsBackgroundList.Count) {
-                slotQuantities[idx].text = "x" + itemsQuantity[idx];
+                slotQuantities[idx].text = "x" + ItemsOwned.itemsQuantity[idx];
             }
-            InventoryFull.slotQuantities[idx].text = "x" + itemsQuantity[idx];
+            InventoryFull.slotQuantities[idx].text = "x" + ItemsOwned.itemsQuantity[idx];
 
             Destroy(obj); // Object not in game world anymore
             return;
@@ -132,7 +145,7 @@ public class Inventory : MonoBehaviour
         // New item adding to inventory...check to see if we have space
         // If we passed in an index to add the itme to, then we don't care about this check
         if (!didPassIndex) {
-            idx = items.IndexOf(-1);
+            idx = ItemsOwned.items.IndexOf(-1);
             if (idx < 0) {
                 IsFull = true;
                 return;
@@ -140,10 +153,12 @@ public class Inventory : MonoBehaviour
         }
 
         // It's a new item! Add it to the first open slot
-        items[idx] = objID;
+        ItemsOwned.items[idx] = objID;
 
         // Update image in inventory slot
         Sprite sprite = obj.GetComponent<SpriteRenderer>().sprite;
+        ItemsOwned.itemsSprite[idx] = sprite;
+
         if (idx < slotsBackgroundList.Count) {
             slotImages[idx].sprite = sprite;
             slotImages[idx].enabled = true;
@@ -154,34 +169,34 @@ public class Inventory : MonoBehaviour
         // Provide the information needed for the item combination
         if (idx < slotsBackgroundList.Count) {
             DragAndDrop itemInInventory = slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
-            itemInInventory.originalItemID = items[idx];
+            itemInInventory.originalItemID = ItemsOwned.items[idx];
             itemInInventory.combineName = combineName;
             itemInInventory.combinedItem = combinedItem;
         }
         DragAndDrop itemInInventoryFull = InventoryFull.slotImages[idx].transform.parent.gameObject.GetComponent<DragAndDrop>();
-        itemInInventoryFull.originalItemID = items[idx];
+        itemInInventoryFull.originalItemID = ItemsOwned.items[idx];
         itemInInventoryFull.combineName = combineName;
         itemInInventoryFull.combinedItem = combinedItem;
 
         // Update item quantity
-        itemsQuantity[idx]++;
+        ItemsOwned.itemsQuantity[idx]++;
         if (idx < slotsBackgroundList.Count) {
-            slotQuantities[idx].text = "x" + itemsQuantity[idx];
+            slotQuantities[idx].text = "x" + ItemsOwned.itemsQuantity[idx];
             slotQuantities[idx].enabled = true;
         }
-        InventoryFull.slotQuantities[idx].text = "x" + itemsQuantity[idx];
+        InventoryFull.slotQuantities[idx].text = "x" + ItemsOwned.itemsQuantity[idx];
         InventoryFull.slotQuantities[idx].enabled = true;
 
         Destroy(obj); // Object not in game world anymore
     }
 
     public bool ContainsSelectedItem(int itemID) {
-        return items[selectedItemIndex] == itemID;
+        return ItemsOwned.items[ItemsOwned.selectedItemIndex] == itemID;
     }
 
     public bool ContainsItem(int itemID)
     {
-        foreach (int item in Inventory.items)
+        foreach (int item in ItemsOwned.items)
         {
             if (item == itemID)
             {
@@ -194,11 +209,11 @@ public class Inventory : MonoBehaviour
 
     // Remove the item from the inventory.
     public void DiscardItem(int itemID) {
-        int indexOfItem = items.IndexOf(itemID);
+        int indexOfItem = ItemsOwned.items.IndexOf(itemID);
         if (indexOfItem >= 0) {
-            itemsQuantity[indexOfItem]--;
-            if (itemsQuantity[indexOfItem] <= 0) {
-                itemsQuantity[indexOfItem] = 0;
+            ItemsOwned.itemsQuantity[indexOfItem]--;
+            if (ItemsOwned.itemsQuantity[indexOfItem] <= 0) {
+                ItemsOwned.itemsQuantity[indexOfItem] = 0;
 
                 if (indexOfItem < slotsBackgroundList.Count) {
                     DragAndDrop itemInInventory = slotImages[indexOfItem].transform.parent.gameObject.GetComponent<DragAndDrop>();
@@ -212,10 +227,10 @@ public class Inventory : MonoBehaviour
                 itemInInventoryFull.combinedItem = null;
 
                 if (indexOfItem < slotsBackgroundList.Count) {
-                    slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                    slotQuantities[indexOfItem].text = "x" + ItemsOwned.itemsQuantity[indexOfItem];
                     slotQuantities[indexOfItem].enabled = false;
                 }
-                InventoryFull.slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                InventoryFull.slotQuantities[indexOfItem].text = "x" + ItemsOwned.itemsQuantity[indexOfItem];
                 InventoryFull.slotQuantities[indexOfItem].enabled = false;
 
                 if (indexOfItem < slotsBackgroundList.Count) {
@@ -225,13 +240,13 @@ public class Inventory : MonoBehaviour
                 InventoryFull.slotImages[indexOfItem].enabled = false;
                 InventoryFull.slotImages[indexOfItem].sprite = null;
 
-                items[indexOfItem] = -1;
+                ItemsOwned.items[indexOfItem] = -1;
             } else {
                 if (indexOfItem < slotsBackgroundList.Count) {
-                    slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                    slotQuantities[indexOfItem].text = "x" + ItemsOwned.itemsQuantity[indexOfItem];
                     slotQuantities[indexOfItem].enabled = true;
                 }
-                InventoryFull.slotQuantities[indexOfItem].text = "x" + itemsQuantity[indexOfItem];
+                InventoryFull.slotQuantities[indexOfItem].text = "x" + ItemsOwned.itemsQuantity[indexOfItem];
                 InventoryFull.slotQuantities[indexOfItem].enabled = true;
             }
         }
@@ -239,8 +254,9 @@ public class Inventory : MonoBehaviour
 
     public void SwapItems(int idx1, int idx2) {
         // Store temp variables for the switch
-        int tempItemID = items[idx1];
-        int tempItemQuantity = itemsQuantity[idx1];
+        int tempItemID = ItemsOwned.items[idx1];
+        int tempItemQuantity = ItemsOwned.itemsQuantity[idx1];
+        Sprite tempItemSprite = ItemsOwned.itemsSprite[idx1];
         Sprite tempItemImage = InventoryFull.slotImages[idx1].sprite;
 
         DragAndDrop tempDragAndDrop = InventoryFull.slotImages[idx1].transform.parent.gameObject.GetComponent<DragAndDrop>();
@@ -250,8 +266,9 @@ public class Inventory : MonoBehaviour
 
         DragAndDrop dragAndDropTo = InventoryFull.slotImages[idx2].transform.parent.gameObject.GetComponent<DragAndDrop>();
 
-        items[idx1] = items[idx2];
-        itemsQuantity[idx1] = itemsQuantity[idx2];
+        ItemsOwned.items[idx1] = ItemsOwned.items[idx2];
+        ItemsOwned.itemsQuantity[idx1] = ItemsOwned.itemsQuantity[idx2];
+        ItemsOwned.itemsSprite[idx1] = ItemsOwned.itemsSprite[idx2];
         if (idx1 < slotsBackgroundList.Count) {
             if (idx2 < slotsBackgroundList.Count) {
                 slotImages[idx1].sprite = slotImages[idx2].sprite;
@@ -286,21 +303,22 @@ public class Inventory : MonoBehaviour
             dragAndDrop2.combinedItem = dragAndDropTo.combinedItem;
         }
 
-        items[idx2] = tempItemID;
-        itemsQuantity[idx2] = tempItemQuantity;
+        ItemsOwned.items[idx2] = tempItemID;
+        ItemsOwned.itemsQuantity[idx2] = tempItemQuantity;
+        ItemsOwned.itemsSprite[idx2] = tempItemSprite;
         if (idx2 < slotsBackgroundList.Count) {
             slotImages[idx2].sprite = tempItemImage;
         }
         InventoryFull.slotImages[idx2].sprite = tempItemImage;
 
         if (idx1 < slotsBackgroundList.Count) {
-            slotQuantities[idx1].text = "x" + itemsQuantity[idx1];
+            slotQuantities[idx1].text = "x" + ItemsOwned.itemsQuantity[idx1];
         }
         if (idx2 < slotsBackgroundList.Count) {
-            slotQuantities[idx2].text = "x" + itemsQuantity[idx2];
+            slotQuantities[idx2].text = "x" + ItemsOwned.itemsQuantity[idx2];
         }
-        InventoryFull.slotQuantities[idx1].text = "x" + itemsQuantity[idx1];
-        InventoryFull.slotQuantities[idx2].text = "x" + itemsQuantity[idx2];
+        InventoryFull.slotQuantities[idx1].text = "x" + ItemsOwned.itemsQuantity[idx1];
+        InventoryFull.slotQuantities[idx2].text = "x" + ItemsOwned.itemsQuantity[idx2];
 
         // The user dragged an item to an empty slot
         if (idx2 < slotsBackgroundList.Count) {
@@ -314,7 +332,7 @@ public class Inventory : MonoBehaviour
             InventoryFull.slotImages[idx2].enabled = true;
         }
 
-        if (itemsQuantity[idx1] <= 0) {
+        if (ItemsOwned.itemsQuantity[idx1] <= 0) {
             if (idx1 < slotsBackgroundList.Count) {
                 if (slotImages[idx1].enabled) {
                     slotImages[idx1].enabled = false;

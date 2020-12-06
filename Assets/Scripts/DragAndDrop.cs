@@ -148,7 +148,6 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         if (result.name.Contains("Heart Key"))
         {
             Cutscene5_Finale.goodEnding = true;
-            PlayerController.hasOddKey = false;
         }
 
         image.GetComponent<RectTransform>().position = imageOriginalPosition;
