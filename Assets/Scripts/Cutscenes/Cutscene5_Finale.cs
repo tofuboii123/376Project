@@ -51,7 +51,6 @@ public class Cutscene5_Finale : MonoBehaviour {
         }
     }
 
-
     IEnumerator Cutscene_Start() {
         PlayerController.inCutscene = true;
         if (Cutscene_Present.inPresentTriggered) {
@@ -60,6 +59,7 @@ public class Cutscene5_Finale : MonoBehaviour {
             }
         }
 
+        PlayerController.CanMove = false;
         Cutscene_Present.inPresentTriggered = false;
 
         GetAudioManager();
@@ -237,11 +237,14 @@ public class Cutscene5_Finale : MonoBehaviour {
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
+
             //clearing up
             Clock.SetActive(true);
             ClockText.SetActive(true);
             Inventory.SetActive(true);
             PlayerController.CanMove = true;
+
+            audioManager.StopFadeOut("In Past", 1.0f);
 
             yield return new WaitForSeconds(1.0f);
 

@@ -56,7 +56,6 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         Object.Destroy(PresentTrigger);
 
         c.GetComponent<CameraMovement>().cutscene_mode = true;
-        PlayerController.CanMove = false;
 
         GetAudioManager();
         audioManager.Play("Cutscene Start");
