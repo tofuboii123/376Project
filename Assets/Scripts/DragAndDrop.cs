@@ -94,7 +94,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         // Check if the drag is valid
         if (realOriginalItemIdx != realNewItemIdx) {
             if (validCombinationDrag) {
-                CombineItems();
+                CombineItems(realNewItemIdx);
             } else if (validSwapDrag) {
                 SwapItems(realOriginalItemIdx, realNewItemIdx);
             } else {
@@ -133,9 +133,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
     // Combine the two items and add a new item
-    void CombineItems() {
-        //print("Combination!");
-
+    void CombineItems(int realNewItemIdx) {
         GameObject itemToSpawn = combinedItem;
         
         // Delete the 2 original items
@@ -144,7 +142,7 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
         // Add the new item
         GameObject result = Instantiate(itemToSpawn);
-        inventory.AddItem(result);
+        inventory.AddItem(result, realNewItemIdx);
 
         //good ending check
         if (result.name.Contains("Heart Key"))
@@ -158,8 +156,6 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
     }
 
     private void SwapItems(int idx1, int idx2) {
-        //print("Swap!");
-
         //Debug.Log("Swapping items idx " + idx1 + " with " + idx2);
         inventory.SwapItems(idx1, idx2);
 

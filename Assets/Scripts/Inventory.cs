@@ -94,17 +94,29 @@ public class Inventory : MonoBehaviour
     }
 
     // add an item to the inventory
-    public void AddItem(GameObject obj)
+    public void AddItem(GameObject obj, int passedIndex = -999)
     {
+        bool didPassIndex = (passedIndex != -999);
+
         // Get information on the object
         InteractableAddToInventory item = obj.GetComponent<InteractableAddToInventory>();
         int objID = item.itemID;
         string combineName = item.combineName;
         GameObject combinedItem = item.combinedObject;
 
+        int idx;
+        bool hasItemCheck;
+
         // Check if we already have the item
-        int idx = items.IndexOf(objID);
-        if (idx >= 0) {
+        if (!didPassIndex) {
+            idx = items.IndexOf(objID);
+            hasItemCheck = (idx >= 0);
+        } else {
+            idx = passedIndex;
+            hasItemCheck = items[idx] != -1;
+        }
+
+        if (hasItemCheck) {
             // We already have the item in our inventory
             // Just add one to the quantity, not add a whole new item
             itemsQuantity[idx]++;
@@ -118,10 +130,13 @@ public class Inventory : MonoBehaviour
         }
 
         // New item adding to inventory...check to see if we have space
-        idx = items.IndexOf(-1);
-        if (idx < 0) {
-            IsFull = true;
-            return;
+        // If we passed in an index to add the itme to, then we don't care about this check
+        if (!didPassIndex) {
+            idx = items.IndexOf(-1);
+            if (idx < 0) {
+                IsFull = true;
+                return;
+            }
         }
 
         // It's a new item! Add it to the first open slot
