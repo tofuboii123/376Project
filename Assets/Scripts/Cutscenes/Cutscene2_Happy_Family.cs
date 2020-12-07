@@ -124,7 +124,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         PlayerController.CanMove = false;
         yield return new WaitForSeconds(1);
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm safe here..They must be dead now..." });
+        MessageController.ShowMessage(new string[] { "???:\nI'm safe here.. They must be dead now..." });
         while (MessageController.showMessage > 0)
         {
             yield return null;

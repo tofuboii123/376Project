@@ -103,6 +103,7 @@ MonoBehaviour:
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.
+  overwriteString: I need to combine this half of a key with the other half.
 --- !u!61 &1384609446646776314
 BoxCollider2D:
   m_ObjectHideFlags: 0

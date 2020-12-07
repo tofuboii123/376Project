@@ -16,6 +16,8 @@ public class MainMenu : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        StartCoroutine(FadeOut());
+
         volume.profile.TryGetSettings(out depthOfField);
         volume.profile.TryGetSettings(out bloom);
 
@@ -81,6 +83,17 @@ public class MainMenu : MonoBehaviour {
         }
 
         SceneManager.LoadScene("Cutscene");
+    }
+
+    IEnumerator FadeOut()
+    {
+        // loop over 1 second backwards
+        for (float i = 2; i >= 0; i -= Time.deltaTime)
+        {
+            // set color with i as alpha
+            image.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
     }
 
     private void GetAudioManager() {

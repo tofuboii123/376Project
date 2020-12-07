@@ -9,6 +9,7 @@ public class InteractableAddToInventory : Interactable
     public int requiredItemID = 0;
     public string getItemString = "I'll take this.";
     public string noItemString = "I don't have what I need.";
+    public string overwriteString = null;
 
     public override void OnInteraction()
     {
@@ -26,8 +27,15 @@ public class InteractableAddToInventory : Interactable
             "I guess I can take this " + objectName + ".",
             "A " + objectName + " could come in handy."
         };
-
-            string randomMessage = pickupMessage[Random.Range(0, pickupMessage.Length - 1)];
+            string randomMessage = "";
+            if(string.IsNullOrEmpty(overwriteString))
+            {
+                randomMessage = pickupMessage[Random.Range(0, pickupMessage.Length - 1)];
+            }
+            else
+            {
+                randomMessage = overwriteString;
+            }
 
             if (inventory.IsFull)
             {

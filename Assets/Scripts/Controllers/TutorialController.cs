@@ -104,7 +104,7 @@ public class TutorialController : MonoBehaviour
     {
         PlayerController.inCutscene = true;
         MessageController.ShowMessage(new string[] {
-            "I can bury her right next to this tree.\nAfter all these years..Her soul can finally\nrest in peace.",
+            "I can bury her right next to this tree.\nAfter all these years.. Her soul can finally\nrest in peace.",
         }, new int[] {
            
             Face.Thinking

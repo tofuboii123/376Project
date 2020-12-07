@@ -104,7 +104,7 @@ public class Cutscene5_Finale : MonoBehaviour {
 
         animator.SetFloat("Speed", 0);
         yield return new WaitForSeconds(1);
-        MessageController.ShowMessage(new string[] { "Victoria:\nMy little sweetheart..why don't you calm down?", "Victoria:\nI know it is my fault..I am the worst mother. \nI overheard them, Sabrina. Do you know what \nthat therapist was saying?", "Victoria:\nHe told Ben that it was the side effect of my pills\nI should not have taken those pills when I was pregnant.", "Victoria:\nBut that idiot Larzno never told me that...\nHe said these pills help stop the voices...I should \nhave known better..I am the worst mother.. \naren't I?", "Victoria:\nShush..calm down. Why don't you stop crying?..\nwhy don't you shut up?!", "Victoria:\nI know you are suffering. I know how to ease your pain." });
+        MessageController.ShowMessage(new string[] { "Victoria:\nMy little sweetheart..why don't you calm down?", "Victoria:\nI know it is my fault.. I am the worst mother. \nI overheard them, Sabrina. Do you know what \nthat therapist was saying?", "Victoria:\nHe told Ben that it was the side effect of my pills\nI should not have taken those pills when I was pregnant.", "Victoria:\nBut that idiot Larzno never told me that...\nHe said these pills help stop the voices... I should \nhave known better.. I am the worst mother.. \naren't I?", "Victoria:\nShush.. calm down. Why don't you stop crying?..\nwhy don't you shut up?!", "Victoria:\nI know you are suffering. I know how to ease your pain." });
         while (MessageController.showMessage > 0) {
             yield return null;
         }
@@ -144,7 +144,7 @@ public class Cutscene5_Finale : MonoBehaviour {
         //insert killing animation here
         yield return new WaitForSeconds(1.5f);
 
-        MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer cry my child..you are no longer \nsuffering.." });
+        MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer cry my child.. you are no longer \nsuffering.." });
         while (MessageController.showMessage > 0) {
             yield return null;
         }
@@ -188,7 +188,7 @@ public class Cutscene5_Finale : MonoBehaviour {
 
             yield return new WaitForSeconds(0.3f);
 
-            MessageController.ShowMessage(new string[] { "???:\nThat baby...She was never buried. She could\nnever rest in peace..I know what I need to do\nnow." });
+            MessageController.ShowMessage(new string[] { "???:\nThat baby... She was never buried. She could\nnever rest in peace.. I know what I need to do\nnow." });
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
@@ -228,7 +228,7 @@ public class Cutscene5_Finale : MonoBehaviour {
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
-            MessageController.ShowMessage(new string[] { "Victoria:\nYou...You saw everything.." });
+            MessageController.ShowMessage(new string[] { "Victoria:\nYou... You saw everything.." });
             while (MessageController.showMessage > 0) {
                 yield return null;
             }

@@ -129,3 +129,4 @@ MonoBehaviour:
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.
+  overwriteString: I'm sure I could use this empty cup for something.

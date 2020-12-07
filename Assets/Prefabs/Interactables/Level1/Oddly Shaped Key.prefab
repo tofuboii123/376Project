@@ -102,3 +102,5 @@ MonoBehaviour:
   requiredItemID: 0
   getItemString: I'll take this.
   noItemString: I don't have what I need.
+  overwriteString: I got a strange key from the chest. I wonder what kind of lock
+    it opens...
