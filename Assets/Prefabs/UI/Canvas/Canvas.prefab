@@ -6630,6 +6630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: {fileID: 0}
   animator: {fileID: 6251363696425297585}
+  blackImage: {fileID: 6575391296028912}
   background: {fileID: 6251363696425297581}
   helpScreen: {fileID: 812375096173033259}
   text: {fileID: 6251363696530658258}

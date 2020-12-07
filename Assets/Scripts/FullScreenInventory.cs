@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class FullScreenInventory : MonoBehaviour {
@@ -10,10 +11,13 @@ public class FullScreenInventory : MonoBehaviour {
 
     public static bool inMenu;
     public static bool inHelpScreen;
+    public static bool isExitingGame;
 
     private static FullScreenInventory instance;
 
     public Animator animator;
+
+    public Image blackImage;
 
     public GameObject background;
     public GameObject helpScreen;
@@ -51,9 +55,14 @@ public class FullScreenInventory : MonoBehaviour {
         helpScreen.SetActive(false);
 
         inHelpScreen = false;
+        isExitingGame = false;
     }
 
     public static void startFullScreenInventory() {
+        if (isExitingGame) {
+            return;
+        }
+
         inMenu = true;
 
         instance.GetAudioManager();
@@ -68,6 +77,10 @@ public class FullScreenInventory : MonoBehaviour {
     }
 
     public static void exitFullScreenInventory() {
+        if (isExitingGame) {
+            return;
+        }
+
         inMenu = false;
 
         instance.GetAudioManager();
@@ -114,27 +127,43 @@ public class FullScreenInventory : MonoBehaviour {
     }
 
     public void OnHelpClicked() {
-        inHelpScreen = true;
+        if (isExitingGame) {
+            return;
+        }
 
         background.SetActive(false);
         helpScreen.SetActive(true);
+
+        inHelpScreen = true;
     }
 
     public void OnHelpBackClicked() {
-        inHelpScreen = false;
+        if (isExitingGame) {
+            return;
+        }
 
         background.SetActive(true);
         helpScreen.SetActive(false);
+
+        inHelpScreen = false;
     }
 
     public void OnExitGameClicked() {
-        #if UNITY_EDITOR
-            // Application.Quit() does not work in the editor so
-            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        if (isExitingGame) {
+            return;
+        }
+
+        StartCoroutine(ExitGame());
+    }
+
+    IEnumerator ExitGame() {
+        for (float i = 0; i <= 1; i += Time.deltaTime) {
+            // set color with i as alpha
+            blackImage.color = new Color(0, 0, 0, i);
+            yield return null;
+        }
+
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void GetAudioManager() {

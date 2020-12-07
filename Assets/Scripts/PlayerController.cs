@@ -71,6 +71,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (FullScreenInventory.isExitingGame) {
+            return;
+        }
+
         // Full screen inventory
         if (Input.GetButtonDown("FullScreenInventory")) {
             if (FullScreenInventory.inHelpScreen) {
@@ -120,6 +124,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (FullScreenInventory.isExitingGame) {
+            return;
+        }
+
         if (CanMove && !inCutscene)
         {
             MovePlayer();
@@ -253,12 +261,12 @@ public class PlayerController : MonoBehaviour
         isTravelling = false;
     }
     public IEnumerator ClockNotWorking() {
-
         CanMove = false;
         MessageController.ShowMessage(new string[] { "???\nThe watch seems to have stopped working.." });
         while (MessageController.showMessage > 0) {
             yield return null;
         }
+
         CanMove = true;
     }
 
