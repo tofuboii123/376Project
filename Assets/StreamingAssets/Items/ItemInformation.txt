@@ -1,6 +1,6 @@
 @ITEM 1
 #ItemName: Plant
-#Description: Description here
+#Description: Looks like a tree sapling. High School arboriculture might finally come in handy.
 @ENDITEM
 @ITEM 11
 #ItemName: Bathroom Key
@@ -11,12 +11,12 @@
 #Description: Just an empty cup. It’s eerily clean...
 @ENDITEM
 @ITEM 13
-#ItemName: Full Cup
+#ItemName: Filled Cup
 #Description: Gotta be careful not to spill this.
 @ENDITEM
 @ITEM 14
 #ItemName: Hammer
-#Description: A pretty sturdy hammer. Seems like it can come in handy if I ever feel like smashing something.
+#Description: Seems like it can come in handy if I ever feel like smashing something.
 @ENDITEM
 @ITEM 15
 #ItemName: Staircase Key
@@ -24,7 +24,7 @@
 @ENDITEM
 @ITEM 16
 #ItemName: Safe Combination
-#Description: There’s some numbers on this piece of paper. Looks like a lock combination.
+#Description: There’s some numbers on this piece of paper. 16-6-6… Maybe I can use it somewhere.
 @ENDITEM
 @ITEM 17
 #ItemName: Oddly-Shaped Key
@@ -43,8 +43,8 @@
 #Description: Now it’s a full key!
 @ENDITEM
 @ITEM 24
-#ItemName: Pieces of metal
-#Description: Description here
+#ItemName: Broken Pieces of Metal
+#Description: They feel pretty sturdy. Too bad they’re in pieces.
 @ENDITEM
 @ITEM 25
 #ItemName: Duct Tape
@@ -74,10 +74,6 @@
 #ItemName: Battery
 #Description: Let’s hope there’s still some juice left.
 @ENDITEM
-@ITEM 212
-#ItemName: Radio
-#Description: Description here
-@ENDITEM
 @ITEM 213
 #ItemName: Rusty Key
 #Description: Looks rusted to all hell. I don’t think it’ll fit in anything in its current state though.
@@ -96,7 +92,7 @@
 @ENDITEM
 @ITEM 217
 #ItemName: Strange Relic
-#Description: Description here
+#Description: Didn’t think it could get any creepier… What even is this?
 @ENDITEM
 @ITEM 218
 #ItemName: Small Key
@@ -104,11 +100,11 @@
 @ENDITEM
 @ITEM 219
 #ItemName: Oddly-Shaped Chest
-#Description: Description here
+#Description: ...
 @ENDITEM
 @ITEM 220
 #ItemName: The Heart
-#Description: Description here
+#Description: ...
 @ENDITEM
 @ITEM 221
 #ItemName: Heart Key
