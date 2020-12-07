@@ -12,9 +12,26 @@ public class MainMenu : MonoBehaviour {
 
     public Image image;
 
+    public GameObject headingText;
+    public GameObject playButton;
+    public GameObject demoButton;
+    public GameObject helpButton;
+    public GameObject exitButton;
+
+    public GameObject helpScreen;
+
     private AudioManager audioManager;
 
-    // Start is called before the first frame update
+    void Awake() {
+        headingText.SetActive(true);
+        playButton.SetActive(true);
+        demoButton.SetActive(true);
+        helpButton.SetActive(true);
+        exitButton.SetActive(true);
+
+        helpScreen.SetActive(false);
+    }
+
     void Start() {
         StartCoroutine(FadeOut());
 
@@ -40,7 +57,26 @@ public class MainMenu : MonoBehaviour {
         GetAudioManager();
         audioManager.Play("Mouse Click");
 
-        Debug.Log("HELP");
+        headingText.SetActive(false);
+        playButton.SetActive(false);
+        demoButton.SetActive(false);
+        helpButton.SetActive(false);
+        exitButton.SetActive(false);
+
+        helpScreen.SetActive(true);
+    }
+
+    public void ExitHelp() {
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
+
+        headingText.SetActive(true);
+        playButton.SetActive(true);
+        demoButton.SetActive(true);
+        helpButton.SetActive(true);
+        exitButton.SetActive(true);
+
+        helpScreen.SetActive(false);
     }
 
     public void Demo() {
