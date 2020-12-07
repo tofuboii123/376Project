@@ -116,12 +116,12 @@ public class Cutscene2_Happy_Family : MonoBehaviour
 
         PlayerController.isTravelling = true;
         Player.GetComponent<PlayerController>().TimeShift();
-
         while (PlayerController.isTravelling)
         {
             yield return null;
-
         }
+
+        PlayerController.CanMove = false;
         yield return new WaitForSeconds(1);
 
         MessageController.ShowMessage(new string[] { "???:\nI'm safe here..They must be dead now..." });
