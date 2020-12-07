@@ -184,6 +184,8 @@ public class Cutscene5_Finale : MonoBehaviour {
                 yield return null;
             }
 
+            PlayerController.CanMove = false;
+
             yield return new WaitForSeconds(0.3f);
 
             MessageController.ShowMessage(new string[] { "???:\nThat baby...She was never buried. She could\nnever rest in peace..I know what I need to do\nnow." });

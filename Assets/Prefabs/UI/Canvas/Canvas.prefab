@@ -524,9 +524,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Item Name
-
-'
+  m_text: Item Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4680478b58b2b834184720fe256a5984, type: 2}
   m_sharedMaterial: {fileID: 7380478836368953630, guid: 4680478b58b2b834184720fe256a5984, type: 2}
@@ -3761,8 +3759,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 346.41, y: -149.37}
-  m_SizeDelta: {x: 575.12585, y: 284.14493}
+  m_AnchoredPosition: {x: 346.41, y: -160.68}
+  m_SizeDelta: {x: 575.12585, y: 261.5123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3351960220719391975
 CanvasRenderer:
@@ -7371,7 +7369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 702.5, y: -326}
+  m_AnchoredPosition: {x: 702.5, y: -342.5}
   m_SizeDelta: {x: 1301.3394, y: 393.62274}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7399798794252707396
@@ -7404,7 +7402,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "  - WASD/Arrow keys: Move\n\n  - F: Interact with objects\n\n  - Space:
     Time Travel\n\n  - Q/E: Cycle through inventory (Select item)\n\n  - R OR ESC:
-    Pause Menu and full screen inventory\n\n  - "
+    Pause Menu and full screen inventory"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4680478b58b2b834184720fe256a5984, type: 2}
   m_sharedMaterial: {fileID: 7380478836368953630, guid: 4680478b58b2b834184720fe256a5984, type: 2}
