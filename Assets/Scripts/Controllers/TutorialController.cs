@@ -140,7 +140,7 @@ public class TutorialController : MonoBehaviour
 
         PlayerController.inCutscene = false;
         Cutscene5_Finale.goodEndingTriggered = false;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Credits");
     }
 
     private void GetAudioManager() {

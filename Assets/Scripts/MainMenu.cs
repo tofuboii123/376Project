@@ -17,6 +17,8 @@ public class MainMenu : MonoBehaviour {
     public GameObject playButton;
     public GameObject demoButton;
     public GameObject helpButton;
+    public GameObject creditsButton;
+    public GameObject optionsButton;
     public GameObject exitButton;
 
     public GameObject helpScreen;
@@ -32,6 +34,7 @@ public class MainMenu : MonoBehaviour {
         playButton.SetActive(true);
         demoButton.SetActive(true);
         helpButton.SetActive(true);
+        creditsButton.SetActive(true);
         exitButton.SetActive(true);
 
         helpScreen.SetActive(false);
@@ -66,6 +69,8 @@ public class MainMenu : MonoBehaviour {
         playButton.SetActive(false);
         demoButton.SetActive(false);
         helpButton.SetActive(false);
+        creditsButton.SetActive(false);
+        optionsButton.SetActive(false);
         exitButton.SetActive(false);
 
         helpScreen.SetActive(true);
@@ -79,9 +84,21 @@ public class MainMenu : MonoBehaviour {
         playButton.SetActive(true);
         demoButton.SetActive(true);
         helpButton.SetActive(true);
+        creditsButton.SetActive(true);
+        optionsButton.SetActive(true);
         exitButton.SetActive(true);
 
         helpScreen.SetActive(false);
+    }
+
+    public void Credits()
+    {
+
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
+        audioManager.StopFadeOut("Main Menu Music", 2.0f);
+
+        StartCoroutine(StartCredits());
     }
 
     public void Options() {
@@ -92,6 +109,8 @@ public class MainMenu : MonoBehaviour {
         playButton.SetActive(false);
         demoButton.SetActive(false);
         helpButton.SetActive(false);
+        creditsButton.SetActive(false);
+        optionsButton.SetActive(false);
         exitButton.SetActive(false);
 
         optionsScreen.SetActive(true);
@@ -109,6 +128,8 @@ public class MainMenu : MonoBehaviour {
         playButton.SetActive(true);
         demoButton.SetActive(true);
         helpButton.SetActive(true);
+        creditsButton.SetActive(true);
+        optionsButton.SetActive(true);
         exitButton.SetActive(true);
 
         optionsScreen.SetActive(false);
@@ -146,6 +167,23 @@ public class MainMenu : MonoBehaviour {
     public void onMyPointerEnter() {
         GetAudioManager();
         audioManager.Play("Mouse Hover");
+    }
+
+    IEnumerator StartCredits()
+    {
+        float timer;
+
+        timer = 0.0f;
+        while (timer < 0.5f)
+        {
+            timer += Time.deltaTime;
+
+            image.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, timer / 0.5f));
+
+            yield return null;
+        }
+
+        SceneManager.LoadScene("Credits");
     }
 
     IEnumerator StartGame() {
