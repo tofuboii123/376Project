@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class FullScreenInventory : MonoBehaviour {
     public PostProcessVolume volume;
@@ -11,6 +12,7 @@ public class FullScreenInventory : MonoBehaviour {
 
     public static bool inMenu;
     public static bool inHelpScreen;
+    public static bool inOptionsScreen;
     public static bool isExitingGame;
 
     private static FullScreenInventory instance;
@@ -21,6 +23,7 @@ public class FullScreenInventory : MonoBehaviour {
 
     public GameObject background;
     public GameObject helpScreen;
+    public GameObject optionsScreen;
 
     public GameObject text;
     public GameObject clock;
@@ -33,6 +36,9 @@ public class FullScreenInventory : MonoBehaviour {
     private CanvasGroup xInteractTextCanvasGroup;
 
     private CanvasGroup canvasGroup;
+
+    public TextMeshProUGUI masterVolumeText;
+    public Slider masterVolumeSlider;
 
     private AudioManager audioManager;
 
@@ -135,6 +141,39 @@ public class FullScreenInventory : MonoBehaviour {
         helpScreen.SetActive(true);
 
         inHelpScreen = true;
+    }
+
+    public void OnOptionsClicked() {
+        if (isExitingGame) {
+            return;
+        }
+
+        background.SetActive(false);
+        optionsScreen.SetActive(true);
+
+        int masterVolumeSet = Option.GetVolumePercent();
+        masterVolumeSlider.value = masterVolumeSet / 100.0f;
+        masterVolumeText.text = masterVolumeSet + "%";
+
+        inOptionsScreen = true;
+    }
+
+    public void OnOptionsBackClicked() {
+        if (isExitingGame) {
+            return;
+        }
+
+        background.SetActive(true);
+        optionsScreen.SetActive(false);
+
+        inOptionsScreen = false;
+    }
+
+    public void NewVolume(float newVolume) {
+        int volume = (int)(newVolume * 100);
+        masterVolumeText.text = volume + "%";
+
+        Option.SetVolumePercent(volume);
     }
 
     public void OnHelpBackClicked() {

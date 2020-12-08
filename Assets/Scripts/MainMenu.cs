@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,10 @@ public class MainMenu : MonoBehaviour {
     public GameObject exitButton;
 
     public GameObject helpScreen;
+    public GameObject optionsScreen;
+
+    public TextMeshProUGUI masterVolumeText;
+    public Slider masterVolumeSlider;
 
     private AudioManager audioManager;
 
@@ -77,6 +82,43 @@ public class MainMenu : MonoBehaviour {
         exitButton.SetActive(true);
 
         helpScreen.SetActive(false);
+    }
+
+    public void Options() {
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
+
+        headingText.SetActive(false);
+        playButton.SetActive(false);
+        demoButton.SetActive(false);
+        helpButton.SetActive(false);
+        exitButton.SetActive(false);
+
+        optionsScreen.SetActive(true);
+
+        int masterVolumeSet = Option.GetVolumePercent();
+        masterVolumeSlider.value = masterVolumeSet / 100.0f;
+        masterVolumeText.text = masterVolumeSet + "%";
+    }
+
+    public void ExitOptions() {
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
+
+        headingText.SetActive(true);
+        playButton.SetActive(true);
+        demoButton.SetActive(true);
+        helpButton.SetActive(true);
+        exitButton.SetActive(true);
+
+        optionsScreen.SetActive(false);
+    }
+
+    public void NewVolume(float newVolume) {
+        int volume = (int)(newVolume * 100);
+        masterVolumeText.text = volume + "%";
+
+        Option.SetVolumePercent(volume);
     }
 
     public void Demo() {

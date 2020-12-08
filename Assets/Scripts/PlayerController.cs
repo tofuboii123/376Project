@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         // Full screen inventory
         if (Input.GetButtonDown("FullScreenInventory")) {
-            if (FullScreenInventory.inHelpScreen) {
+            if (FullScreenInventory.inHelpScreen || FullScreenInventory.inOptionsScreen) {
                 return;
             }
 
