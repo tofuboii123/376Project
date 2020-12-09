@@ -6,7 +6,7 @@ using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour {
+public class MainMenuController : MonoBehaviour {
     public PostProcessVolume volume;
     private DepthOfField depthOfField;
     private Bloom bloom;

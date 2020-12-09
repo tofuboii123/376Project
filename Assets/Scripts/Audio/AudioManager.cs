@@ -25,6 +25,10 @@ public class AudioManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
+        Init();
+    }
+
+    private void Init() {
         soundsList = new Dictionary<string, Sound>();
 
         foreach (Sound s in sounds) {

@@ -28,6 +28,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public static bool isDragging;
 
+    private AudioManager audioManager;
+
     void Start()
     {
         inventory = player.GetComponent<Inventory>();
@@ -146,6 +148,9 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
 
         image.GetComponent<RectTransform>().position = imageOriginalPosition;
         quantityText.GetComponent<RectTransform>().position = quantityTextOriginalPosition;
+
+        GetAudioManager();
+        audioManager.Play("Item Combination");
     }
 
     private void SwapItems(int idx1, int idx2) {
@@ -164,5 +169,11 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler
         List<RaycastResult> raysastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raysastResults);
         return raysastResults;
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

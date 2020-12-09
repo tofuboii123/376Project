@@ -63084,10 +63084,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1057328329671439577, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2047801766412364471, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1723116990}
+    - target: {fileID: 2056947381488437550, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3141766403768337466, guid: 59d38af2df802d04f8fffba8cb16886c, type: 3}
       propertyPath: player
       value: 

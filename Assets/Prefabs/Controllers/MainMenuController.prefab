@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8302659116580261047}
-  - component: {fileID: 8302659116580261046}
+  - component: {fileID: 8480488211406887962}
   m_Layer: 0
   m_Name: MainMenuController
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8302659116580261046
+--- !u!114 &8480488211406887962
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,3 +45,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   volume: {fileID: 0}
   image: {fileID: 0}
+  headingText: {fileID: 0}
+  playButton: {fileID: 0}
+  demoButton: {fileID: 0}
+  helpButton: {fileID: 0}
+  creditsButton: {fileID: 0}
+  optionsButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  helpScreen: {fileID: 0}
+  optionsScreen: {fileID: 0}
+  masterVolumeText: {fileID: 0}
+  masterVolumeSlider: {fileID: 0}
