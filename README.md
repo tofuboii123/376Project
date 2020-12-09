@@ -11,3 +11,5 @@ COMP 376 Team Project
 * https://www.artstation.com/artwork/580dDE
 * https://opengameart.org/content/2d-car-sprite-4
 * https://opengameart.org/content/interior-tileset-16x16
+* https://www.fesliyanstudios.com/play-mp3/5659
+* https://freesound.org/people/Bertsz/sounds/500900/
