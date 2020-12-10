@@ -6,9 +6,12 @@ public class InteractableBreakableWindow : Interactable
 {
     public static bool windowIsBroken = false;
 
+    private AudioManager audioManager;
+
     private void Start()
     {
         windowIsBroken = false;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     public override void OnInteraction()
@@ -17,6 +20,7 @@ public class InteractableBreakableWindow : Interactable
         {
             if (player.GetComponent<PlayerController>().inPast)
             {
+                audioManager.Play("Window Break");
                 windowIsBroken = true;
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 if(GameObject.FindGameObjectsWithTag("BreakableWindow").Length == 2)

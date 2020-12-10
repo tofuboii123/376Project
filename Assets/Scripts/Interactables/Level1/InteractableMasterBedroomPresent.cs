@@ -21,6 +21,8 @@ public class InteractableMasterBedroomPresent : Interactable
             {
                 if (inventory.ContainsSelectedItem(14))
                 {
+                    GetAudioManager();
+                    audioManager.Play("Door Break");
                     doorIsBroken = true;
                     inventory.DiscardItem(14);
                     MessageController.ShowMessage("I was able to break the door down since it was weakened from years of outside weather!", Face.Happy);
@@ -45,9 +47,6 @@ public class InteractableMasterBedroomPresent : Interactable
     {
 
         PlayerController.CanMove = false;
-
-        GetAudioManager();
-        audioManager.Play("Open Door");
 
         for (float i = 0; i <= 1; i += Time.deltaTime * 2)
         {
