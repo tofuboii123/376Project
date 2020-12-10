@@ -10,12 +10,16 @@ public class CreditsController : MonoBehaviour {
     public RectTransform creditsTextObjectTransform;
     public TextMeshProUGUI thanksText;
 
+    private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start() {
         creditsTextObjectTransform.anchorMin = new Vector2(0.5f, -0.05f);
         creditsTextObjectTransform.anchorMax = new Vector2(0.5f, -0.05f);
 
-        //StartCoroutine(FadeOut());
+        GetAudioManager();
+        audioManager.PlayFadeIn("Credits Music", 2.0f);
+
         StartCoroutine(StartCredits());
     }
 
@@ -59,8 +63,17 @@ public class CreditsController : MonoBehaviour {
             yield return null;
         }
 
-        yield return new WaitForSeconds(1.0f);
+        GetAudioManager();
+        audioManager.StopFadeOut("Credits Music", 1.5f);
+
+        yield return new WaitForSeconds(1.5f);
 
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void GetAudioManager() {
+        if (audioManager == null) {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 }

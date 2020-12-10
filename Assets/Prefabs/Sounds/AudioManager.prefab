@@ -177,4 +177,11 @@ MonoBehaviour:
     playOnAwake: 0
     loop: 0
     source: {fileID: 0}
+  - name: Credits Music
+    clip: {fileID: 8300000, guid: 21d9d4ec2c17b6a4c8857a01237586cf, type: 3}
+    volume: 0.2
+    pitch: 1
+    playOnAwake: 0
+    loop: 1
+    source: {fileID: 0}
   disableAllSounds: 0
