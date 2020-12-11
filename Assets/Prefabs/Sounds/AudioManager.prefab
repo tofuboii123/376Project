@@ -154,6 +154,13 @@ MonoBehaviour:
     volume: 0.3
     pitch: 1
     playOnAwake: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: Item Combination
+    clip: {fileID: 8300000, guid: 855b7dfd25a909c4d9c0b9ca2819237c, type: 3}
+    volume: 0.3
+    pitch: 1
+    playOnAwake: 0
     loop: 0
     source: {fileID: 0}
   disableAllSounds: 0

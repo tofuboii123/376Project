@@ -93,14 +93,16 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
 
 
         yield return new WaitForSeconds(1.5f);
-        MessageController.ShowMessage(new string[] {"Victoria:\nWhat did the doctor say?\nWhat is going on with my baby?","Benjamin:\nMy love, you should remain calm.." });
+        MessageController.ShowMessage(new string[] {"Victoria:\nWhat did the doctor say?\nWhat is going on with my baby?","Benjamin:\nMy love, you should remain calm.." },new int[] {
+            Face.VNormal,
+            Face.BSad        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
 
         animator.SetFloat("Vertical", -1);
-        animator.SetFloat("Speed", 5);
+        animator.SetFloat("Speed", 1);
 
 
         while (Mother.transform.position.y > Father.transform.position.y)
@@ -125,7 +127,20 @@ public class Cutscene4_Chaos_and_Pain : MonoBehaviour
         animator.SetFloat("Speed", 0);
 
 
-        MessageController.ShowMessage(new string[] {"Victoria:\nWhat did that idiot say?! Answer me!", "Benjamin:\nListen.. I will tell you\nBut you have to promise me to stay calm.", "Benjamin:\nI have talked to the doctor.\nSabrina just needs a little extra care.","Victoria:\nYou are lying to me! I know there is something\nseriously wrong with her! She's been constantly crying.\nI know she's in pain..","Benjamin:\nYou are right.. I don't know how to say this..\nThe doctor told me.. She's been diagnosed with \nmucoviscidosis.","Benjamin:\nThey did not explain much.. She was born with this\ncondition.. We need to be more patient with her.","Victoria:\nBut.. what did the doctors do?\nHow long is she going to suffer?","Benjamin:\nI.. I'm afraid there isn't much we or the doctors can do.\nWe need to stay with her, and stay strong.","Victoria:\nSo my innocent girl going to be in pain..\nand they are going to do nothing about it.","Victoria:\nBut how can I blame them... It was my choice.\nI gave birth to her. I made her be in pain..\nI am the cause of all the pain she is going through.","Benjamin:\nThis is absolutely nobody's fault.\nListen, this is not going to be easy for the four of\nus. I need you to keep being strong. Don't listen to\nthe voices!","Victoria:\nI chose to bring her into this world.. what for?\nto suffer and get hurt.. like I did.\nIsn't that true?"});
+        MessageController.ShowMessage(new string[] {"Victoria:\nWhat did that idiot say?! Answer me!", "Benjamin:\nListen.. I will tell you\nBut you have to promise me to stay calm.", "Benjamin:\nI have talked to the doctor.\nSabrina just needs a little extra care.","Victoria:\nYou are lying to me! I know there is something\nseriously wrong with her! She's been constantly crying.\nI know she's in pain..","Benjamin:\nYou are right.. I don't know how to say this..\nThe doctor told me.. She's been diagnosed with \nmucoviscidosis.","Benjamin:\nThey did not explain much.. She was born with this\ncondition.. We need to be more patient with her.","Victoria:\nBut.. what did the doctors do?\nHow long is she going to suffer?","Benjamin:\nI.. I'm afraid there isn't much we or the doctors can do.\nWe need to stay with her, and stay strong.","Victoria:\nSo my innocent girl going to be in pain..\nand they are going to do nothing about it.","Victoria:\nBut how can I blame them... It was my choice.\nI gave birth to her. I made her be in pain..\nI am the cause of all the pain she is going through.","Benjamin:\nThis is absolutely nobody's fault.\nListen, this is not going to be easy for the four of\nus. I need you to keep being strong. Don't listen to\nthe voices!","Victoria:\nI chose to bring her into this world.. what for?\nto suffer and get hurt.. like I did.\nIsn't that true?"},new int[] {
+            Face.VSad,
+            Face.BNormal,
+            Face.BNormal,
+            Face.VSad,
+            Face.BSad,
+            Face.BSad,
+            Face.VSad,
+             Face.BSad,
+             Face.VSad,
+             Face.VNormal,
+             Face.BNormal,
+             Face.VNormal
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;

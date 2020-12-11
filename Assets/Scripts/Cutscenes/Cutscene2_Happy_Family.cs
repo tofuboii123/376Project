@@ -26,6 +26,14 @@ public class Cutscene2_Happy_Family : MonoBehaviour
     //Audio
     private AudioManager audioManager;
 
+    public Animator animator;
+
+     void Start() {
+        animator = Father.GetComponent<Animator>();
+        isActive = false;
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.CompareTo("Player") == 0)
@@ -49,7 +57,8 @@ public class Cutscene2_Happy_Family : MonoBehaviour
                 yield return null;
             }
         }
-
+        animator.SetFloat("Vertical", 0);
+        animator.SetFloat("Horizontal", 1);
         PlayerController.CanMove = false;
         Cutscene_Present.inPresentTriggered = false;
 
@@ -81,19 +90,35 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         }
         yield return new WaitForSeconds(0.8f);
 
-        MessageController.ShowMessage(new string[] { "???:\nw...what?? there are people living here?!\nor used to live...", "Benjamin:\nYes dear! and guess where we are going for the weekend.\nAvondale Park!"});
+        MessageController.ShowMessage(new string[] { "???:\nw...what?? there are people living here?!\nor used to live...", "Benjamin:\nYes dear! and guess where we are going for the weekend.\nAvondale Park!"},
+        new int[] {
+            Face.Surprised,
+            Face.BHappy,
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
 
-        MessageController.ShowMessage(new string[] { "Abigail:\nDad that is wonderful! You are the best!\nI can't wait until Saturday.", "Benjamin:\nHaha let's not get too excited about that yet, my dear.\nYour mother should agree first.", "Victoria:\nAvondale Park? isn't that a bit far from here..?", "Benjamin:\nI know, but it's been a while since we had a family\ntrip. Plus, Abby has been wanting to visit there for a \nlong time.", "Benjamin:\nI also confirmed with Dr. Larnzo. It's your break week and\na short trip will help before starting the next phase \nof therapy.", "Abigail:\nYes mom! please please!", "Victoria:\nIf you say so sweetie.\nSay, how was school today?", "Benjamin:\nI hate to interrupt you ladies, but it's 15 minutes past\n4. I shouldn't be late to the meeting. Take care." });
+        MessageController.ShowMessage(new string[] { "Abigail:\nDad that is wonderful! You are the best!\nI can't wait until Saturday.", "Benjamin:\nHaha let's not get too excited about that yet, \nmy dear. Your mother should agree first.", "Victoria:\nAvondale Park? isn't that a bit far from here..?", "Benjamin:\nI know, but it's been a while since we had a family\ntrip. Plus, Abby has been wanting to visit there for a \nlong time.", "Benjamin:\nI also confirmed with Dr. Larnzo. It's your break week\nand a short trip will help before starting the \nnext phase of therapy.", "Abigail:\nYes mom! please please!", "Victoria:\nIf you say so sweetie.\nSay, how was school today?", "Benjamin:\nI hate to interrupt you ladies, but it's 15 minutes past\n4. I shouldn't be late to the meeting. Take care." }, new int[] {
+            Face.AHappy,
+            Face.BHappy,
+            Face.VNormal,
+            Face.BNormal,
+            Face.BNormal,
+            Face.AHappy,
+            Face.VHappy,
+            Face.BNormal
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
 
         //Debug.Log(Father.transform.position.y);
+        animator.SetFloat("Vertical", -1);
+        animator.SetFloat("Horizontal", 0);
+        animator.SetFloat("Speed", 1f);
 
         while (c.transform.position.x != Player.transform.position.x)
         {
@@ -108,7 +133,10 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         }
         c.GetComponent<CameraMovement>().cutscene_mode = false;
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm not staying here for another second!"  });
+        MessageController.ShowMessage(new string[] { "???:\nI'm not staying here for another second!"  },new int[] {
+            Face.Surprised
+          
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
@@ -124,11 +152,14 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         PlayerController.CanMove = false;
         yield return new WaitForSeconds(1);
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm safe here.. They must be dead now..." });
+        MessageController.ShowMessage(new string[] { "???:\nI'm safe here.. They must be dead now..." },new int[] {
+            Face.Disappointed
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
+        animator.SetFloat("Speed", 0.0f);
 
         //clearing up
         Clock.SetActive(true);

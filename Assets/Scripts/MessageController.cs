@@ -10,6 +10,15 @@ public class Face
     public const int Disappointed = 2;
     public const int Happy = 3;
     public const int None = 4;
+    public const int VNormal = 5;
+    public const int VSad = 6;
+    public const int VHappy = 7;
+    public const int VMad = 8;
+
+    public const int BNormal = 9;
+    public const int BHappy = 10;
+    public const int BSad = 11;
+    public const int AHappy = 12;
 }
 
 public class MessageController : MonoBehaviour
@@ -17,7 +26,7 @@ public class MessageController : MonoBehaviour
     public GameObject messageBox;
     public GameObject messageText;
     public GameObject closeMessageText;
-    public Sprite[] faceSprites = new Sprite[5];
+    public Sprite[] faceSprites = new Sprite[13];
     public Image face;
     
     private float typeDelay = 0.015f;

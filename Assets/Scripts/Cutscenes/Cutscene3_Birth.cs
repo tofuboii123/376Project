@@ -25,10 +25,12 @@ public class Cutscene3_Birth : MonoBehaviour
     private AudioManager audioManager;
 
     public GameObject PresentTrigger;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
+                animator = Father.GetComponent<Animator>();
         isActive = false;
     }
 
@@ -46,6 +48,8 @@ public class Cutscene3_Birth : MonoBehaviour
 
     IEnumerator Cutscene_Start()
     {
+        animator.SetFloat("Vertical", 0);
+        animator.SetFloat("Horizontal", 1);
         PlayerController.inCutscene = true;
         if (Cutscene_Present.inPresentTriggered){
             while(PlayerController.isTravelling == true){
@@ -80,7 +84,12 @@ public class Cutscene3_Birth : MonoBehaviour
 
         }
         yield return new WaitForSeconds(1);
-        MessageController.ShowMessage(new string[] { "???:\nA baby.. Could that be..me?","Victoria:\nSabrina... I like it", "???:\nOk that's definitely not me.\nBut I feel very close to her...and her mom.","Benjamin:\nI feel like the happiest man in the world\nnow my dear. Our little Sabrina will bring\nus a lot of joy."});
+        MessageController.ShowMessage(new string[] { "???:\nA baby.. Could that be..me?","Victoria:\nSabrina... I like it", "???:\nOk that's definitely not me.\nBut I feel very close to her...and her mom.","Benjamin:\nI feel like the happiest man in the world\nnow my dear. Our little Sabrina will bring\nus a lot of joy."},new int[] {
+            Face.Surprised,
+            Face.VNormal,
+            Face.Thinking,
+            Face.BHappy
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
@@ -92,13 +101,20 @@ public class Cutscene3_Birth : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
 
-        MessageController.ShowMessage(new string[] { "Victoria:\nShush.. She's crying again..\nShe was crying all day yesterday.\nBen, I think there is something wrong with her..", "Benjamin:\nDon't panic darling. You know babies cry\na lot. Remember when Abigail was this young? We\ncouldn't sleep a single night!", "Victoria:\nBut this feels different..", "Benjamin:\nShe's probably just hungry.\nLet me get the bottle."});
+        MessageController.ShowMessage(new string[] { "Victoria:\nShush.. She's crying again..\nShe was crying all day yesterday.\nBen, I think there is something wrong with her..", "Benjamin:\nDon't panic darling. You know babies cry\na lot. Remember when Abigail was this young? We\ncouldn't sleep a single night!", "Victoria:\nBut this feels different..", "Benjamin:\nShe's probably just hungry.\nLet me get the bottle."},new int[] {
+            Face.VNormal,
+            Face.BHappy,
+            Face.VNormal,
+            Face.BNormal
+        });
         while (MessageController.showMessage > 0)
         {
             yield return null;
         }
 
-
+   animator.SetFloat("Vertical", 0);
+        animator.SetFloat("Horizontal", -1);
+        animator.SetFloat("Speed", 1f);
         while (c.transform.position.y != Player.transform.position.y)
         {
 
@@ -123,7 +139,7 @@ public class Cutscene3_Birth : MonoBehaviour
 
         }
         yield return new WaitForSeconds(1);
-
+        animator.SetFloat("Speed", 0.0f);
 
         //clearing up
         Clock.SetActive(true);

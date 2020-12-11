@@ -137,6 +137,9 @@ public class FullScreenInventory : MonoBehaviour {
             return;
         }
 
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
+
         background.SetActive(false);
         helpScreen.SetActive(true);
 
@@ -147,6 +150,9 @@ public class FullScreenInventory : MonoBehaviour {
         if (isExitingGame) {
             return;
         }
+
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
 
         background.SetActive(false);
         optionsScreen.SetActive(true);
@@ -162,6 +168,9 @@ public class FullScreenInventory : MonoBehaviour {
         if (isExitingGame) {
             return;
         }
+
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
 
         background.SetActive(true);
         optionsScreen.SetActive(false);
@@ -181,6 +190,9 @@ public class FullScreenInventory : MonoBehaviour {
             return;
         }
 
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
+
         background.SetActive(true);
         helpScreen.SetActive(false);
 
@@ -191,6 +203,9 @@ public class FullScreenInventory : MonoBehaviour {
         if (isExitingGame) {
             return;
         }
+
+        GetAudioManager();
+        audioManager.Play("Mouse Click");
 
         StartCoroutine(ExitGame());
     }
