@@ -14,6 +14,7 @@ public class ItemsOwned : MonoBehaviour {
     public static int selectedItemIndex = 0;
 
     public int totalInventorySize;
+    public static int totalInventorySizeStatic;
 
     public static ItemsOwned instance;
 
@@ -47,5 +48,19 @@ public class ItemsOwned : MonoBehaviour {
         }
 
         selectedItemIndex = 0;
+
+        totalInventorySizeStatic = totalInventorySize;
+    }
+
+    public static void ResetInventory() {
+        for (int i = 0; i < totalInventorySizeStatic; i++) {
+            items[i] = -1;
+            itemsQuantity[i] = 0;
+            itemsSprite[i] = null;
+
+            dragAndDropItemID[i] = 0;
+            dragAndDropCombineName[0] = "";
+            dragAndDropCombineObject[i] = null;
+        }
     }
 }

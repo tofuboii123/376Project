@@ -49,6 +49,8 @@ public class MainMenuController : MonoBehaviour {
 
         GetAudioManager();
         audioManager.Play("Main Menu Music");
+
+        ItemsOwned.ResetInventory();
     }
 
     public void PlayGame() {
