@@ -5,12 +5,12 @@ COMP 376 Team Project
 
 Green Hill Gang (Team 2)
 
-Weiliang Xie 		- 40100745 - Sprite Designer, Quality Management, Scheduler
-Giuseppe Campanelli - 40043909 - Source Control Expert, Level Programmer
-Bojan Srbinoski 	- 40058428 - Level/Puzzle Designer, Technical Writer
-Jared Cohen 		- 40092599 - Audio/SFX Engineer
-Zahra Nikbakht 		- 40138253 - Cinematic Designer, Writer, Level Programmer
-Zi Li Wang 			- 40018308 - Art Designer + Implementation
+* Weiliang Xie 		- 40100745 - Sprite Designer, Quality Management, Scheduler
+* Giuseppe Campanelli - 40043909 - Source Control Expert, Level Programmer
+* Bojan Srbinoski 	- 40058428 - Level/Puzzle Designer, Technical Writer
+* Jared Cohen 		- 40092599 - Audio/SFX Engineer
+* Zahra Nikbakht 		- 40138253 - Cinematic Designer, Writer, Level Programmer
+* Zi Li Wang 			- 40018308 - Art Designer + Implementation
 
 # Notes
 - Created using Unity version 2020.1.11f1
