@@ -1,6 +1,55 @@
 # In A Timely Manor
 COMP 376 Team Project
- 
+
+# Team
+
+Green Hill Gang (Team 2)
+
+Weiliang Xie 		- 40100745 - Sprite Designer, Quality Management, Scheduler
+Giuseppe Campanelli - 40043909 - Source Control Expert, Level Programmer
+Bojan Srbinoski 	- 40058428 - Level/Puzzle Designer, Technical Writer
+Jared Cohen 		- 40092599 - Audio/SFX Engineer
+Zahra Nikbakht 		- 40138253 - Cinematic Designer, Writer, Level Programmer
+Zi Li Wang 			- 40018308 - Art Designer + Implementation
+
+# Notes
+- Created using Unity version 2020.1.11f1
+
+# Changes since prototype presentation
+* 01-12-2020:
+	- First level layout implemented
+	- Fix message box closing when spamming the close key
+	- Added faces to opening cutscene message boxes
+	- Second cutscene implemented
+	- Second level layout implemented
+	- Item combination system implemented
+	- Pause menu inventory implemented
+	- Level 1 puzzle implemented
+	- Level 2 puzzle implemented
+	- Fix white lines on tilemap
+	- Fix time travel animation speed
+	- Third cutscene implemented
+	- Fourth cutscene implemented
+	- Inventory item sprites created
+	- Fix sprites in inventory moving to wrong place after combination
+	- Added level transitions after completing a level
+
+* 07-12-2020:
+	- Basement added
+	- Good and bad endings implemented
+	- Various custom art implemented
+	- Minor bug fixes
+	- Item descriptions added in full screen inventory
+	- Sound effects and music added
+	- Game playable from start to finish
+
+* 11-12-2020
+	- Minor bug fixes
+	- Character portraits added for all characters
+	- All new character sprites implemented
+	- All new environment sprites implemented
+	- Added credits scene
+	- Added volume slider 
  
 # Resources used
 * https://fonts2u.com/pixel-nes.font
