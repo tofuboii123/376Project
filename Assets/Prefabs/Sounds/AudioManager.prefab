@@ -158,14 +158,14 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Window Break
     clip: {fileID: 8300000, guid: 051cab1521452d044bdde6ea11cc9e58, type: 3}
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     playOnAwake: 0
     loop: 0
     source: {fileID: 0}
   - name: Door Break
     clip: {fileID: 8300000, guid: 0d711e8610d32194299c020e4590bf72, type: 3}
-    volume: 0.3
+    volume: 0.1
     pitch: 1
     playOnAwake: 0
     loop: 0
