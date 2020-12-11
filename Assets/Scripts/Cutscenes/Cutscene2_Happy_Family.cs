@@ -90,8 +90,9 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         }
         yield return new WaitForSeconds(0.8f);
 
-        MessageController.ShowMessage(new string[] { "???:\nw...what?? there are people living here?!\nor used to live...", "Benjamin:\nYes dear! and guess where we are going for the weekend.\nAvondale Park!"},
+        MessageController.ShowMessage(new string[] { "???:\n!!!", "People still live here?!", "Benjamin:\nYes dear! and guess where we are going this weekend.\nAvondale Park!"},
         new int[] {
+            Face.Surprised,
             Face.Surprised,
             Face.BHappy,
         });
@@ -100,7 +101,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
             yield return null;
         }
 
-        MessageController.ShowMessage(new string[] { "Abigail:\nDad that is wonderful! You are the best!\nI can't wait until Saturday.", "Benjamin:\nHaha let's not get too excited about that yet, \nmy dear. Your mother should agree first.", "Victoria:\nAvondale Park? isn't that a bit far from here..?", "Benjamin:\nI know, but it's been a while since we had a family\ntrip. Plus, Abby has been wanting to visit there for a \nlong time.", "Benjamin:\nI also confirmed with Dr. Larnzo. It's your break week\nand a short trip will help before starting the \nnext phase of therapy.", "Abigail:\nYes mom! please please!", "Victoria:\nIf you say so sweetie.\nSay, how was school today?", "Benjamin:\nI hate to interrupt you ladies, but it's 15 minutes past\n4. I shouldn't be late to the meeting. Take care." }, new int[] {
+        MessageController.ShowMessage(new string[] { "Abigail:\nFather that's wonderful! You're the best!\nI can't wait 'til Saturday.", "Benjamin:\nHahaha let's not get too excited about that yet, \nmy dear. Why don't we ask your mother to join us?", "Victoria:\nAvondale Park? isn't that a bit far from here..?", "Benjamin:\nI know, but it's been a while since we had a family\ntrip. Plus, Abby has been wanting to go there for a \nlong time.", "Benjamin:\nI also confirmed with Dr. Larnzo. It's your break week\nand a short trip will help before starting the \nnext phase of therapy.", "Abigail:\nYes mother! please, please!", "Victoria:\nIf you say so sweetie.\nSay, how was school today?", "Benjamin:\nI hate to interrupt you ladies, but it's a quarter past\n4. I shouldn't be late to the meeting. Take care!" }, new int[] {
             Face.AHappy,
             Face.BHappy,
             Face.VNormal,
@@ -133,7 +134,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         }
         c.GetComponent<CameraMovement>().cutscene_mode = false;
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm not staying here for another second!"  },new int[] {
+        MessageController.ShowMessage(new string[] { "???:\nI gotta get outta here!"  },new int[] {
             Face.Surprised
           
         });
@@ -152,7 +153,7 @@ public class Cutscene2_Happy_Family : MonoBehaviour
         PlayerController.CanMove = false;
         yield return new WaitForSeconds(1);
 
-        MessageController.ShowMessage(new string[] { "???:\nI'm safe here.. They must be dead now..." },new int[] {
+        MessageController.ShowMessage(new string[] { "???:\nBack in the present... They must be dead now..." },new int[] {
             Face.Disappointed
         });
         while (MessageController.showMessage > 0)

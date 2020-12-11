@@ -107,7 +107,7 @@ public GameObject BabyOnTable;
 
         animator.SetFloat("Speed", 0);
         yield return new WaitForSeconds(1);
-        MessageController.ShowMessage(new string[] { "Victoria:\nMy little sweetheart..why don't you calm down?", "Victoria:\nI know it is my fault.. I am the worst mother. \nI overheard them, Sabrina. Do you know what \nthat therapist was saying?", "Victoria:\nHe told Ben that it was the side effect of my pills\nI should not have taken those pills when I was \npregnant.", "Victoria:\nBut that idiot Larzno never told me that...\nHe said these pills help stop the voices... I should \nhave known better.. I am the worst mother.. \naren't I?", "Victoria:\nShush.. calm down. Why don't you stop crying?..\nwhy don't you shut up?!", "Victoria:\nI know you are suffering. I know how to ease your pain." }, new int[]{Face.VNormal,Face.VNormal,Face.VNormal,Face.VSad,Face.VSad,Face.VHappy});
+        MessageController.ShowMessage(new string[] { "Victoria:\nMy little sweetheart... why don't you calm down?", "Victoria:\nI know it's my fault.. I am the worst mother. \nI overheard them, Sabrina. Do you know what \nthat therapist was saying?", "Victoria:\nHe told Ben that it was the side effect of my pills\nI should not have taken those pills when I was \npregnant.", "Victoria:\nBut that idiot Larzno never told me that...\nHe said these pills help stop the voices... I should \nhave known better.. I am the worst mother.. \naren't I?", "Victoria:\nShush... calm down. Why don't you stop crying?..\nwhy don't you shut up?!", "Victoria:\nI know you are suffering. I know how to ease your pain." }, new int[]{Face.VNormal,Face.VNormal,Face.VNormal,Face.VSad,Face.VSad,Face.VHappy});
         while (MessageController.showMessage > 0) {
             yield return null;
         }
@@ -139,7 +139,7 @@ public GameObject BabyOnTable;
         animator.SetFloat("Speed", 0);
         BabyOnTable.SetActive(true);
         yield return new WaitForSeconds(1);
-        MessageController.ShowMessage(new string[] { "???:\nShe's holding a knife! No!" }, new int[]{Face.Surprised});
+        MessageController.ShowMessage(new string[] { "???:\nIs that a knife??" }, new int[]{Face.Surprised});
         while (MessageController.showMessage > 0) {
             yield return null;
         }
@@ -150,7 +150,7 @@ public GameObject BabyOnTable;
         animator.SetBool("Stab",false);
         GetAudioManager();
         audioManager.StopFadeOut("Baby Crying", 0.5f);
-        MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer cry my child.. you are no longer \nsuffering.." }, new int[]{Face.VMad});
+        MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer need to cry my child... you are no longer \nsuffering.." }, new int[]{Face.VMad});
         while (MessageController.showMessage > 0) {
             yield return null;
         }
@@ -196,7 +196,7 @@ public GameObject BabyOnTable;
 
             yield return new WaitForSeconds(0.3f);
 
-            MessageController.ShowMessage(new string[] { "???:\nThat baby... She was never buried. She could\nnever rest in peace.. I know what I need to do\nnow." },new int[]{Face.Disappointed});
+            MessageController.ShowMessage(new string[] { "???:\nThat child... She was never buried. She could\nnever rest in peace.. I know what I need to do\nnow." },new int[]{Face.Disappointed});
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
@@ -208,14 +208,14 @@ public GameObject BabyOnTable;
         } else {
             // bad ending
 
-            MessageController.ShowMessage(new string[] { "???:\nI need to run away! She's out of her mind!" }, new int[]{Face.Surprised});
+            MessageController.ShowMessage(new string[] { "???:\nShe's out of her mind! I have to leave. Now." }, new int[]{Face.Surprised});
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
 
 
             yield return new WaitForSeconds(2.5f);
-            MessageController.ShowMessage(new string[] { "???:\nWhat?! why am I still here?! What is wrong with \nmy watch? It's not working!" }, new int[]{Face.Surprised});
+            MessageController.ShowMessage(new string[] { "???:\nWhat?! why am I still here?! The watch!!? It's not working!" }, new int[]{Face.Surprised});
 
             animator.SetFloat("Vertical", -1);
             animator.SetFloat("Horizontal", 0);
@@ -236,7 +236,7 @@ public GameObject BabyOnTable;
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
-            MessageController.ShowMessage(new string[] { "Victoria:\nYou... You saw everything.." }, new int[]{Face.VNormal});
+            MessageController.ShowMessage(new string[] { "Victoria:\nYou... You saw everything!!" }, new int[]{Face.VNormal});
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
