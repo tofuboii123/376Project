@@ -108,5 +108,5 @@
 @ENDITEM
 @ITEM 221
 #ItemName: Heart Key
-#Description: Description here
+#Description: It almost feels like it's... Beating...
 @ENDITEM
