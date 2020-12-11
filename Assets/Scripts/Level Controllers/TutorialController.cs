@@ -107,7 +107,7 @@ public class TutorialController : MonoBehaviour
             "I can bury her right next to this tree.\nAfter all these years.. Her soul can finally\nrest in peace.",
         }, new int[] {
            
-            Face.Thinking
+            Face.Disappointed
         }, false);
 
         while (MessageController.showMessage > 0) {
@@ -123,7 +123,7 @@ public class TutorialController : MonoBehaviour
             "Victoria:\nThank you Ashton..\nI shall leave your body now.",
         }, new int[] {
            
-            Face.Thinking
+            Face.VNormal
         }, false);
 
           while (MessageController.showMessage > 0) {

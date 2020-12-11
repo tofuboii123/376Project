@@ -9,6 +9,8 @@ public class Cutscene5_Finale : MonoBehaviour {
     public GameObject Mother;
     public GameObject Player;
 
+public GameObject BabyInCrib;
+public GameObject BabyOnTable;
     private Inventory inventory;
 
     //UI
@@ -36,7 +38,7 @@ public class Cutscene5_Finale : MonoBehaviour {
         goodEnding = false;
         goodEndingTriggered = false;
         isActive = false;
-
+        BabyOnTable.SetActive(false);
         inventory = Player.GetComponent<Inventory>();
     }
 
@@ -52,6 +54,7 @@ public class Cutscene5_Finale : MonoBehaviour {
     }
 
     IEnumerator Cutscene_Start() {
+        animator.speed = 0.15f;
         PlayerController.inCutscene = true;
         if (Cutscene_Present.inPresentTriggered) {
             while (PlayerController.isTravelling == true) {
@@ -104,13 +107,14 @@ public class Cutscene5_Finale : MonoBehaviour {
 
         animator.SetFloat("Speed", 0);
         yield return new WaitForSeconds(1);
-        MessageController.ShowMessage(new string[] { "Victoria:\nMy little sweetheart..why don't you calm down?", "Victoria:\nI know it is my fault.. I am the worst mother. \nI overheard them, Sabrina. Do you know what \nthat therapist was saying?", "Victoria:\nHe told Ben that it was the side effect of my pills\nI should not have taken those pills when I was pregnant.", "Victoria:\nBut that idiot Larzno never told me that...\nHe said these pills help stop the voices... I should \nhave known better.. I am the worst mother.. \naren't I?", "Victoria:\nShush.. calm down. Why don't you stop crying?..\nwhy don't you shut up?!", "Victoria:\nI know you are suffering. I know how to ease your pain." });
+        MessageController.ShowMessage(new string[] { "Victoria:\nMy little sweetheart..why don't you calm down?", "Victoria:\nI know it is my fault.. I am the worst mother. \nI overheard them, Sabrina. Do you know what \nthat therapist was saying?", "Victoria:\nHe told Ben that it was the side effect of my pills\nI should not have taken those pills when I was \npregnant.", "Victoria:\nBut that idiot Larzno never told me that...\nHe said these pills help stop the voices... I should \nhave known better.. I am the worst mother.. \naren't I?", "Victoria:\nShush.. calm down. Why don't you stop crying?..\nwhy don't you shut up?!", "Victoria:\nI know you are suffering. I know how to ease your pain." }, new int[]{Face.VNormal,Face.VNormal,Face.VNormal,Face.VSad,Face.VSad,Face.VHappy});
         while (MessageController.showMessage > 0) {
             yield return null;
         }
 
 
         yield return new WaitForSeconds(0.5f);
+        BabyInCrib.SetActive(false);
         animator.SetFloat("Vertical", -1);
         animator.SetFloat("Horizontal", 0);
         animator.SetFloat("Speed", 2.5f);
@@ -133,21 +137,25 @@ public class Cutscene5_Finale : MonoBehaviour {
 
         }
         animator.SetFloat("Speed", 0);
-        MessageController.ShowMessage(new string[] { "???:\nShe's holding a knife! No!" });
+        BabyOnTable.SetActive(true);
+        yield return new WaitForSeconds(1);
+        MessageController.ShowMessage(new string[] { "???:\nShe's holding a knife! No!" }, new int[]{Face.Surprised});
         while (MessageController.showMessage > 0) {
             yield return null;
         }
+        animator.SetBool("Stab",true);
+        
 
+        yield return new WaitForSeconds(2.5f);
+        animator.SetBool("Stab",false);
         GetAudioManager();
         audioManager.StopFadeOut("Baby Crying", 0.5f);
-
-        //insert killing animation here
-        yield return new WaitForSeconds(1.5f);
-
-        MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer cry my child.. you are no longer \nsuffering.." });
+        MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer cry my child.. you are no longer \nsuffering.." }, new int[]{Face.VMad});
         while (MessageController.showMessage > 0) {
             yield return null;
         }
+        BabyOnTable.SetActive(false);
+
         animator.SetFloat("Horizontal", 1);
         animator.SetFloat("Speed", 3);
         while (Mother.transform.position.x < -165) {
@@ -188,7 +196,7 @@ public class Cutscene5_Finale : MonoBehaviour {
 
             yield return new WaitForSeconds(0.3f);
 
-            MessageController.ShowMessage(new string[] { "???:\nThat baby... She was never buried. She could\nnever rest in peace.. I know what I need to do\nnow." });
+            MessageController.ShowMessage(new string[] { "???:\nThat baby... She was never buried. She could\nnever rest in peace.. I know what I need to do\nnow." },new int[]{Face.Disappointed});
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
@@ -200,14 +208,14 @@ public class Cutscene5_Finale : MonoBehaviour {
         } else {
             // bad ending
 
-            MessageController.ShowMessage(new string[] { "???:\nI need to run away! She's out of her mind!" });
+            MessageController.ShowMessage(new string[] { "???:\nI need to run away! She's out of her mind!" }, new int[]{Face.Surprised});
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
 
 
             yield return new WaitForSeconds(2.5f);
-            MessageController.ShowMessage(new string[] { "???:\nWhat?! why am I still here?! What is wrong with \nmy watch? It's not working!" });
+            MessageController.ShowMessage(new string[] { "???:\nWhat?! why am I still here?! What is wrong with \nmy watch? It's not working!" }, new int[]{Face.Surprised});
 
             animator.SetFloat("Vertical", -1);
             animator.SetFloat("Horizontal", 0);
@@ -228,7 +236,7 @@ public class Cutscene5_Finale : MonoBehaviour {
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
-            MessageController.ShowMessage(new string[] { "Victoria:\nYou... You saw everything.." });
+            MessageController.ShowMessage(new string[] { "Victoria:\nYou... You saw everything.." }, new int[]{Face.VNormal});
             while (MessageController.showMessage > 0) {
                 yield return null;
             }
