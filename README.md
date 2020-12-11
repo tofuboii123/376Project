@@ -12,6 +12,9 @@ Green Hill Gang (Team 2)
 * Zahra Nikbakht 		- 40138253 - Cinematic Designer, Writer, Level Programmer
 * Zi Li Wang 			- 40018308 - Art Designer + Implementation
 
+# Game Demo
+https://youtu.be/E6y3eRIf1-o
+
 # Notes
 - Created using Unity version 2020.1.11f1
 
