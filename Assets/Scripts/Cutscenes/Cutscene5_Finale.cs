@@ -144,12 +144,12 @@ public GameObject BabyOnTable;
             yield return null;
         }
         animator.SetBool("Stab",true);
-        GetAudioManager();
-        audioManager.StopFadeOut("Baby Crying", 0.5f);
+        
 
         yield return new WaitForSeconds(2.5f);
         animator.SetBool("Stab",false);
-
+        GetAudioManager();
+        audioManager.StopFadeOut("Baby Crying", 0.5f);
         MessageController.ShowMessage(new string[] { "Victoria:\nYou no longer cry my child.. you are no longer \nsuffering.." }, new int[]{Face.VMad});
         while (MessageController.showMessage > 0) {
             yield return null;
