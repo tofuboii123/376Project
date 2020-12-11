@@ -15,7 +15,6 @@ public class MainMenuController : MonoBehaviour {
 
     public GameObject headingText;
     public GameObject playButton;
-    public GameObject demoButton;
     public GameObject helpButton;
     public GameObject creditsButton;
     public GameObject optionsButton;
@@ -32,7 +31,6 @@ public class MainMenuController : MonoBehaviour {
     void Awake() {
         headingText.SetActive(true);
         playButton.SetActive(true);
-        demoButton.SetActive(true);
         helpButton.SetActive(true);
         creditsButton.SetActive(true);
         exitButton.SetActive(true);
@@ -67,7 +65,6 @@ public class MainMenuController : MonoBehaviour {
 
         headingText.SetActive(false);
         playButton.SetActive(false);
-        demoButton.SetActive(false);
         helpButton.SetActive(false);
         creditsButton.SetActive(false);
         optionsButton.SetActive(false);
@@ -82,7 +79,6 @@ public class MainMenuController : MonoBehaviour {
 
         headingText.SetActive(true);
         playButton.SetActive(true);
-        demoButton.SetActive(true);
         helpButton.SetActive(true);
         creditsButton.SetActive(true);
         optionsButton.SetActive(true);
@@ -91,11 +87,10 @@ public class MainMenuController : MonoBehaviour {
         helpScreen.SetActive(false);
     }
 
-    public void Credits()
-    {
-
+    public void Credits() {
         GetAudioManager();
         audioManager.Play("Mouse Click");
+
         audioManager.StopFadeOut("Main Menu Music", 2.0f);
 
         StartCoroutine(StartCredits());
@@ -107,7 +102,6 @@ public class MainMenuController : MonoBehaviour {
 
         headingText.SetActive(false);
         playButton.SetActive(false);
-        demoButton.SetActive(false);
         helpButton.SetActive(false);
         creditsButton.SetActive(false);
         optionsButton.SetActive(false);
@@ -126,7 +120,6 @@ public class MainMenuController : MonoBehaviour {
 
         headingText.SetActive(true);
         playButton.SetActive(true);
-        demoButton.SetActive(true);
         helpButton.SetActive(true);
         creditsButton.SetActive(true);
         optionsButton.SetActive(true);
@@ -140,14 +133,6 @@ public class MainMenuController : MonoBehaviour {
         masterVolumeText.text = volume + "%";
 
         Option.SetVolumePercent(volume);
-    }
-
-    public void Demo() {
-        GetAudioManager();
-        audioManager.Play("Mouse Click");
-        audioManager.StopFadeOut("Main Menu Music", 2.0f);
-
-        Debug.Log("DEMO");
     }
 
     public void QuitGame() {
